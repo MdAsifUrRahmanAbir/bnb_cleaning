@@ -1,21 +1,11 @@
+
 import '../../../utils/basic_widget_imports.dart';
 import '../../../widgets/text_labels/title_heading5_widget.dart';
 
-class ShoppingCardCardWidget extends StatelessWidget {
-  const ShoppingCardCardWidget(
-      {super.key,
-      required this.title,
-      required this.subTitle,
-      required this.price,
-      required this.date,
-      required this.onEdit,
-      required this.onDelete,
-        this.isExpansion = false
-      });
+class PriceCardWidget extends StatelessWidget {
+  const PriceCardWidget({super.key, required this.title, required this.subTitle, required this.price, required this.vat});
 
-  final String title, subTitle, price, date;
-  final VoidCallback onEdit, onDelete;
-  final bool isExpansion;
+  final String title, subTitle, price, vat;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +23,7 @@ class ShoppingCardCardWidget extends StatelessWidget {
               mainAxisAlignment: mainSpaceBet,
               children: [
                 TitleHeading5Widget(
-                  text: date,
+                  text: vat,
                   textAlign: TextAlign.center,
                 ),
                 TitleHeading3Widget(
@@ -45,10 +35,13 @@ class ShoppingCardCardWidget extends StatelessWidget {
             Row(
               crossAxisAlignment: crossStart,
               children: [
-                Icon(
-                  Icons.apartment,
-                  size: 50.0,
-                  color: Theme.of(context).primaryColor,
+                Container(
+                  height: 80,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(Dimensions.radius)
+                  ),
                 ),
                 horizontalSpace(5),
                 Expanded(
@@ -57,44 +50,22 @@ class ShoppingCardCardWidget extends StatelessWidget {
                     children: [
                       TitleHeading3Widget(
                         text: title,
-                        maxLines: 1,
-                        textOverflow: TextOverflow.ellipsis,
+                        // maxLines: 1,
+                        // textOverflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
                       ),
                       verticalSpace(4.0),
                       TitleHeading5Widget(
                         text: subTitle,
-                        maxLines: 2,
-                        textOverflow: TextOverflow.ellipsis,
+                        // maxLines: 2,
+                        // textOverflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
                       ),
                     ],
                   ),
                 ),
-                horizontalSpace(5),
-                // const Spacer(),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: onEdit,
-                        icon: Icon(Icons.edit,
-                            color: Theme.of(context).primaryColor)),
-                    IconButton(
-                        onPressed: onDelete,
-                        icon: Icon(Icons.delete,
-                            color: Theme.of(context).primaryColor)),
-                  ],
-                )
               ],
             ),
-            Visibility(
-              visible: isExpansion,
-              child: Column(
-                children: [
-
-                ],
-              ),
-            )
           ],
         ),
       ),

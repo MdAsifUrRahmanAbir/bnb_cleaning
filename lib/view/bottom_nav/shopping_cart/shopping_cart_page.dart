@@ -9,18 +9,30 @@ class ShoppingCartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(
+        vertical: Dimensions.paddingSizeVertical * .5,
+        horizontal: Dimensions.paddingSizeHorizontal * .5,
+      ),
         itemBuilder: (context, index) {
-          return ShoppingCardCardWidget(
+          return Obx(() => ShoppingCardCardWidget(
+            isExpansion: controller.selectedIndex.value == index,
             title: 'Duis velit voluptat',
             subTitle: 'Dolores similique im,Consectetur atque n ',
             price: '£0',
             date: 'Sunday 18 , August',
-            onEdit: () {},
-            onDelete: () {},
-          );
+            onEdit: () {
+              if (controller.selectedIndex.value != index) {
+                controller.selectedIndex.value = index;
+              } else {
+                controller.selectedIndex.value = -1;
+              }
+            },
+            onDelete: () {
+
+            },
+          ));
         },
         separatorBuilder: (_, i) => verticalSpace(5),
-        itemCount: 1);
+        itemCount: 5);
   }
 }
