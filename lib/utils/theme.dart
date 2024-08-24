@@ -37,6 +37,9 @@ class Themes {
           bodyColor: CustomColor.primaryLightTextColor,
           fontFamily: GoogleFonts.inter().fontFamily,
         ),
+    iconTheme: const IconThemeData(
+      color: Colors.black
+    )
   );                       
 
   static final dark = ThemeData.dark().copyWith(
@@ -53,5 +56,8 @@ class Themes {
           bodyColor: CustomColor.primaryDarkTextColor,
           fontFamily: GoogleFonts.inter().fontFamily,
         ),
+      iconTheme: const IconThemeData(
+          color: Colors.white
+      )
   );
 }

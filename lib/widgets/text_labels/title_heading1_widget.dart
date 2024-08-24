@@ -13,6 +13,7 @@ class TitleHeading1Widget extends StatelessWidget {
     this.fontSize,
     this.fontWeight,
     this.color,
+    this.shadows,
   });
 
   final String text;
@@ -24,6 +25,7 @@ class TitleHeading1Widget extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? color;
+  final List<Shadow>? shadows;
   static const paddingValue = EdgeInsets.all(0.0);
 
   @override
@@ -43,7 +45,8 @@ class TitleHeading1Widget extends StatelessWidget {
           style: TextStyle(
               fontSize: fontSize ?? Dimensions.headingTextSize1,
               fontWeight: fontWeight ?? FontWeight.w700,
-              color: color
+              color: color,
+            shadows: shadows
           ),
           textAlign: textAlign,
           overflow: textOverflow,

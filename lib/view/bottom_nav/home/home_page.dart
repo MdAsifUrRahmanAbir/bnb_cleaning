@@ -84,7 +84,6 @@ class HomePage extends StatelessWidget {
                 right: 10,
                 child: Icon(
                   Icons.arrow_forward,
-                  color: Colors.black,
                   size: 30.0,
                 ),
               ),

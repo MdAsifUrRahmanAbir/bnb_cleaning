@@ -20,6 +20,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0,
       title: title,
       elevation: 0,
       leading: Animate(

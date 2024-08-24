@@ -1,36 +1,58 @@
 import '../../utils/basic_widget_imports.dart';
-import '../../utils/strings.dart';
+import 'package:intl/intl.dart';
 
-class PrimaryTextInputWidget extends StatelessWidget {
-  final TextEditingController controller;
-  final String labelText, optional, hint;
-  final TextInputType? keyboardType;
+class PrimaryDateInputWidget extends StatefulWidget {
+  final String labelText, optional;
   final bool? readOnly;
-  final Color? color;
-  final int maxLine;
-  final double focusedBorderWidth; // not need
-  final double enabledBorderWidth;
-  final Widget? suffixIcon, prefixIcon;
-  final VoidCallback? onTap;
-  final Function(String)? onChanged;
+  final Function(DateTime) onChanged;
+  final DateTime? initialDate;
+  final Color color;
 
-  const PrimaryTextInputWidget({
+  const PrimaryDateInputWidget({
     super.key,
-    required this.controller,
     required this.labelText,
-    this.keyboardType,
     this.readOnly = false,
-    this.focusedBorderWidth = 1.2,
-    this.enabledBorderWidth = 1,
-    this.maxLine = 1,
-    this.color = Colors.transparent,
-    this.suffixIcon,
-    this.onTap,
     this.optional = "",
-    this.hint = "",
-    this.prefixIcon,
-    this.onChanged,
+    this.color = Colors.transparent,
+    required this.onChanged,
+    this.initialDate,
   });
+
+  @override
+  State<PrimaryDateInputWidget> createState() => _PrimaryDateInputWidgetState();
+}
+
+class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
+  DateTime? _selectedDate;
+  final controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = widget.initialDate ?? DateTime.now();
+    controller.text = _filterDateOnly(widget.initialDate ?? DateTime.now());
+  }
+
+  String _filterDateOnly(DateTime value){
+    return DateFormat('dd-MM-yyyy').format(value);
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: widget.initialDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        controller.text = _filterDateOnly(picked);
+        widget.onChanged(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +63,14 @@ class PrimaryTextInputWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TitleHeading4Widget(
-              text: labelText,
+              text: widget.labelText,
               fontWeight: FontWeight.w600,
             ),
             horizontalSpace(Dimensions.widthSize * 0.5),
             Visibility(
-              visible: optional.isNotEmpty,
+              visible: widget.optional.isNotEmpty,
               child: TitleHeading4Widget(
-                text: optional,
+                text: widget.optional,
                 opacity: .4,
                 fontWeight: FontWeight.w600,
               ),
@@ -58,32 +80,23 @@ class PrimaryTextInputWidget extends StatelessWidget {
         verticalSpace(Dimensions.marginBetweenInputTitleAndBox * 1),
         TextFormField(
           cursorColor: Theme.of(context).primaryColor,
-          maxLines: maxLine,
           style: CustomStyle.lightHeading4TextStyle
               .copyWith(color: Theme.of(context).primaryColor),
-          readOnly: readOnly!,
-          // style: CustomStyle.textStyle,
-          controller: controller,
-          keyboardType: keyboardType,
-          validator: (String? value) {
-            if (value!.isEmpty && optional == "") {
-              return Strings.pleaseFillOutTheField;
-            } else {
-              return null;
-            }
+          readOnly: true,
+          onTap: () {
+            _selectDate(context);
           },
-          onFieldSubmitted: onChanged,
+          controller: controller,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.5),
               borderSide: BorderSide(
                   color: Theme.of(context).primaryColor.withOpacity(0.2),
-                  width: enabledBorderWidth),
+                  width: 1),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                  width: focusedBorderWidth),
+              borderSide:
+                  BorderSide(color: Theme.of(context).primaryColor, width: 1.2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.5),
@@ -94,10 +107,10 @@ class PrimaryTextInputWidget extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.red, width: 1),
             ),
             filled: true,
-            fillColor: color,
+            fillColor: widget.color,
             contentPadding:
                 const EdgeInsets.only(left: 16, right: 10, top: 10, bottom: 10),
-            hintText: hint,
+            hintText: "",
             hintStyle: Get.isDarkMode
                 ? CustomStyle.darkHeading3TextStyle.copyWith(
                     color: CustomColor.primaryDarkTextColor.withOpacity(0.2),
@@ -109,11 +122,10 @@ class PrimaryTextInputWidget extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontSize: Dimensions.headingTextSize3,
                   ),
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
+            // suffixIcon: suffixIcon,
+            // prefixIcon: prefixIcon,
           ),
         )
-        // CustomSize.heightBetween()
       ],
     );
   }

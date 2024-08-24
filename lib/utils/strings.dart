@@ -106,4 +106,8 @@ class Strings {
   static String privacyPolicy  = "Privacy Policy";
   static String logOutContent  = "Do you want to log out from your account?";
 
+  static String selectDate  = "Select Date";
+  static String selectDateFirst  = "(Please select the date first)";
+
+  static String contactDetails  = "Contact Details";
 }

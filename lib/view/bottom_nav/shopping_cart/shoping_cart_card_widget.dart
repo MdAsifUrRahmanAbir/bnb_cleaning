@@ -1,4 +1,8 @@
+import 'package:bnb_clean/utils/basic_screen_imports.dart';
+
 import '../../../utils/basic_widget_imports.dart';
+import '../../../utils/strings.dart';
+import '../../../widgets/inputs/primary_date_input_widget.dart';
 import '../../../widgets/text_labels/title_heading5_widget.dart';
 
 class ShoppingCardCardWidget extends StatelessWidget {
@@ -10,8 +14,7 @@ class ShoppingCardCardWidget extends StatelessWidget {
       required this.date,
       required this.onEdit,
       required this.onDelete,
-        this.isExpansion = false
-      });
+      this.isExpansion = false});
 
   final String title, subTitle, price, date;
   final VoidCallback onEdit, onDelete;
@@ -89,11 +92,54 @@ class ShoppingCardCardWidget extends StatelessWidget {
             ),
             Visibility(
               visible: isExpansion,
-              child: Column(
-                children: [
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    PrimaryDateInputWidget(
+                      labelText: Strings.selectDate,
+                      optional: Strings.selectDateFirst,
+                      onChanged: (date) {
+                        print(date);
+                      },
+                    ),
+                    verticalSpace(Dimensions.marginBetweenInputBox),
+                    const TitleHeading3Widget(text: "Service is available from 11.00 A.M to 3.00 P.M"),
+                    verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
+                    Row(
+                      children: [
+                        TitleHeading4Widget(text: Strings.contactDetails),
+                        horizontalSpace(5),
+                        TitleHeading4Widget(text: "...."),
+                      ],
+                    ),
+                    verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
 
-                ],
+                    Row(
+                      children: [
+                        TitleHeading4Widget(text: Strings.name),
+                        horizontalSpace(5),
+                        TitleHeading4Widget(text: "Abir"),
+                      ],
+                    ),
+
+                    verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
+
+                    Row(
+                      children: [
+                        TitleHeading4Widget(text: Strings.phone),
+                        horizontalSpace(5),
+                        TitleHeading4Widget(text: "+8801877348044"),
+                      ],
+                    ),
+
+                    verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
+
+                    PrimaryButton(title: Strings.confirm, onPressed: (){})
+                  ],
+                ),
               ),
+
             )
           ],
         ),

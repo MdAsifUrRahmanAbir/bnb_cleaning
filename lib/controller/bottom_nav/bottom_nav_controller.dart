@@ -20,4 +20,11 @@ class BottomNavController extends GetxController{
     ShoppingCartPage(),
     ProfilePage(),
   ];
+
+  List bodyTitle = [
+    "How To Order",
+    "Prices",
+    "Shopping Cart",
+    "Profile"
+  ];
 }
