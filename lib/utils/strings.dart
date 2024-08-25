@@ -110,4 +110,5 @@ class Strings {
   static String selectDateFirst  = "(Please select the date first)";
 
   static String contactDetails  = "Contact Details";
+  static String addToCart  = "Add to Cart";
 }

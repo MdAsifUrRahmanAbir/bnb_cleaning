@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                     return SizedBox(
                       width: 300,
                       child: Card(
-                        color: CustomColor.secondaryLightColor.withOpacity(.2),
+                        color: CustomColor.secondaryLightColor.withOpacity(.05),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

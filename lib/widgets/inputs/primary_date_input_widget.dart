@@ -1,6 +1,8 @@
 import '../../utils/basic_widget_imports.dart';
 import 'package:intl/intl.dart';
 
+import '../../utils/strings.dart';
+
 class PrimaryDateInputWidget extends StatefulWidget {
   final String labelText, optional;
   final bool? readOnly;
@@ -29,8 +31,15 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.initialDate ?? DateTime.now();
-    controller.text = _filterDateOnly(widget.initialDate ?? DateTime.now());
+    debugPrint("✔️✍️ PrimaryDateInput -> initialDate: ${widget.initialDate} ✉");
+    if(widget.initialDate == null) {
+      controller.text = Strings.selectDate;
+      _selectedDate = DateTime.now();
+    }
+    else{
+      _selectedDate = widget.initialDate;
+      controller.text = _filterDateOnly(widget.initialDate!);
+    }
   }
 
   String _filterDateOnly(DateTime value){
@@ -40,9 +49,9 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: widget.initialDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 1),
     );
 
     if (picked != null && picked != _selectedDate) {
@@ -79,6 +88,7 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
         ),
         verticalSpace(Dimensions.marginBetweenInputTitleAndBox * 1),
         TextFormField(
+          autofocus: widget.initialDate != null,
           cursorColor: Theme.of(context).primaryColor,
           style: CustomStyle.lightHeading4TextStyle
               .copyWith(color: Theme.of(context).primaryColor),

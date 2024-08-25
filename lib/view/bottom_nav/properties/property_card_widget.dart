@@ -1,4 +1,5 @@
 import '../../../utils/basic_widget_imports.dart';
+import '../../../utils/strings.dart';
 import '../../../widgets/text_labels/title_heading5_widget.dart';
 
 class PropertyCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class PropertyCard extends StatelessWidget {
     return InkWell(
       onTap: onTapCart,
       child: Card(
-        color: CustomColor.secondaryLightColor.withOpacity(.2),
+        color: CustomColor.secondaryLightColor.withOpacity(.05),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -31,16 +32,17 @@ class PropertyCard extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  icon: const Icon(Icons.edit),
+                  icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
                   onPressed: onTapEdit,
                 ),
               ),
               const SizedBox(height: 8.0),
-              const Icon(Icons.apartment, size: 50.0),
+              Icon(Icons.apartment, color:  Theme.of(context).primaryColor, size: 50.0),
               const SizedBox(height: 8.0),
               TitleHeading2Widget(
                 text: title,
                 textAlign: TextAlign.center,
+                color:  Theme.of(context).primaryColor,
               ),
               const SizedBox(height: 4.0),
               TitleHeading4Widget(
@@ -56,10 +58,13 @@ class PropertyCard extends StatelessWidget {
               OutlinedButton(
                 onPressed: () {},
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(),
+                  side: BorderSide(
+                    color: Theme.of(context).primaryColor.withOpacity(.5),
+                  ),
                 ),
-                child: const TitleHeading4Widget(
-                  text: 'Add to Cart',
+                child: TitleHeading4Widget(
+                  text: Strings.addToCart,
+                  color:  Theme.of(context).primaryColor,
                 ),
               ),
             ],

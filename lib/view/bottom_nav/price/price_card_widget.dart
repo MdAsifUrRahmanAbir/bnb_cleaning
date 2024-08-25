@@ -10,7 +10,7 @@ class PriceCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: CustomColor.secondaryLightColor.withOpacity(.2),
+      color: CustomColor.secondaryLightColor.withOpacity(.05),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
