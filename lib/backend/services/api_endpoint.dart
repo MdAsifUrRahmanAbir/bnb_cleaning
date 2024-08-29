@@ -1,13 +1,22 @@
 import 'package:bnb_clean/backend/extensions/custom_extensions.dart';
 
 class ApiEndpoint {
-  static String mainDomain = "https://fahim.appdevs.team/moneymate";
-  static String baseUrl = "$mainDomain/api/v1";
-
-  static String languagesURL = '/login'.addBaseURl();
-  static String basicSettingsURL = '/settings/basic-settings'.addBaseURl();
+  static String mainDomain = "https://api.mastersysobe.com";
+  static String baseUrl = "$mainDomain/api";
 
   ///-> Login
   static String loginURL = '/login'.addBaseURl();
+
+  ///-> Register
+  static String registerURL = '/register'.addBaseURl();
+
+  ///-> My-property
+  static String myPropertyURL = '/my-property'.addBaseURl();
+
+  ///-> My-property-save
+  static String myPropertySaveURL = '/my-property/save'.addBaseURl();
+
+  ///-> Price-list
+  static String priceListURL = '/price-list'.addBaseURl();
 
 }
