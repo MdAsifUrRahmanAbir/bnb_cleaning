@@ -26,12 +26,12 @@ class AirbnbCleaning {
   int id;
   String categoryName;
   String title;
-  int price;
+  double price;
   String image;
   DateTime createdAt;
   DateTime updatedAt;
   String details;
-  int rowStatus;
+  dynamic rowStatus;
 
   AirbnbCleaning({
     required this.id,
@@ -47,14 +47,14 @@ class AirbnbCleaning {
 
   factory AirbnbCleaning.fromJson(Map<String, dynamic> json) => AirbnbCleaning(
     id: json["id"],
-    categoryName: json["category_name"],
+    categoryName: json["category_name"] ?? "",
     title: json["title"],
-    price: json["price"],
+    price: json["price"].toDouble(),
     image: json["image"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    details: json["details"],
-    rowStatus: json["row_status"],
+    details: json["details"] ?? "",
+    rowStatus: json["row_status"] ?? "",
   );
 }
 
@@ -67,7 +67,7 @@ class Bundle {
   int rowStatus;
   DateTime createdAt;
   DateTime updatedAt;
-  int isProduct;
+  dynamic isProduct;
 
   Bundle({
     required this.id,
@@ -84,12 +84,12 @@ class Bundle {
   factory Bundle.fromJson(Map<String, dynamic> json) => Bundle(
     id: json["id"],
     name: json["name"],
-    details: json["details"],
+    details: json["details"] ?? "",
     price: json["price"],
     image: json["image"],
     rowStatus: json["row_status"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    isProduct: json["is_product"],
+    isProduct: json["is_product"] ?? "",
   );
 }

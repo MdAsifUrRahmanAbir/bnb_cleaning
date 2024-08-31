@@ -1,6 +1,9 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
+
+import '../../../backend/model/price_list/price_list_model.dart';
 import '../../../controller/bottom_nav/price_controller.dart';
 import '../../../utils/basic_screen_imports.dart';
-import '../../../widgets/text_labels/title_heading5_widget.dart';
+import '../../../utils/strings.dart';
 import 'price_card_widget.dart';
 
 class PricePage extends StatelessWidget {
@@ -9,37 +12,68 @@ class PricePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        padding: EdgeInsets.only(
-          top: Dimensions.paddingSizeVertical * .5,
-          left: Dimensions.paddingSizeHorizontal * .5,
-          right: Dimensions.paddingSizeHorizontal * .5,
-        ),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        children: List.generate(controller.type.length,
-            (index) => _typeWidget(context, controller.type[index])));
+    return Obx(() => controller.isLoading
+        ? const CustomLoadingAPI()
+        : ListView(
+            padding: EdgeInsets.only(
+              top: Dimensions.paddingSizeVertical * .5,
+              left: Dimensions.paddingSizeHorizontal * .5,
+              right: Dimensions.paddingSizeHorizontal * .5,
+            ),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+                _typeWidget<AirbnbCleaning>(context, Strings.linenHires,
+                    controller.priceListModel.linenHires, 1),
+                _typeWidget<AirbnbCleaning>(context, Strings.airbnbCleanings,
+                    controller.priceListModel.airbnbCleanings, 1),
+                _typeWidget<AirbnbCleaning>(
+                    context,
+                    Strings.midStayShortLetClean,
+                    controller.priceListModel.midCleanings,
+                    1),
+                _typeWidget<Bundle>(context, Strings.products,
+                    controller.priceListModel.products, 2),
+                _typeWidget<Bundle>(context, Strings.bundles,
+                    controller.priceListModel.bundles, 2),
+              ]));
   }
 
-  _typeWidget(BuildContext context, type) {
+  _typeWidget<T>(
+      BuildContext context, String typeName, List<T?> data, int type) {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        TitleHeading3Widget(text: type),
+        TitleHeading3Widget(text: typeName),
         verticalSpace(5),
         ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return const PriceCardWidget(
-                title: 'Single Bed Pack',
-                subTitle: '1x single sheet, 1x single duvet cover, 2x pillow cases, 1x hand towel, 1x bath towel',
-                price: '£17',
-                vat: 'inc. VAT',
-              );
+              if (type == 1) {
+                AirbnbCleaning datum = data[index] as AirbnbCleaning;
+
+                return PriceCardWidget(
+                  title: datum.title,
+                  subTitle: datum.categoryName.isEmpty
+                      ? datum.details
+                      : datum.categoryName,
+                  price: '£${datum.price.toStringAsFixed(2)}',
+                  vat: 'inc. VAT',
+                );
+              } else {
+                Bundle datum = data[index] as Bundle;
+
+                return PriceCardWidget(
+                  title: datum.name,
+                  subTitle: datum.details,
+                  price: '£${datum.price}',
+                  vat: 'inc. VAT',
+                );
+              }
             },
             separatorBuilder: (_, i) => verticalSpace(10),
-            itemCount: 5)
+            itemCount: data.length)
       ],
     );
   }
