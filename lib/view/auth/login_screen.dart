@@ -1,3 +1,5 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
+
 import '../../controller/auth/login_controller.dart';
 import '../../utils/assets.dart';
 import '../../utils/basic_screen_imports.dart';
@@ -56,7 +58,7 @@ class LoginScreen extends StatelessWidget {
               ),
               _rememberMeWidget(context),
               verticalSpace(Dimensions.marginSizeVertical),
-              PrimaryButton(title: Strings.loginNow, onPressed: controller.login),
+              Obx(() => controller.isLoading ? const CustomLoadingAPI() : PrimaryButton(title: Strings.loginNow, onPressed: controller.login)),
               verticalSpace(Dimensions.marginSizeVertical),
               _richTextWidget()
             ],

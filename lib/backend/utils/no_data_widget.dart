@@ -4,7 +4,6 @@ import 'package:lottie/lottie.dart';
 import '../../utils/dimensions.dart';
 import '../../utils/size.dart';
 
-
 class NoDataWidget extends StatelessWidget {
   const NoDataWidget({super.key});
 
@@ -15,8 +14,15 @@ class NoDataWidget extends StatelessWidget {
         crossAxisAlignment: crossCenter,
         mainAxisAlignment: mainCenter,
         children: [
-          Lottie.asset('assets/empty_animation.json',height: Dimensions.buttonHeight * 3),
-          const Text("Strings.noDataFound")
+          Lottie.asset('assets/empty_animation.json',
+              height: Dimensions.buttonHeight * 3),
+          Text(
+            "No records found",
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Theme.of(context).primaryColor),
+          )
         ],
       ),
     );

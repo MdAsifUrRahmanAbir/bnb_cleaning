@@ -1,5 +1,6 @@
 
 
+import '../model/my_property/property_list_model.dart';
 import '../model/price_list/price_list_model.dart';
 import '../utils/api_method.dart';
 import '../utils/custom_snackbar.dart';
@@ -24,6 +25,27 @@ mixin DashboardService{
       }
     } catch (e) {
       log.e(':ladybug::ladybug::ladybug: err from PriceList api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+  ///* Get MyProperty api services
+  Future<MyPropertyModel?> myPropertyProcessApi() async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).get(
+        ApiEndpoint.myPropertyURL,
+        showResult: true
+      );
+      if (mapResponse != null) {
+        MyPropertyModel result = MyPropertyModel.fromJson(mapResponse);
+        // CustomSnackBar.success(result.message.success.first.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from MyProperty api service ==> $e :ladybug::ladybug::ladybug:');
       CustomSnackBar.error('Something went Wrong!');
       return null;
     }

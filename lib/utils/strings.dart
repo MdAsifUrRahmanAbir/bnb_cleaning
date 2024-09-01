@@ -14,6 +14,7 @@ class Strings {
 
   static String login = "Login";
   static String confirm = "Confirm";
+  static String confirmPassword = "Confirm Password";
 
   static String forgotPassword = "Forgot Password?";
 

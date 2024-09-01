@@ -7,7 +7,7 @@ import '../../view/bottom_nav/profile/profile_page.dart';
 import '../../view/bottom_nav/shopping_cart/shopping_cart_page.dart';
 
 class BottomNavController extends GetxController{
-  RxInt selectedIndex = 1.obs;
+  RxInt selectedIndex = 0.obs;
   RxBool isDark = false.obs;
 
   void onItemTapped(int index) {

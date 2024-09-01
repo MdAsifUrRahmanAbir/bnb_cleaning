@@ -1,33 +1,37 @@
-class PropertyListModel {
+
+class MyPropertyModel {
+  String message;
   List<Property> properties;
 
-  PropertyListModel({
+  MyPropertyModel({
     required this.properties,
+    required this.message,
   });
 
-  factory PropertyListModel.fromJson(Map<String, dynamic> json) => PropertyListModel(
-    properties: List<Property>.from(json["properties"].map((x) => Property.fromJson(x))),
+  factory MyPropertyModel.fromJson(Map<String, dynamic> json) => MyPropertyModel(
+    properties: List<Property>.from((json["properties"] ?? []).map((x) => Property.fromJson(x))),
+      message: json["properties"] ?? "",
   );
 }
 
 class Property {
-  int id;
-  int userId;
-  String identifier;
-  String propertyType;
-  String description;
-  String newContactName;
-  String newContactNumber;
-  String accessInformation;
-  String addressApartment;
-  String addressNumber;
-  String addressStreet;
-  String address;
-  String access;
-  String city;
-  String postcode;
-  String country;
-  int rowStatus;
+  dynamic id;
+  dynamic userId;
+  dynamic identifier;
+  dynamic propertyType;
+  dynamic description;
+  dynamic newContactName;
+  dynamic newContactNumber;
+  dynamic accessInformation;
+  dynamic addressApartment;
+  dynamic addressNumber;
+  dynamic addressStreet;
+  dynamic address;
+  dynamic access;
+  dynamic city;
+  dynamic postcode;
+  dynamic country;
+  dynamic rowStatus;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -54,24 +58,24 @@ class Property {
   });
 
   factory Property.fromJson(Map<String, dynamic> json) => Property(
-    id: json["id"],
-    userId: json["user_id"],
-    identifier: json["identifier"],
-    propertyType: json["property_type"],
-    description: json["description"],
-    newContactName: json["new_contact_name"],
-    newContactNumber: json["new_contact_number"],
-    accessInformation: json["access_information"],
-    addressApartment: json["address_apartment"],
-    addressNumber: json["address_number"],
-    addressStreet: json["address_street"],
-    address: json["address"],
-    access: json["access"],
-    city: json["city"],
+    id: json["id"] ?? "",
+    userId: json["user_id"] ?? "",
+    identifier: json["identifier"] ?? "",
+    propertyType: json["property_type"] ?? "",
+    description: json["description"] ?? "",
+    newContactName: json["new_contact_name"] ?? "",
+    newContactNumber: json["new_contact_number"] ?? "",
+    accessInformation: json["access_information"] ?? "",
+    addressApartment: json["address_apartment"] ?? "",
+    addressNumber: json["address_number"] ?? "",
+    addressStreet: json["address_street"] ?? "",
+    address: json["address"] ?? "",
+    access: json["access"] ?? "",
+    city: json["city"] ?? "",
     postcode: json["postcode"],
-    country: json["country"],
-    rowStatus: json["row_status"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    country: json["country"] ?? "",
+    rowStatus: json["row_status"] ?? "",
+    createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
+    updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
   );
 }
