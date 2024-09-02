@@ -1,5 +1,6 @@
 import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 
+import '../../../backend/model/my_property/property_list_model.dart';
 import '../../../backend/utils/no_data_widget.dart';
 import '../../../controller/bottom_nav/properties_controller.dart';
 import '../../../routes/routes.dart';
@@ -40,11 +41,12 @@ class PropertiesScreen extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 400),
                   itemBuilder: (BuildContext context, int index) {
+                    Property data = controller.myPropertyModel.properties[index];
                     return PropertyCard(
                       onTapCart: () {},
-                      title: "Duis velit volutpat",
-                      subTitle: 'Dolores similique im',
-                      details: 'Consectetur atque n\n2 bed 2 bath (flat)',
+                      title: data.identifier,
+                      subTitle: data.propertyType,
+                      details: data.description,
                       onTapEdit: () {
                         Get.toNamed(Routes.editPropertiesScreen);
                       },

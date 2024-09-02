@@ -1,5 +1,6 @@
 
 
+import '../model/my_property/my_property_save_model.dart';
 import '../model/my_property/property_list_model.dart';
 import '../model/price_list/price_list_model.dart';
 import '../utils/api_method.dart';
@@ -46,6 +47,28 @@ mixin DashboardService{
       }
     } catch (e) {
       log.e(':ladybug::ladybug::ladybug: err from MyProperty api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+  ///* MyPropertySave api services
+  Future<MyPropertySaveModel?> myPropertySaveProcessApi(
+      {required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        ApiEndpoint.myPropertySaveURL,
+        body,
+      );
+      if (mapResponse != null) {
+        MyPropertySaveModel result = MyPropertySaveModel.fromJson(mapResponse);
+        // CustomSnackBar.success(result.message.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from MyPropertySave api service ==> $e :ladybug::ladybug::ladybug:');
       CustomSnackBar.error('Something went Wrong!');
       return null;
     }

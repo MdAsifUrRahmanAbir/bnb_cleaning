@@ -10,7 +10,7 @@ class MyPropertyModel {
 
   factory MyPropertyModel.fromJson(Map<String, dynamic> json) => MyPropertyModel(
     properties: List<Property>.from((json["properties"] ?? []).map((x) => Property.fromJson(x))),
-      message: json["properties"] ?? "",
+      message: json["message"] ?? "",
   );
 }
 

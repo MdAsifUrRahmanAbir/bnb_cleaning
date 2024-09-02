@@ -1,3 +1,5 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
+
 import '../../../../backend/static_data.dart';
 import '../../../../controller/bottom_nav/add_properties_controller.dart';
 import '../../../../utils/basic_screen_imports.dart';
@@ -20,7 +22,8 @@ class AddPropertiesScreen extends StatelessWidget {
   }
 
   _bodyWidget() {
-    return SafeArea(child: ListView(
+    return SafeArea(
+        child: ListView(
       padding: EdgeInsets.only(
         left: Dimensions.paddingSizeHorizontal,
         right: Dimensions.paddingSizeHorizontal,
@@ -31,9 +34,11 @@ class AddPropertiesScreen extends StatelessWidget {
         _aboutWidget(),
         _contactWidget(),
         _addressWidget(),
-
         verticalSpace(Dimensions.marginSizeVertical),
-        PrimaryButton(title: Strings.create, onPressed: controller.createProperty),
+        Obx(() => controller.isLoading
+            ? const CustomLoadingAPI()
+            : PrimaryButton(
+                title: Strings.create, onPressed: controller.createProperty)),
         verticalSpace(Dimensions.marginSizeVertical),
       ],
     ));
@@ -48,15 +53,12 @@ class AddPropertiesScreen extends StatelessWidget {
           color: Theme.of(Get.context!).primaryColor,
         ),
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
           controller: controller.propertyNameController,
           hint: Strings.propertyNameHint,
           labelText: Strings.propertyName,
         ),
-
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         CustomDropDown<DropDownUseModel>(
           title: Strings.propertyType,
           items: propertyType,
@@ -66,7 +68,6 @@ class AddPropertiesScreen extends StatelessWidget {
           hint: controller.selectedPropertyType.value.title,
         ),
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
           optional: Strings.optional,
           maxLine: 3,
@@ -74,12 +75,9 @@ class AddPropertiesScreen extends StatelessWidget {
           hint: Strings.propertyDescriptionHint,
           labelText: Strings.propertyDescription,
         ),
-
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
-
         const Divider(),
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
-
       ],
     );
   }
@@ -93,23 +91,18 @@ class AddPropertiesScreen extends StatelessWidget {
           color: Theme.of(Get.context!).primaryColor,
         ),
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
           controller: controller.contactNameController,
           hint: Strings.enterName,
           labelText: Strings.name,
         ),
-
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
           controller: controller.contactPhoneController,
           hint: Strings.enterPhoneNumber,
           labelText: Strings.phoneNumber,
         ),
-
         verticalSpace(Dimensions.marginSizeVertical),
-
         CustomDropDown<DropDownUseModel>(
           title: Strings.propertyAccess,
           items: propertyAccess,
@@ -119,7 +112,6 @@ class AddPropertiesScreen extends StatelessWidget {
           hint: controller.selectedPropertyAccess.value.title,
         ),
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
-
         const Divider(),
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
       ],
@@ -135,23 +127,18 @@ class AddPropertiesScreen extends StatelessWidget {
           color: Theme.of(Get.context!).primaryColor,
         ),
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
           controller: controller.addressController,
           hint: Strings.enterAddress,
           labelText: Strings.address,
         ),
-
         verticalSpace(Dimensions.marginBetweenInputBox),
-
         PrimaryTextInputWidget(
-          controller: controller.postCodePhoneController,
+          controller: controller.postCodeController,
           hint: Strings.enterPostCode,
           labelText: Strings.postCode,
         ),
-
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
-
         const Divider(),
         verticalSpace(Dimensions.marginBetweenInputBox * .5),
       ],
