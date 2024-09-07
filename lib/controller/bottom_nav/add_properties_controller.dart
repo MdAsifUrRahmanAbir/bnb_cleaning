@@ -54,6 +54,7 @@ class AddPropertiesController extends GetxController with DashboardService{
       "address": addressController.text,
       "postcode": postCodeController.text
     };
+
     await myPropertySaveProcessApi(body: inputBody).then((value) {
       _myPropertySaveModel = value!;
       Get.find<PropertiesController>().myPropertyProcess();

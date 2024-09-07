@@ -19,4 +19,7 @@ class ApiEndpoint {
   ///-> Price-list
   static String priceListURL = '/price-list'.addBaseURl();
 
+  ///-> Profile-Manage
+  static String changePasswordURL = '/change-password'.addBaseURl();
+  static String updateProfileURL = '/update-basic-info'.addBaseURl();
 }
