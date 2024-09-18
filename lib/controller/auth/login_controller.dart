@@ -1,9 +1,9 @@
 import 'package:bnb_clean/backend/local_storage/local_storage.dart';
+import 'package:bnb_clean/backend/model/common/common_success_model.dart';
 
 import '../../../routes/routes.dart';
 import '../../backend/model/auth/login_model.dart';
 import '../../backend/services/auth_service.dart';
-import '../../backend/utils/custom_snackbar.dart';
 import '../../utils/basic_screen_imports.dart';
 
 class LoginController extends GetxController with AuthService{
@@ -41,10 +41,8 @@ class LoginController extends GetxController with AuthService{
   }
 
   void forgotPasswordSendLink() {
-    CustomSnackBar.toast("Email Send Successfully. Please Check Your Email.");
+    forgotPasswordProcess();
   }
-
-
 
   /// ------------------------------------- >>
   final _isLoading = false.obs;
@@ -76,5 +74,35 @@ class LoginController extends GetxController with AuthService{
     _isLoading.value = false;
     update();
     return _loginModel;
+  }
+
+
+  /// ------------------------------------- >>
+  final _isForgotLoading = false.obs;
+  bool get isForgotLoading => _isForgotLoading.value;
+
+
+  late CommonSuccessModel _forgotPasswordModel;
+  CommonSuccessModel get forgotPasswordModel => _forgotPasswordModel;
+
+
+  ///* ForgotPassword in process
+  Future<CommonSuccessModel> forgotPasswordProcess() async {
+    _isForgotLoading.value = true;
+    update();
+    Map<String, dynamic> inputBody = {
+      'key': 'value',
+    };
+    await forgotPasswordProcessApi(body: inputBody).then((value) {
+      _forgotPasswordModel = value!;
+      Get.toNamed(Routes.resetPasswordScreen);
+      _isForgotLoading.value = false;
+      update();
+    }).catchError((onError) {
+      log.e(onError);
+    });
+    _isForgotLoading.value = false;
+    update();
+    return _forgotPasswordModel;
   }
 }

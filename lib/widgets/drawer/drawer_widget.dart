@@ -59,6 +59,15 @@ class DrawerWidget extends StatelessWidget {
         //     .move(begin: const Offset(-16, 0), curve: Curves.easeOutQuad),
         // verticalSpace(Dimensions.marginSizeVertical * 1),
 
+
+        DrawerTileButtonWidget(
+          onTap: () {
+            Get.toNamed(Routes.changePasswordScreen);
+          },
+          text: Strings.changePassword,
+          icon: Icons.key,
+        ),
+
         Obx(() => DrawerTileButtonWidget(
           onTap: (){
             controller.isDark.value = !controller.isDark.value;

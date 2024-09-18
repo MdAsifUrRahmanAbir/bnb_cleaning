@@ -1,23 +1,35 @@
-
-
-import 'package:bnb_clean/backend/services/dashboard_service.dart';
 import 'package:bnb_clean/utils/basic_screen_imports.dart';
 
 import '../../backend/model/common/common_success_model.dart';
+import '../../backend/services/profile_service.dart';
 
-class ChangePasswordController extends GetxController with DashboardService{
+class ChangePasswordController extends GetxController with ProfileService{
   final oldPassword = TextEditingController();
   final newPassword = TextEditingController();
   final confirmPassword = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    oldPassword.dispose();
+    newPassword.dispose();
+    confirmPassword.dispose();
+    super.dispose();
+  }
+
+  void changePassword() async{
+    if(formKey.currentState!.validate()){
+      await changePasswordProcess();
+    }
+  }
 
   /// ------------------------------------- >>
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
-
   late CommonSuccessModel _commonSuccessModel;
   CommonSuccessModel get commonSuccessModel => _commonSuccessModel;
-
 
   ///* CommonSuccess in process
   Future<CommonSuccessModel> changePasswordProcess() async {
@@ -40,6 +52,4 @@ class ChangePasswordController extends GetxController with DashboardService{
     update();
     return _commonSuccessModel;
   }
-
-
 }

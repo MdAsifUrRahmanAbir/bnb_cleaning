@@ -4,16 +4,16 @@ class ApiEndpoint {
   static String mainDomain = "https://api.mastersysobe.com";
   static String baseUrl = "$mainDomain/api";
 
-  ///-> Login
+  ///-> Auth
   static String loginURL = '/login'.addBaseURl();
-
-  ///-> Register
   static String registerURL = '/register'.addBaseURl();
+
+  ///-> Forget Password
+  static String forgotPasswordURL = '/forgot-password'.addBaseURl();
+  static String resetPasswordURL = '/reset-password'.addBaseURl();
 
   ///-> My-property
   static String myPropertyURL = '/my-property'.addBaseURl();
-
-  ///-> My-property-save
   static String myPropertySaveURL = '/my-property/save'.addBaseURl();
 
   ///-> Price-list
@@ -22,4 +22,5 @@ class ApiEndpoint {
   ///-> Profile-Manage
   static String changePasswordURL = '/change-password'.addBaseURl();
   static String updateProfileURL = '/update-basic-info'.addBaseURl();
+  static String profileURL = '/user-info'.addBaseURl();
 }

@@ -23,8 +23,8 @@ class CartDetailScreen extends StatelessWidget {
         appBar: const PrimaryAppBar(
           title: "",
         ),
-        body: SafeArea(
-            child: ListView(
+        body:
+        SafeArea(child: ListView(
           children: [
             ShoppingCardCardWidget(
               initialDate: initialDate,
@@ -36,7 +36,8 @@ class CartDetailScreen extends StatelessWidget {
               contactDetails: contactDetails,
               name: name,
               phoneNumber: phoneNumber,
-            )
+            ),
+
           ],
         )));
   }

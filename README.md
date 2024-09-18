@@ -1,16 +1,10 @@
 # bnb_clean
 
-A new Flutter project.
 
-## Getting Started
+1. Firstly Automatic enable just first 3 service. 
+2. If user select Airbnb then line hire is must. Mid Stay and Product are disabled,
+3. if user selected airbnb and linehire both , just mid stay is disable,
+4. If Mid stay selected only line hire enable, if both select, then only bnb is disable.
+5. if only select line hire all is open. and minimum 40 euro , if select from bnb or mid stay then dont need minimum euro from line hire.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Please note that the customer should only be able to order Products and Services when he/she added Cleaning services to the basket already!!!

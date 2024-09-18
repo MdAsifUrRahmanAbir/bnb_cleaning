@@ -9,6 +9,8 @@ class Strings {
   static String email = "Email";
   static String enterEmail = "Enter Email";
 
+  static String oldPassword = "Old Password";
+  static String newPassword = "New Password";
   static String password = "Password";
   static String enterPassword = "Enter Password";
 
@@ -118,4 +120,7 @@ class Strings {
   static String midStayShortLetClean  = "Mid Stay Short Let Clean";
   static String products  = "Products";
   static String bundles  = "Bundles";
+
+  static String changePassword  = "Change Password";
+  static String resetPassword  = "Reset Password";
 }
