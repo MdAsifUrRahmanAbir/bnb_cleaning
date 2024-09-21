@@ -1,4 +1,5 @@
 import '../model/common/common_success_model.dart';
+import '../model/my_property/cart_index_model.dart';
 import '../model/my_property/my_property_save_model.dart';
 import '../model/my_property/property_list_model.dart';
 import '../model/price_list/price_list_model.dart';
@@ -67,6 +68,48 @@ mixin DashboardService{
       }
     } catch (e) {
       log.e(':ladybug::ladybug::ladybug: err from MyPropertySave api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+  ///* Get CartIndex api services
+  Future<CartIndexModel?> cartIndexProcessApi() async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).get(
+        ApiEndpoint.shoppingCartURL,
+      );
+      if (mapResponse != null) {
+        CartIndexModel result = CartIndexModel.fromJson(mapResponse);
+        // CustomSnackBar.success(result.message.success.first.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from CartIndex api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+  ///* CartSave api services
+  Future<CommonSuccessModel?> cartSaveProcessApi(
+      {required Map<String, dynamic> body, required String id}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        "${ApiEndpoint.shoppingCartURL}/$id",
+        body,
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        CustomSnackBar.success(result.message.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from CartSave api service ==> $e :ladybug::ladybug::ladybug:');
       CustomSnackBar.error('Something went Wrong!');
       return null;
     }

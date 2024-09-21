@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../services/api_endpoint.dart';
 
@@ -70,7 +69,7 @@ extension GlassWidget<T extends Widget> on T {
 
 extension EndPointExtensions on String {
   String addBaseURl() {
-    return "${ApiEndpoint.baseUrl}$this?lang=${GetStorage().read('selectedLanguage')}";
+    return "${ApiEndpoint.baseUrl}$this";
   }
 
   double parseDouble() {

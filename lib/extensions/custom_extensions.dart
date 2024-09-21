@@ -2,6 +2,7 @@
 import '../backend/services/api_endpoint.dart';
 import '../utils/basic_widget_imports.dart';
 
+
 extension NumberParsing on String {
   int parseInt() {
     return int.parse(this);
@@ -35,8 +36,6 @@ class HexColor extends Color {
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
-
-
 
 String makeBalance(String value, [int end = 2]){
   return double.parse(value).toStringAsFixed(end);
@@ -91,4 +90,22 @@ String _getMonthName(int month) {
     default:
       return "";
   }
+}
+
+
+Map<String, dynamic> parsePhpSerialized(String input) {
+  print(input);
+  final regex = RegExp(r's:\d+:"([^"]+)";i?:(\d+)?;s?\d*?:"([^"]+)"?;?', multiLine: true);
+  final matches = regex.allMatches(input);
+
+  print(matches);
+
+  Map<String, dynamic> result = {};
+  for (var match in matches) {
+    var key = match.group(1); // the key in "s" format
+    var value = match.group(3) ?? match.group(2); // the value in "s" or "i"
+    result[key!] = value;
+  }
+
+  return result;
 }

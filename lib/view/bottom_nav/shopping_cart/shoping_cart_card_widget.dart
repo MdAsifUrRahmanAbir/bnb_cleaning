@@ -16,7 +16,7 @@ class ShoppingCardCardWidget extends StatelessWidget {
     this.onEdit,
     this.onDelete,
     this.isExpansion = false,
-    required this.contactDetails,
+    this.contactDetails = "",
     required this.name,
     required this.phoneNumber,
     this.onNext,
@@ -126,8 +126,11 @@ class ShoppingCardCardWidget extends StatelessWidget {
                         text:
                             "Service is available from 11.00 A.M to 3.00 P.M"),
                     verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
-                    TitleAndValueWidget(
-                        title: Strings.contactDetails, value: contactDetails),
+                    Visibility(
+                      visible: contactDetails.isNotEmpty,
+                      child: TitleAndValueWidget(
+                          title: Strings.contactDetails, value: contactDetails),
+                    ),
                     TitleAndValueWidget(title: Strings.name, value: name),
                     TitleAndValueWidget(
                         title: Strings.phone, value: phoneNumber),

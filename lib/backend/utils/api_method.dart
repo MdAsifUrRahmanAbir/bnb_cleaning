@@ -38,7 +38,7 @@ class ApiMethod {
     String url, {
     int code = 200,
     int duration = 120,
-    bool showResult = false,
+    bool showResult = true,
     VoidCallback? onTimeOut,
   }) async {
     log.i(
@@ -131,7 +131,7 @@ class ApiMethod {
     Map<String, dynamic> body, {
     int code = 200,
     int duration = 120,
-    bool showResult = false,
+    bool showResult = true,
     VoidCallback? onTimeOut,
   }) async {
     try {

@@ -16,59 +16,56 @@ class PropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTapCart,
-      child: Card(
-        color: CustomColor.secondaryLightColor.withOpacity(.05),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
-                  onPressed: onTapEdit,
+    return Card(
+      color: CustomColor.secondaryLightColor.withOpacity(.05),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
+                onPressed: onTapEdit,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Icon(Icons.apartment, color:  Theme.of(context).primaryColor, size: 50.0),
+            const SizedBox(height: 8.0),
+            TitleHeading2Widget(
+              text: title,
+              textAlign: TextAlign.center,
+              color:  Theme.of(context).primaryColor,
+            ),
+            const SizedBox(height: 4.0),
+            TitleHeading4Widget(
+              text: subTitle,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4.0),
+            TitleHeading5Widget(
+              text: details,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16.0),
+            OutlinedButton(
+              onPressed: onTapCart,
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                  color: Theme.of(context).primaryColor.withOpacity(.5),
                 ),
               ),
-              const SizedBox(height: 8.0),
-              Icon(Icons.apartment, color:  Theme.of(context).primaryColor, size: 50.0),
-              const SizedBox(height: 8.0),
-              TitleHeading2Widget(
-                text: title,
-                textAlign: TextAlign.center,
+              child: TitleHeading4Widget(
+                text: Strings.addToCart,
                 color:  Theme.of(context).primaryColor,
               ),
-              const SizedBox(height: 4.0),
-              TitleHeading4Widget(
-                text: subTitle,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 4.0),
-              TitleHeading5Widget(
-                text: details,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16.0),
-              OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                    color: Theme.of(context).primaryColor.withOpacity(.5),
-                  ),
-                ),
-                child: TitleHeading4Widget(
-                  text: Strings.addToCart,
-                  color:  Theme.of(context).primaryColor,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
