@@ -32,7 +32,7 @@ class ShoppingCartPage extends StatelessWidget {
           CartItem data = controller.cartIndexModel.cartItems[index];
           Map<dynamic, dynamic> serializedData = phpDeserialize(data.attributes);
 
-          print(serializedData);
+          // print(serializedData);
 
           return Obx(() => ShoppingCardCardWidget(
               isExpansion: controller.selectedIndex.value == index,
@@ -47,14 +47,14 @@ class ShoppingCartPage extends StatelessWidget {
                 controller.selectedIndex.value = -1;
 
                 Get.to(CartDetailScreen(
-                  title: 'Duis velit voluptat',
-                  subTitle: 'Dolores similique im,Consectetur atque n ',
+                  title: data.itemName,
+                  subTitle: serializedData["address"],
                   price: '£0',
-                  date: 'Sunday 18 , August',
+                  date: DateFormat('EEEE d, MMMM').format(data.createdAt),
+                  contactDetails: '',
+                  name: serializedData["new_contact_name"],
+                  phoneNumber: serializedData["new_contact_number"],
                   initialDate: date,
-                  contactDetails: 'Contact with admin. Email abc@email.abc',
-                  name: "Md Abir",
-                  phoneNumber: '+8801877348044',
                 ));
               },
               onEdit: () {
