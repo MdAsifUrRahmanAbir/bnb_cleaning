@@ -15,6 +15,7 @@ class ApiEndpoint {
   ///-> My-property
   static String myPropertyURL = '/my-property'.addBaseURl();
   static String myPropertySaveURL = '/my-property/save'.addBaseURl();
+  static String shoppingCartURL = '/shopping-cart'.addBaseURl();
 
   ///-> Price-list
   static String priceListURL = '/price-list'.addBaseURl();

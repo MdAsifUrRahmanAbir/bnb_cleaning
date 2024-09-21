@@ -1,3 +1,6 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
+import 'package:bnb_clean/backend/utils/no_data_widget.dart';
+
 import '../../../controller/bottom_nav/shopping_cart_controller.dart';
 import '../../../utils/basic_screen_imports.dart';
 import 'cart_detail/cart_detail_screen.dart';
@@ -9,6 +12,14 @@ class ShoppingCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() => controller.isLoading
+        ? const CustomLoadingAPI()
+        : controller.cartIndexModel.cartItems.isEmpty
+            ? const NoDataWidget()
+            : _list());
+  }
+
+  _list() {
     return ListView.separated(
         padding: EdgeInsets.symmetric(
           vertical: Dimensions.paddingSizeVertical * .5,
@@ -48,6 +59,6 @@ class ShoppingCartPage extends StatelessWidget {
               onDelete: () {}));
         },
         separatorBuilder: (_, i) => verticalSpace(5),
-        itemCount: 5);
+        itemCount: controller.cartIndexModel.cartItems.length);
   }
 }

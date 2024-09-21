@@ -31,19 +31,27 @@ class PropertiesScreen extends StatelessWidget {
                 child: TitleHeading4Widget(text: Strings.addNew))
           ],
         ),
-        body: SafeArea(
-            child: Obx(
-          () => controller.isLoading
-              ? const CustomLoadingAPI()
-              : controller.myPropertyModel.properties.isEmpty ? const NoDataWidget() : GridView.builder(
+        body: _bodyWidget());
+  }
+
+  _bodyWidget() {
+    return SafeArea(child: Obx(() {
+      return controller.isLoading
+          ? const CustomLoadingAPI()
+          : controller.myPropertyModel.properties.isEmpty
+              ? const NoDataWidget()
+              : GridView.builder(
                   itemCount: controller.myPropertyModel.properties.length,
                   padding: const EdgeInsets.all(12.0),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 400),
                   itemBuilder: (BuildContext context, int index) {
-                    Property data = controller.myPropertyModel.properties[index];
+                    Property data =
+                        controller.myPropertyModel.properties[index];
                     return PropertyCard(
-                      onTapCart: () {},
+                      onTapCart: () {
+                        // controller
+                      },
                       title: data.identifier,
                       subTitle: data.propertyType,
                       details: data.description,
@@ -52,7 +60,7 @@ class PropertiesScreen extends StatelessWidget {
                       },
                     );
                   },
-                ),
-        )));
+                );
+    }));
   }
 }

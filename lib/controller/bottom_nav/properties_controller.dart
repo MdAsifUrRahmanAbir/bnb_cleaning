@@ -1,12 +1,11 @@
-
+import 'package:bnb_clean/backend/model/common/common_success_model.dart';
 import 'package:get/get.dart';
 
 import '../../backend/model/my_property/property_list_model.dart';
 import '../../backend/services/dashboard_service.dart';
 import '../../routes/routes.dart';
 
-class PropertiesController extends GetxController with DashboardService{
-
+class PropertiesController extends GetxController with DashboardService {
   @override
   void onInit() {
     myPropertyProcess();
@@ -40,5 +39,39 @@ class PropertiesController extends GetxController with DashboardService{
     return _myPropertyModel;
   }
 
+  /// ------------------------------------- >>
+  final _isCartSaveLoading = false.obs;
+  bool get isCartSaveLoading => _isCartSaveLoading.value;
+
+  late CommonSuccessModel _cartSaveModel;
+  CommonSuccessModel get cartSaveModel => _cartSaveModel;
+
+  ///* CartSave in process
+  Future<CommonSuccessModel> cartSaveProcess(
+      {required String id,
+      required String name,
+      required String price,
+      required String qty}) async {
+    _isCartSaveLoading.value = true;
+    update();
+
+    Map<String, dynamic> inputBody = {
+      "property_id": id,
+      "name": name,
+      "price": price,
+      "qty": qty
+    };
+
+    await cartSaveProcessApi(body: inputBody, id: id).then((value) {
+      _cartSaveModel = value!;
+      _isCartSaveLoading.value = false;
+      update();
+    }).catchError((onError) {
+      log.e(onError);
+    });
+    _isCartSaveLoading.value = false;
+    update();
+    return _cartSaveModel;
+  }
 
 }

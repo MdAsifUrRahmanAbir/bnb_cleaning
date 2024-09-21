@@ -5,7 +5,7 @@ import '../controller/bottom_nav/home_controller.dart';
 import '../controller/bottom_nav/price_controller.dart';
 import '../controller/profile/profile_controller.dart';
 // import '../controller/bottom_nav/properties_controller.dart';
-import '../controller/bottom_nav/shopping_cart_controller.dart';
+// import '../controller/bottom_nav/shopping_cart_controller.dart';
 
 class DashboardBinding extends Bindings {
   @override
@@ -14,6 +14,6 @@ class DashboardBinding extends Bindings {
     Get.put(PriceController());
     Get.put(ProfileController());
     Get.put(BottomNavController());
-    Get.put(ShoppingCartController());
+    // Get.put(ShoppingCartController());
   }
 }
