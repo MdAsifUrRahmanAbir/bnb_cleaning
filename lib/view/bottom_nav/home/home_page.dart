@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
     return ListView(
         padding: EdgeInsets.only(
           top: Dimensions.paddingSizeVertical * .5,
+          bottom: Dimensions.paddingSizeVertical * .5,
           left: Dimensions.paddingSizeHorizontal * .5,
           right: Dimensions.paddingSizeHorizontal * .5,
         ),
@@ -27,17 +28,18 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: crossStart,
           children: [
             TitleHeading4Widget(
-              text: type,
+              text: type["type"],
               fontWeight: FontWeight.w600,
             ),
             verticalSpace(5),
             SizedBox(
-              height: 250,
+              height: 260,
               child: ListView.separated(
                   // controller: controller.scrollController,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
+                    var data = type["list"][index];
                     return SizedBox(
                       width: 300,
                       child: Card(
@@ -55,15 +57,18 @@ class HomePage extends StatelessWidget {
                                 'assets/logo/basic_logo.png',
                                 height: 100,
                               ), // Update with your image path
-                              verticalSpace(
-                                  Dimensions.paddingSizeVertical * .5),
-                              TitleHeading5Widget(
-                                text: "Sample Title $index",
+                              data["title"].isEmpty ? const SizedBox.shrink(): Column(
+                                children: [
+                                  verticalSpace(
+                                      Dimensions.paddingSizeVertical * .5),
+                                  TitleHeading5Widget(
+                                    text: data["title"],
+                                  ),
+                                ],
                               ),
                               verticalSpace(4),
                               TitleHeading5Widget(
-                                text:
-                                    'To be able to place an order, first you need to add a property and fill in the required details',
+                                text: data["subTitle"],
                                 fontSize: Dimensions.headingTextSize6,
                               ),
                             ],
@@ -73,21 +78,23 @@ class HomePage extends StatelessWidget {
                     );
                   },
                   separatorBuilder: (_, i) => verticalSpace(10),
-                  itemCount: 5),
+                  itemCount: type["list"].length),
             )
           ],
         ),
-        Obx(() => Visibility(
-              visible: controller.showArrow.value,
-              child: const Positioned(
-                bottom: 10,
-                right: 10,
-                child: Icon(
-                  Icons.arrow_forward,
-                  size: 30.0,
-                ),
-              ),
-            )),
+
+
+        Visibility(
+          visible: type["list"].length > 1,
+          child: const Positioned(
+            bottom: 10,
+            right: 10,
+            child: Icon(
+              Icons.arrow_forward,
+              size: 30.0,
+            ),
+          ),
+        )
       ],
     );
   }
