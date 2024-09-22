@@ -26,9 +26,9 @@ class CartDetailScreen extends StatelessWidget {
         appBar: const PrimaryAppBar(
           title: "",
         ),
-        body: SafeArea(
-            child: ListView(
+        body: SafeArea(child: ListView(
           children: [
+
             ShoppingCardCardWidget(
               initialDate: initialDate,
               isExpansion: true,
@@ -40,6 +40,7 @@ class CartDetailScreen extends StatelessWidget {
               name: name,
               phoneNumber: phoneNumber,
             ),
+
             ExpansionTile(
                 title: TitleHeading2Widget(text: Strings.airbnbCleanings),
                 children: [
