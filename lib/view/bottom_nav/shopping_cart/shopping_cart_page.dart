@@ -46,10 +46,14 @@ class ShoppingCartPage extends StatelessWidget {
               onNext: (DateTime date) {
                 controller.selectedIndex.value = -1;
 
+                controller.orderId = data.id;
+                controller.propertyName = data.itemName;
+                controller.selectedDate = DateFormat('yyyy-MM-dd').format(date);
+
                 Get.to(CartDetailScreen(
                   title: data.itemName,
                   subTitle: serializedData["address"],
-                  price: '£0',
+                  price: '',
                   date: DateFormat('EEEE d, MMMM').format(data.createdAt),
                   contactDetails: '',
                   name: serializedData["new_contact_name"],

@@ -17,7 +17,10 @@ class TitleAndValueWidget extends StatelessWidget {
             TitleHeading5Widget(
                 text: title, color: Theme.of(context).primaryColor),
             horizontalSpace(5),
-            Expanded(child: TitleHeading4Widget(text: value)),
+            Expanded(child: TitleHeading4Widget(
+                text: value,
+              textAlign: TextAlign.right,
+            )),
           ],
         ),
         verticalSpace(Dimensions.marginBetweenInputTitleAndBox),

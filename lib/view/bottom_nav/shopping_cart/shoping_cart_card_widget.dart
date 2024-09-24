@@ -1,5 +1,6 @@
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
 import 'package:bnb_clean/utils/basic_screen_imports.dart';
+import 'package:intl/intl.dart';
 
 import '../../../utils/strings.dart';
 import '../../../widgets/inputs/primary_date_input_widget.dart';
@@ -7,21 +8,20 @@ import '../../../widgets/text_labels/title_heading5_widget.dart';
 import '../../../widgets/text_labels/title_value_widget.dart';
 
 class ShoppingCardCardWidget extends StatelessWidget {
-  const ShoppingCardCardWidget({
-    super.key,
-    required this.title,
-    required this.subTitle,
-    required this.price,
-    required this.date,
-    this.onEdit,
-    this.onDelete,
-    this.isExpansion = false,
-    this.contactDetails = "",
-    required this.name,
-    required this.phoneNumber,
-    this.onNext,
-    this.initialDate
-  });
+  const ShoppingCardCardWidget(
+      {super.key,
+      required this.title,
+      required this.subTitle,
+      required this.price,
+      required this.date,
+      this.onEdit,
+      this.onDelete,
+      this.isExpansion = false,
+      this.contactDetails = "",
+      required this.name,
+      required this.phoneNumber,
+      this.onNext,
+      this.initialDate});
 
   final String title, subTitle, price, date, contactDetails, name, phoneNumber;
   final VoidCallback? onEdit, onDelete;
@@ -110,27 +110,34 @@ class ShoppingCardCardWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    PrimaryDateInputWidget(
-                      initialDate: initialDate,
-                      labelText: Strings.selectDate,
-                      optional: Strings.selectDateFirst,
-                      onChanged: (DateTime date) {
-                        /// todo date catch method
-                        debugPrint("✔️✍️ ${date.toString()} ✉");
-                        selectedDate = date;
-                        // onDateChanged(date);
-                      },
-                    ),
-                    verticalSpace(Dimensions.marginBetweenInputBox),
-                    const TitleHeading3Widget(
-                        text:
-                            "Service is available from 11.00 A.M to 3.00 P.M"),
-                    verticalSpace(Dimensions.marginBetweenInputTitleAndBox),
+                    onNext == null
+                        ? TitleAndValueWidget(
+                            title: Strings.selectedDate,
+                            value:
+                                DateFormat('yyyy-MM-dd').format(initialDate!))
+                        : PrimaryDateInputWidget(
+                            initialDate: initialDate,
+                            labelText: Strings.selectDate,
+                            optional: Strings.selectDateFirst,
+                            onChanged: (DateTime date) {
+                              /// todo date catch method
+                              debugPrint("✔️✍️ ${date.toString()} ✉");
+                              selectedDate = date;
+                              // onDateChanged(date);
+                            },
+                          ),
+                    // verticalSpace(Dimensions.marginBetweenInputBox),
+                    // const TitleHeading3Widget(
+                    //     text: "Service is available from 11.00 A.M to 3.00 P.M"),
+                    verticalSpace(onNext == null
+                        ? 0
+                        : Dimensions.marginBetweenInputTitleAndBox),
                     Visibility(
                       visible: contactDetails.isNotEmpty,
                       child: TitleAndValueWidget(
                           title: Strings.contactDetails, value: contactDetails),
                     ),
+
                     TitleAndValueWidget(title: Strings.name, value: name),
                     TitleAndValueWidget(
                         title: Strings.phone, value: phoneNumber),

@@ -1,12 +1,16 @@
 
+import 'package:bnb_clean/backend/services/cart_service.dart';
 import 'package:get/get.dart';
 
 import '../../backend/model/my_property/cart_index_model.dart';
-import '../../backend/services/dashboard_service.dart';
 
-class ShoppingCartController extends GetxController with DashboardService{
+class ShoppingCartController extends GetxController with CartService{
 
   RxInt selectedIndex = (-1).obs;
+
+  String propertyName = "";
+  String selectedDate = "";
+  int orderId = -1;
 
   @override
   void onInit() {

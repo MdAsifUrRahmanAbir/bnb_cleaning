@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AddSubtractWidget extends StatefulWidget {
   final int initialValue;
-  final ValueChanged<int> onChanged;
+  final ValueChanged<Map> onChanged;
 
   const AddSubtractWidget({
     super.key,
@@ -27,7 +27,10 @@ class AddSubtractWidgetState extends State<AddSubtractWidget> {
     setState(() {
       _quantity++;
     });
-    widget.onChanged(_quantity); // Notify parent widget about quantity change
+    widget.onChanged({
+      "qty": _quantity,
+      "type": "add"
+    }); // Notify parent widget about quantity change
   }
 
   void _decrementQuantity() {
@@ -35,7 +38,10 @@ class AddSubtractWidgetState extends State<AddSubtractWidget> {
       setState(() {
         _quantity--;
       });
-      widget.onChanged(_quantity); // Notify parent widget about quantity change
+      widget.onChanged({
+        "qty": _quantity,
+        "type": "sub"
+      }); // Notify parent widget about quantity change
     }
   }
 

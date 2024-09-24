@@ -120,7 +120,11 @@ class Strings {
   static String midStayShortLetClean  = "Mid Stay Short Let Clean";
   static String products  = "Products";
   static String bundles  = "Bundles";
+  static String productsAndBundles  = "Products & Bundles";
+  static String optionalExtras  = "Optional Extras";
 
   static String changePassword  = "Change Password";
   static String resetPassword  = "Reset Password";
+
+  static String selectedDate  = "Selected Date";
 }
