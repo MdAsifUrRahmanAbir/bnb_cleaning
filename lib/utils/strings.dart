@@ -127,4 +127,7 @@ class Strings {
   static String resetPassword  = "Reset Password";
 
   static String selectedDate  = "Selected Date";
+
+  static String delete  = "Delete";
+  static String areYouSure  = "Are you sure you want to delete it?";
 }

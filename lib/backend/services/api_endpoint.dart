@@ -15,7 +15,11 @@ class ApiEndpoint {
   ///-> My-property
   static String myPropertyURL = '/my-property'.addBaseURl();
   static String myPropertySaveURL = '/my-property/save'.addBaseURl();
-  static String shoppingCartURL = '/shopping-cart'.addBaseURl();
+  static String myPropertyUpdateURL = '/properties'.addBaseURl();
+
+  /// -> Cart
+  static String shoppingCartURL = '/shopping-cart'.addBaseURl();   /// this url is using for 2 actions, get for index, post for store
+  static String cartDeleteURL = '/cart-items'.addBaseURl();
 
   static String updateAirbnbServiceURL = '/airbnb-update'.addBaseURl();
   static String updateLineServiceURL = '/linen-update'.addBaseURl();

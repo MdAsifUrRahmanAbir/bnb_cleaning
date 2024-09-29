@@ -596,7 +596,7 @@ class ApiMethod {
     return null;
   }
 
-  Future<Map<String, dynamic>?> put(String url, Map<String, String> body,
+  Future<Map<String, dynamic>?> put(String url, Map<String, dynamic> body,
       {int code = 200, int duration = 120, bool showResult = false}) async {
     try {
       log.i(

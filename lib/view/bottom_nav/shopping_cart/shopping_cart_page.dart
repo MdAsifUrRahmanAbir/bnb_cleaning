@@ -6,6 +6,8 @@ import 'package:php_serializer/php_serializer.dart';
 import '../../../backend/model/my_property/cart_index_model.dart';
 import '../../../controller/bottom_nav/shopping_cart_controller.dart';
 import '../../../utils/basic_screen_imports.dart';
+import '../../../utils/strings.dart';
+import '../../../widgets/dialog_helper.dart';
 import 'cart_detail/cart_detail_screen.dart';
 import 'shoping_cart_card_widget.dart';
 
@@ -43,6 +45,7 @@ class ShoppingCartPage extends StatelessWidget {
               contactDetails: '',
               name: serializedData["new_contact_name"],
               phoneNumber: serializedData["new_contact_number"],
+
               onNext: (DateTime date) {
                 controller.selectedIndex.value = -1;
 
@@ -68,7 +71,15 @@ class ShoppingCartPage extends StatelessWidget {
                   controller.selectedIndex.value = -1;
                 }
               },
-              onDelete: () {}));
+              onDelete: () {
+                DialogHelper.showAlertDialog(context,
+                    title: Strings.delete,
+                    isLoading: controller.isDeleteLoading,
+                    content: Strings.areYouSure, onTap: () async {
+                      controller.cartDeleteProcess(data.id);
+                    });
+              })
+          );
         },
         separatorBuilder: (_, i) => verticalSpace(5),
         itemCount: controller.cartIndexModel.cartItems.length);

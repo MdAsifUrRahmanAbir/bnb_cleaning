@@ -74,6 +74,29 @@ mixin DashboardService{
   }
 
   ///* CartSave api services
+  Future<CommonSuccessModel?> myPropertyUpdateProcessApi(
+      {required Map<String, dynamic> body, required String id}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).put(
+        "${ApiEndpoint.myPropertyUpdateURL}/$id",
+        body,
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        CustomSnackBar.success(result.message.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from CartSave api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+
+  ///* CartSave api services
   Future<CommonSuccessModel?> cartSaveProcessApi(
       {required Map<String, dynamic> body, required String id}) async {
     Map<String, dynamic>? mapResponse;

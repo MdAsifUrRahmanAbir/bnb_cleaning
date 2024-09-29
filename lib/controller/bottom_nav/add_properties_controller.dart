@@ -1,3 +1,4 @@
+import '../../backend/model/common/common_success_model.dart';
 import '../../backend/model/my_property/my_property_save_model.dart';
 import '../../backend/services/dashboard_service.dart';
 import '../../backend/static_data.dart';
@@ -68,4 +69,6 @@ class AddPropertiesController extends GetxController with DashboardService{
     update();
     return _myPropertySaveModel;
   }
+
+
 }

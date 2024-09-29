@@ -1,3 +1,5 @@
+import 'package:bnb_clean/backend/model/common/common_success_model.dart';
+
 import '../model/cart/service_success_model.dart';
 import '../model/my_property/cart_index_model.dart';
 import '../utils/api_method.dart';
@@ -19,6 +21,27 @@ mixin CartService{
       if (mapResponse != null) {
         CartIndexModel result = CartIndexModel.fromJson(mapResponse);
         // CustomSnackBar.success(result.message.success.first.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from CartIndex api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+  ///* Delete Cart api services
+  Future<CommonSuccessModel?> cartDeleteProcessApi(String id) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).delete(
+        "${ApiEndpoint.cartDeleteURL}/$id",
+        code: 200
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        CustomSnackBar.success(result.message.toString());
         return result;
       }
     } catch (e) {

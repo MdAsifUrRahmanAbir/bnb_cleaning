@@ -144,7 +144,7 @@ class UpdatePropertiesScreen extends StatelessWidget {
         verticalSpace(Dimensions.marginBetweenInputBox),
 
         PrimaryTextInputWidget(
-          controller: controller.postCodePhoneController,
+          controller: controller.postCodeController,
           hint: Strings.enterPostCode,
           labelText: Strings.postCode,
         ),
