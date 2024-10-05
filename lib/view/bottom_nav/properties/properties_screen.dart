@@ -19,16 +19,22 @@ class PropertiesScreen extends StatelessWidget {
         appBar: PrimaryAppBar(
           title: Strings.properties,
           actions: [
-            TextButton(
-                style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.resolveWith((states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return CustomColor.secondaryLightColor;
-                  }
-                  return Theme.of(context).primaryColor;
-                })),
-                onPressed: controller.addPropertiesRoute,
-                child: TitleHeading4Widget(text: Strings.addNew))
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.resolveWith((states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return CustomColor.secondaryLightColor;
+                    }
+                    return Theme.of(context).primaryColor;
+                  })),
+                  onPressed: controller.addPropertiesRoute,
+                  child: TitleHeading4Widget(
+                      text: Strings.addNew,
+                    color: CustomColor.whiteColor,
+                  )),
+            )
           ],
         ),
         body: _bodyWidget());

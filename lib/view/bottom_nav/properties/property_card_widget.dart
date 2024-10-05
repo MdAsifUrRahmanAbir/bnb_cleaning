@@ -29,9 +29,20 @@ class PropertyCard extends StatelessWidget {
           children: <Widget>[
             Align(
               alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
-                onPressed: onTapEdit,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor
+                  )
+                ),
+                child: GestureDetector(
+                  onTap: onTapEdit,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
+                  ),
+                ).paddingZero,
               ),
             ),
             const SizedBox(height: 8.0),

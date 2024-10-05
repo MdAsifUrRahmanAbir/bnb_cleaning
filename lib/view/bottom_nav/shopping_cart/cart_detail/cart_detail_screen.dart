@@ -50,7 +50,7 @@ class CartDetailScreen extends StatelessWidget {
                 _lineHireTile(context),
                 _midStayTile(context),
                 _proAndBundleTile(context),
-                // _othersTile(context),
+                _othersTile(context),
                 Visibility(
                   visible: controller.submitEnable.value,
                   child: Padding(

@@ -9,6 +9,7 @@ class PrimaryDateInputWidget extends StatefulWidget {
   final Function(DateTime) onChanged;
   final DateTime? initialDate;
   final Color color;
+  final List<DateTime>? disabledDates;
 
   const PrimaryDateInputWidget({
     super.key,
@@ -18,6 +19,7 @@ class PrimaryDateInputWidget extends StatefulWidget {
     this.color = Colors.transparent,
     required this.onChanged,
     this.initialDate,
+    this.disabledDates,
   });
 
   @override
@@ -32,30 +34,30 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   void initState() {
     super.initState();
     debugPrint("✔️✍️ PrimaryDateInput -> initialDate: ${widget.initialDate} ✉");
-    if(widget.initialDate == null) {
+    if (widget.initialDate == null) {
       controller.text = Strings.selectDate;
       _selectedDate = DateTime.now();
-    }
-    else{
+    } else {
       _selectedDate = widget.initialDate;
       controller.text = _filterDateOnly(widget.initialDate!);
     }
   }
 
-  String _filterDateOnly(DateTime value){
+  String _filterDateOnly(DateTime value) {
     return DateFormat('dd-MM-yyyy').format(value);
   }
 
   List<DateTime> disabledDates = [
-    DateTime(2024, 9, 25),
-    DateTime(2024, 9, 26),
-    DateTime(2024, 9, 27),
+    DateTime(2024, 10, 8),
+    DateTime(2024, 10, 15),
+    DateTime(2024, 10, 27),
   ];
 
-  DateTime? checkSelectedDate(DateTime selectedDate, List<DateTime> disabledDates) {
+  DateTime? checkSelectedDate(
+      DateTime selectedDate, List<DateTime> disabledDates) {
     // Check if selectedDate is in the disabledDates list
     bool isDisabled = disabledDates.any((disabledDate) =>
-    selectedDate.year == disabledDate.year &&
+        selectedDate.year == disabledDate.year &&
         selectedDate.month == disabledDate.month &&
         selectedDate.day == disabledDate.day);
 
@@ -64,7 +66,6 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: checkSelectedDate(_selectedDate!, disabledDates),
@@ -73,7 +74,8 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
       // Here you define the predicate to disable specific dates
       selectableDayPredicate: (DateTime date) {
         // Disable the dates in the disabledDates list
-        return !disabledDates.contains(DateTime(date.year, date.month, date.day));
+        return !disabledDates
+            .contains(DateTime(date.year, date.month, date.day));
       },
     );
 

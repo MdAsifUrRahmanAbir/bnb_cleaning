@@ -35,7 +35,6 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 260,
               child: ListView.separated(
-                  // controller: controller.scrollController,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
@@ -79,7 +78,8 @@ class HomePage extends StatelessWidget {
                   },
                   separatorBuilder: (_, i) => verticalSpace(10),
                   itemCount: type["list"].length),
-            )
+            ),
+            verticalSpace(15),
           ],
         ),
 
@@ -87,11 +87,13 @@ class HomePage extends StatelessWidget {
         Visibility(
           visible: type["list"].length > 1,
           child: const Positioned(
-            bottom: 10,
+            bottom: 25,
             right: 10,
-            child: Icon(
-              Icons.arrow_forward,
-              size: 30.0,
+            child: CircleAvatar(
+              child: Icon(
+                Icons.arrow_forward,
+                size: 30.0,
+              ),
             ),
           ),
         )

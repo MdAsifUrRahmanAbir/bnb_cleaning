@@ -1,11 +1,13 @@
 
+import 'package:bnb_clean/backend/services/api_endpoint.dart';
+
 import '../../../utils/basic_widget_imports.dart';
 import '../../../widgets/text_labels/title_heading5_widget.dart';
 
 class PriceCardWidget extends StatelessWidget {
-  const PriceCardWidget({super.key, required this.title, required this.subTitle, required this.price, required this.vat});
+  const PriceCardWidget({super.key, required this.title, required this.subTitle, required this.price, required this.vat, required this.image});
 
-  final String title, subTitle, price, vat;
+  final String title, subTitle, price, vat, image;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,12 @@ class PriceCardWidget extends StatelessWidget {
                   width: 90,
                   decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          "${ApiEndpoint.mainDomain}/public/assets/images/$image"
+                        ),
+                        fit: BoxFit.fill
+                      ),
                       borderRadius: BorderRadius.circular(Dimensions.radius)
                   ),
                 ),

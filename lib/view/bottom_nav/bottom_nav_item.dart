@@ -22,7 +22,7 @@ class BottomNavItem extends StatelessWidget {
           children: <Widget>[
             Icon(
               icon,
-              color: isSelected ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodySmall!.color!.withOpacity(.5),
+              color: isSelected ? Theme.of(context).primaryColor : Colors.white.withOpacity(.6),
             ),
             if (isSelected)
               Container(

@@ -55,6 +55,7 @@ class PricePage extends StatelessWidget {
 
                 return PriceCardWidget(
                   title: datum.title,
+                  image: datum.image,
                   subTitle: datum.categoryName.isEmpty
                       ? datum.details
                       : datum.categoryName,
@@ -66,6 +67,7 @@ class PricePage extends StatelessWidget {
 
                 return PriceCardWidget(
                   title: datum.name,
+                  image: datum.image,
                   subTitle: datum.details,
                   price: '£${datum.price}',
                   vat: 'inc. VAT',

@@ -48,7 +48,7 @@ class BottomNavScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(
           Icons.leaderboard_outlined,
-          color: CustomColor.secondaryLightColor,
+          color: Colors.black,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

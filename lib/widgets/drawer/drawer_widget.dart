@@ -74,7 +74,7 @@ class DrawerWidget extends StatelessWidget {
             debugPrint(controller.isDark.value.toString());
             Themes().switchTheme();
           },
-          text: Strings.changeTheme,
+          text: controller.isDark.value ? "Switch to Light" : "Switch to Dark",
           icon: controller.isDark.value ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
         )),
 

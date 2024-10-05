@@ -14,3 +14,13 @@ and minimum 40 euro , if select from bnb or mid stay then dont need minimum euro
 
 Please note that the customer should only be able to order Products and Services when he/she 
 added Cleaning services to the basket already!!!
+
+
+10/06 Due work:
+Payment screen
+Need to download image from dashboard and implement,
+Route to whatsapp  +44 7342 839334,
+Selector top padding issue,
+Help and FAQ screen,
+
+Optional extras model add,
