@@ -7,7 +7,7 @@ import '../../../../widgets/custom_dropdown_widget/custom_dropdown_widget.dart';
 class UpdatePropertiesScreen extends StatelessWidget {
   UpdatePropertiesScreen({super.key});
 
-  final controller = Get.put(UpdatePropertiesController());
+  final controller = Get.find<UpdatePropertiesController>();
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import '../widgets/custom_dropdown_widget/custom_dropdown_widget.dart';
 
 class DropDownUseModel extends DropdownModel {
   @override
-  final String title;
+  late final String title;
 
   DropDownUseModel(this.title);
 }

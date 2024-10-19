@@ -77,9 +77,9 @@ class ApiMethod {
         log.e(
             'unknown error hitted in status code${jsonDecode(response.body)}');
 
-        ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        // ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
 
-        CustomSnackBar.error(res.message.error.toString());
+        CustomSnackBar.error(jsonDecode(response.body).toString());
 
         return null;
       }
@@ -174,9 +174,8 @@ class ApiMethod {
         log.e(
             'unknown error hitted in status code ${jsonDecode(response.body)}');
 
-        ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
-
-        CustomSnackBar.error(res.message.error.toString());
+        // ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        CustomSnackBar.error(jsonDecode(response.body).toString());
 
         return null;
       }
@@ -554,9 +553,10 @@ class ApiMethod {
         log.e(
             'unknown error hitted in status code  ${jsonDecode(response.body)}');
 
-        ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        // ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        CustomSnackBar.error(jsonDecode(response.body).toString());
 
-        CustomSnackBar.error(res.message.error.toString());
+        // CustomSnackBar.error(res.message.error.toString());
 
         return null;
       }
@@ -639,9 +639,10 @@ class ApiMethod {
         log.e(
             'unknown error hitted in status code  ${jsonDecode(response.body)}');
 
-        ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        // ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
+        CustomSnackBar.error(jsonDecode(response.body).toString());
 
-        CustomSnackBar.error(res.message.error.toString());
+        // CustomSnackBar.error(res.message.error.toString());
 
         return null;
       }

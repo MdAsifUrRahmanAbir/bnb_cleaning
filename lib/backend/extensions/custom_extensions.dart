@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../services/api_endpoint.dart';
 
@@ -93,4 +94,18 @@ extension SupperRoute on String {
   get offAllNamed => Get.offAllNamed(this);
 
   get offNamed => Get.offNamed(this);
+}
+
+
+void launchWhatsApp({
+  required String phoneNumber,
+}) async {
+  final Uri whatsappUrl = Uri.parse(
+      "https://api.whatsapp.com/send/?phone=$phoneNumber&text=How+can+i+help+you+%3F&type=phone_number&app_absent=0");
+
+  if (await canLaunchUrl(whatsappUrl)) {
+    await launchUrl(whatsappUrl);
+  } else {
+    throw "Could not launch WhatsApp";
+  }
 }

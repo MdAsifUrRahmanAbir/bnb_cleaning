@@ -53,13 +53,37 @@ mixin CartService{
   }
 
 
+
+  ///* Delete Cart api services
+  Future<CommonSuccessModel?> cartDateUpdateProcessApi(String id, {required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).put(
+        "${ApiEndpoint.cartDateUpdateURL}/$id/update-date",
+          body,
+        code: 200
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        CustomSnackBar.success("Date selected successfully!");
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from CartIndex api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+
   ///* AirbnbUpdate api services
   Future<ServiceSuccessModel?> airbnbUpdateProcessApi(
-      {required Map<String, dynamic> body}) async {
+      {required String orderId, required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
       mapResponse = await ApiMethod(isBasic: false).post(
-        ApiEndpoint.updateAirbnbServiceURL,
+        "${ApiEndpoint.updateAirbnbServiceURL}/$orderId",
         body,
       );
       if (mapResponse != null) {
@@ -78,11 +102,11 @@ mixin CartService{
 
   ///* LineUpdate api services
   Future<ServiceSuccessModel?> lineUpdateProcessApi(
-      {required Map<String, dynamic> body}) async {
+      {required String orderId, required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
       mapResponse = await ApiMethod(isBasic: false).post(
-        ApiEndpoint.updateLineServiceURL,
+        "${ApiEndpoint.updateLineServiceURL}/$orderId",
         body,
       );
       if (mapResponse != null) {
@@ -101,11 +125,11 @@ mixin CartService{
 
   ///* MidStayUpdate api services
   Future<ServiceSuccessModel?> midStayUpdateProcessApi(
-      {required Map<String, dynamic> body}) async {
+      {required String orderId, required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
       mapResponse = await ApiMethod(isBasic: false).post(
-        ApiEndpoint.updateMidStayServiceURL,
+        "${ApiEndpoint.updateMidStayServiceURL}/$orderId",
         body,
       );
       if (mapResponse != null) {
@@ -124,11 +148,11 @@ mixin CartService{
 
   ///* ProductAndBundleUpdate api services
   Future<ServiceSuccessModel?> productAndBundleUpdateProcessApi(
-      {required Map<String, dynamic> body}) async {
+      {required String orderId, required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
       mapResponse = await ApiMethod(isBasic: false).post(
-        ApiEndpoint.updateProAndBundleServiceURL,
+        "${ApiEndpoint.updateProAndBundleServiceURL}/$orderId",
         body,
       );
       if (mapResponse != null) {
@@ -147,16 +171,45 @@ mixin CartService{
 
   ///* OthersUpdate api services
   Future<ServiceSuccessModel?> othersUpdateProcessApi(
-      {required Map<String, dynamic> body}) async {
+      {required String orderId, required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
       mapResponse = await ApiMethod(isBasic: false).post(
-        ApiEndpoint.updateOtherServiceURL,
+        "${ApiEndpoint.updateOtherServiceURL}/$orderId",
         body,
       );
       if (mapResponse != null) {
         ServiceSuccessModel result = ServiceSuccessModel.fromJson(mapResponse);
         // CustomSnackBar.success(result.message.success.first.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from OthersUpdate api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
+
+  ///* OrderProcess api services
+  Future<CommonSuccessModel?> orderProcessApi(
+      {required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        ApiEndpoint.orderProcessURL,
+        body,
+        showResult: true
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        if(result.success){
+          CustomSnackBar.success(result.message.toString());
+        }else{
+          CustomSnackBar.error(result.message.toString());
+        }
+
         return result;
       }
     } catch (e) {

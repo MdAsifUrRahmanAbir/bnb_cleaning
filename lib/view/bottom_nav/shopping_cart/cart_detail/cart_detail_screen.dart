@@ -1,10 +1,10 @@
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
-
 import '../../../../controller/bottom_nav/cart_details_controller.dart';
 import '../../../../controller/bottom_nav/price_controller.dart';
 import '../../../../utils/basic_screen_imports.dart';
 import '../../../../utils/strings.dart';
 import '../shoping_cart_card_widget.dart';
+import '../stripe pay/stripe_payment_screen.dart';
 import 'add_substract_widget.dart';
 
 class CartDetailScreen extends StatelessWidget {
@@ -21,15 +21,57 @@ class CartDetailScreen extends StatelessWidget {
 
   final String title, subTitle, price, date, contactDetails, name, phoneNumber;
   final DateTime initialDate;
-  final controller = Get.put(CartDetailsController());
+  final controller = Get.find<CartDetailsController>();
   final priceController = Get.find<PriceController>();
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const PrimaryAppBar(
+        appBar: PrimaryAppBar(
           title: "",
+          actions: [
+            Obx(() => Visibility(
+              visible: controller.submitEnable.value,
+              child: InkWell(
+                onTap: (){
+                  // if(controller.onlyLineSelected == 0){
+                  //   if(controller.totalPrice.value >= 40){
+                  //     // continue
+                  //   }else{
+                  //     CustomSnackBar.error("For Line Hire minimum value is 40 Euro");
+                  //   }
+                  // }
+
+                  // controller.processPayment();
+                  Get.to(StripePaymentScreen());
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.paddingSizeHorizontal * 3,
+                    vertical: Dimensions.paddingSizeVertical * .28
+                  ),
+                  decoration: BoxDecoration(
+                    // color: const Color(0xff28a745),
+                    color: const Color(0xff22c55e),
+                    // color: const Color(0xff16a34a),
+                    borderRadius: BorderRadius.circular(Dimensions.radius * 1),
+                  ),
+                  child: Row(
+                    mainAxisSize: mainMin,
+                    mainAxisAlignment: mainCenter,
+                    children: [
+
+                      TitleHeading3Widget(
+                          text: Strings.placeOrder,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )),
+            horizontalSpace(10)
+          ],
           // actions: [IconButton(onPressed: onPressed, icon: icon)],
         ),
         body: Obx(() => SafeArea(
@@ -40,7 +82,7 @@ class CartDetailScreen extends StatelessWidget {
                   isExpansion: true,
                   title: title,
                   subTitle: subTitle,
-                  price: "£${controller.totalPrice.toStringAsFixed(2)}",
+                  price: controller.totalPrice.value == 0 ? "" : "£${controller.totalPrice.value.toStringAsFixed(2)}",
                   date: date,
                   contactDetails: contactDetails,
                   name: name,
@@ -51,24 +93,7 @@ class CartDetailScreen extends StatelessWidget {
                 _midStayTile(context),
                 _proAndBundleTile(context),
                 _othersTile(context),
-                Visibility(
-                  visible: controller.submitEnable.value,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: PrimaryButton(
-                      title: Strings.confirm,
-                      onPressed: () {
-                        // if(controller.onlyLineSelected == 0){
-                        //   if(controller.totalPrice.value >= 40){
-                        //     // continue
-                        //   }else{
-                        //     CustomSnackBar.error("For Line Hire minimum value is 40 Euro");
-                        //   }
-                        // }
-                      },
-                    ),
-                  ),
-                )
+
               ],
             ))));
   }
@@ -80,7 +105,7 @@ class CartDetailScreen extends StatelessWidget {
         children: [
           Column(
             children: List.generate(
-                priceController.priceListModel.bundles.length,
+                priceController.priceListModel.extras.length,
                 (index) => Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 4),
@@ -92,10 +117,10 @@ class CartDetailScreen extends StatelessWidget {
                               children: [
                                 TitleHeading3Widget(
                                     text: priceController
-                                        .priceListModel.bundles[index].name),
+                                        .priceListModel.extras[index].name),
                                 TitleHeading4Widget(
                                     text:
-                                        "£${priceController.priceListModel.bundles[index].price}"),
+                                        "£${priceController.priceListModel.extras[index].price}"),
                               ],
                             ),
                           ),
@@ -109,11 +134,13 @@ class CartDetailScreen extends StatelessWidget {
                               if (value["type"] == "add") {
                                 controller.totalPrice.value += double.parse(
                                     priceController
-                                        .priceListModel.bundles[index].price);
+                                        .priceListModel.extras[index].price
+                                        .toStringAsFixed(2));
                               } else {
                                 controller.totalPrice.value -= double.parse(
                                     priceController
-                                        .priceListModel.bundles[index].price);
+                                        .priceListModel.extras[index].price
+                                        .toStringAsFixed(2));
                               }
                             },
                           )
@@ -121,30 +148,36 @@ class CartDetailScreen extends StatelessWidget {
                       ),
                     )),
           ),
-          Visibility(
-            visible: controller.optionalsEnable.value,
-            child: InkWell(
-              onTap: () {
-                for (var i = 0; i < controller.optionalsArray.length; i++) {
-                  if (controller.optionalsArray[i] != 0) {
-                    controller.optionalsName
-                        .add(priceController.priceListModel.bundles[i].name);
-                    controller.optionalsPrice
-                        .add(priceController.priceListModel.bundles[i].price);
-                    controller.optionalsQty.add(controller.optionalsArray[i]);
-                  }
-                }
-                controller.optionalsUpdateProcess();
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width * .4,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: TitleHeading2Widget(
-                    text: Strings.next, color: CustomColor.whiteColor),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: controller.optionalsEnable.value,
+                child: InkWell(
+                  onTap: () {
+                    for (var i = 0; i < controller.optionalsArray.length; i++) {
+                      if (controller.optionalsArray[i] != 0) {
+                        controller.optionalsName
+                            .add(priceController.priceListModel.bundles[i].name);
+                        controller.optionalsPrice
+                            .add(priceController.priceListModel.bundles[i].price);
+                        controller.optionalsQty.add(controller.optionalsArray[i]);
+                      }
+                    }
+                    controller.optionalsUpdateProcess();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.sizeOf(context).width * .4,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: TitleHeading2Widget(
+                        text: Strings.next, color: CustomColor.whiteColor),
+                  ),
+                ),
               ),
             ),
           ),
@@ -159,7 +192,7 @@ class CartDetailScreen extends StatelessWidget {
         children: [
           Column(
             children: List.generate(
-                priceController.priceListModel.products.length,
+                priceController.productAndBundle.length,
                 (index) => Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 4),
@@ -171,10 +204,10 @@ class CartDetailScreen extends StatelessWidget {
                               children: [
                                 TitleHeading3Widget(
                                     text: priceController
-                                        .priceListModel.products[index].name),
+                                        .productAndBundle[index].name),
                                 TitleHeading4Widget(
                                     text:
-                                        "£${priceController.priceListModel.products[index].price}"),
+                                        "£${priceController.productAndBundle[index].price}"),
                               ],
                             ),
                           ),
@@ -188,11 +221,11 @@ class CartDetailScreen extends StatelessWidget {
                               if (value["type"] == "add") {
                                 controller.totalPrice.value += double.parse(
                                     priceController
-                                        .priceListModel.products[index].price);
+                                        .productAndBundle[index].price);
                               } else {
                                 controller.totalPrice.value -= double.parse(
                                     priceController
-                                        .priceListModel.products[index].price);
+                                        .productAndBundle[index].price);
                               }
                             },
                           )
@@ -229,33 +262,39 @@ class CartDetailScreen extends StatelessWidget {
           //         ),
           //       )),
           // ),
-          Visibility(
-            visible: controller.proAndBundleEnable.value,
-            child: InkWell(
-              onTap: () {
-                for (var i = 0; i < controller.productArray.length; i++) {
-                  if (controller.productArray[i] != 0) {
-                    controller.productAndBundlePrice
-                        .add(priceController.priceListModel.products[i].price);
-                    controller.productAndBundleName
-                        .add(priceController.priceListModel.products[i].name);
-                    controller.productAndBundleQty.add(controller.productArray[i]);
+          Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Visibility(
+              visible: controller.proAndBundleEnable.value,
+              child: InkWell(
+                onTap: () {
+                  for (var i = 0; i < controller.productArray.length; i++) {
+                    if (controller.productArray[i] != 0) {
+                      controller.productAndBundlePrice
+                          .add(priceController.priceListModel.products[i].price);
+                      controller.productAndBundleName
+                          .add(priceController.priceListModel.products[i].name);
+                      controller.productAndBundleQty
+                          .add(controller.productArray[i]);
+                    }
                   }
-                }
-                controller.productAndBundleUpdateProcess();
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width * .4,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: TitleHeading2Widget(
-                    text: Strings.next, color: CustomColor.whiteColor),
+                  controller.productAndBundleUpdateProcess();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * .4,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: TitleHeading2Widget(
+                      text: Strings.next, color: CustomColor.whiteColor),
+                ),
               ),
             ),
-          ),
+          )),
           verticalSpace(10),
         ]);
   }
@@ -308,33 +347,38 @@ class CartDetailScreen extends StatelessWidget {
                       ),
                     )),
           ),
-          Visibility(
-            visible: controller.midStayEnable.value,
-            child: InkWell(
-              onTap: () {
-                for (var i = 0; i < controller.midStayArray.length; i++) {
-                  if (controller.midStayArray[i] != 0) {
-                    controller.midStayPrice.add(
-                        priceController.priceListModel.midCleanings[i].price);
-                    controller.midStayName.add(
-                        priceController.priceListModel.midCleanings[i].title);
-                    controller.midStayQty.add(controller.midStayArray[i]);
+          Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Visibility(
+              visible: controller.midStayEnable.value,
+              child: InkWell(
+                onTap: () {
+                  for (var i = 0; i < controller.midStayArray.length; i++) {
+                    if (controller.midStayArray[i] != 0) {
+                      controller.midStayPrice.add(
+                          priceController.priceListModel.midCleanings[i].price);
+                      controller.midStayName.add(
+                          priceController.priceListModel.midCleanings[i].title);
+                      controller.midStayQty.add(controller.midStayArray[i]);
+                    }
                   }
-                }
-                controller.onMidstaySelected(true);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width * .4,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: TitleHeading2Widget(
-                    text: Strings.next, color: CustomColor.whiteColor),
+                  controller.onMidstaySelected(true);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * .4,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: TitleHeading2Widget(
+                      text: Strings.next, color: CustomColor.whiteColor),
+                ),
               ),
             ),
-          ),
+          )),
           verticalSpace(10),
         ]);
   }
@@ -386,12 +430,33 @@ class CartDetailScreen extends StatelessWidget {
                       ),
                     )),
           ),
-          Visibility(
-            visible: controller.lineEnable.value,
-            child: InkWell(
-              onTap: () {
-                if(controller.onlyLineSelected == 0){
-                  if(controller.totalPrice.value >= 40){
+          Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Visibility(
+              visible: controller.lineEnable.value,
+              child: InkWell(
+                onTap: () {
+                  if (controller.onlyLineSelected == 0) {
+                    if (controller.totalPrice.value >= 40) {
+                      for (var i = 0; i < controller.lineHireArray.length; i++) {
+                        if (controller.lineHireArray[i] != 0) {
+                          controller.lineHirePrice.add(
+                              priceController.priceListModel.linenHires[i].price);
+                          controller.lineHireName.add(
+                              priceController.priceListModel.linenHires[i].title);
+                          controller.lineHireQty.add(controller.lineHireArray[i]);
+                        }
+                      }
+                      controller.onLineHireSelected(true);
+                    } else {
+                      controller.onLineHireSelected(true);
+                      // controller.lineHireForAirBnb.value = true;
+                      CustomSnackBar.error(
+                          "For Line Hire minimum value is 40 Euro");
+                    }
+                  } else {
                     for (var i = 0; i < controller.lineHireArray.length; i++) {
                       if (controller.lineHireArray[i] != 0) {
                         controller.lineHirePrice.add(
@@ -402,36 +467,21 @@ class CartDetailScreen extends StatelessWidget {
                       }
                     }
                     controller.onLineHireSelected(true);
-                  }else{
-                    CustomSnackBar.error("For Line Hire minimum value is 40 Euro");
                   }
-                }else{
-                  for (var i = 0; i < controller.lineHireArray.length; i++) {
-                    if (controller.lineHireArray[i] != 0) {
-                      controller.lineHirePrice.add(
-                          priceController.priceListModel.linenHires[i].price);
-                      controller.lineHireName.add(
-                          priceController.priceListModel.linenHires[i].title);
-                      controller.lineHireQty.add(controller.lineHireArray[i]);
-                    }
-                  }
-                  controller.onLineHireSelected(true);
-                }
-
-
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width * .4,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: TitleHeading2Widget(
-                    text: Strings.next, color: CustomColor.whiteColor),
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * .4,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: TitleHeading2Widget(
+                      text: Strings.next, color: CustomColor.whiteColor),
+                ),
               ),
             ),
-          ),
+          )),
           verticalSpace(10),
         ]);
   }
@@ -493,35 +543,40 @@ class CartDetailScreen extends StatelessWidget {
                       ),
                     )),
           ),
-          Visibility(
-            visible: controller.airbnbEnable.value,
-            child: InkWell(
-              onTap: () {
-                print(controller.airbnbArray);
+          Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Visibility(
+              visible: controller.airbnbEnable.value,
+              child: InkWell(
+                onTap: () {
+                  print(controller.airbnbArray);
 
-                for (var i = 0; i < controller.airbnbArray.length; i++) {
-                  if (controller.airbnbArray[i] != 0) {
-                    controller.airbnbPrice.add(priceController
-                        .priceListModel.airbnbCleanings[i].price);
-                    controller.airbnbName.add(priceController
-                        .priceListModel.airbnbCleanings[i].title);
-                    controller.airbnbQty.add(controller.airbnbArray[i]);
+                  for (var i = 0; i < controller.airbnbArray.length; i++) {
+                    if (controller.airbnbArray[i] != 0) {
+                      controller.airbnbPrice.add(priceController
+                          .priceListModel.airbnbCleanings[i].price);
+                      controller.airbnbName.add(priceController
+                          .priceListModel.airbnbCleanings[i].title);
+                      controller.airbnbQty.add(controller.airbnbArray[i]);
+                    }
                   }
-                }
-                controller.onAirbnbSelected(true);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.sizeOf(context).width * .4,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(12)),
-                child: TitleHeading2Widget(
-                    text: Strings.next, color: CustomColor.whiteColor),
+                  controller.onAirbnbSelected(true);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * .4,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: TitleHeading2Widget(
+                      text: Strings.next, color: CustomColor.whiteColor),
+                ),
               ),
             ),
-          ),
+          )),
           verticalSpace(10),
         ]);
   }

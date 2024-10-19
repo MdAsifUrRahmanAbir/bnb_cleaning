@@ -91,7 +91,7 @@ class LoginController extends GetxController with AuthService{
     _isForgotLoading.value = true;
     update();
     Map<String, dynamic> inputBody = {
-      'key': 'value',
+      'email': resetEmailController.text,
     };
     await forgotPasswordProcessApi(body: inputBody).then((value) {
       _forgotPasswordModel = value!;

@@ -1,26 +1,27 @@
-
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
 import 'package:bnb_clean/utils/basic_screen_imports.dart';
 import 'package:get/get.dart';
 
 import '../../backend/model/cart/service_success_model.dart';
+import '../../backend/model/common/common_success_model.dart';
 import '../../backend/services/cart_service.dart';
 import 'price_controller.dart';
 import 'shopping_cart_controller.dart';
 
-class CartDetailsController extends GetxController with CartService{
-
+class CartDetailsController extends GetxController with CartService {
   final shoppingCartController = Get.find<ShoppingCartController>();
   final priceController = Get.find<PriceController>();
-
 
   RxBool bnbServiceEnable = true.obs;
   List airbnbArray = [];
 
+  // RxBool lineHireForAirBnb = false.obs;
   RxBool lineHireEnable = true.obs;
+  RxBool lineHireClicked = false.obs;
   List lineHireArray = [];
 
   RxBool midstayEnable = true.obs;
+  RxBool midstayClicked = false.obs;
   List midStayArray = [];
 
   RxBool productAndBundleEnable = false.obs;
@@ -29,12 +30,46 @@ class CartDetailsController extends GetxController with CartService{
   RxBool otherServiceEnable = false.obs;
   List optionalsArray = [];
 
+// @override
+//   void dispose() {
+//   initializeServices();
+//     super.dispose();
+//   }
+
+  /// ------------------------------------- >>
+  final _isDateUpdateLoading = false.obs;
+  bool get isDateUpdateLoading => _isDateUpdateLoading.value;
+
+  late CommonSuccessModel _cartDateUpdateModel;
+  CommonSuccessModel get cartDateUpdateModel => _cartDateUpdateModel;
+
+  ///* Get Cart Delete in process
+  Future<CommonSuccessModel> cartDateUpdateProcess(int id, String date) async {
+    _isDateUpdateLoading.value = true;
+    update();
+
+    await cartDateUpdateProcessApi(id.toString(), body: {"date": date})
+        .then((value) {
+      _cartDateUpdateModel = value!;
+
+      _isDateUpdateLoading.value = false;
+      update();
+    }).catchError((onError) {
+      log.e(onError);
+    });
+    _isDateUpdateLoading.value = false;
+    update();
+    return _cartDateUpdateModel;
+  }
 
   // Initially enabling the first three services
   void initializeServices() {
+    // lineHireForAirBnb.value = false;
     bnbServiceEnable.value = true;
     lineHireEnable.value = true;
     midstayEnable.value = true;
+    midstayClicked.value = false;
+    lineHireClicked.value = false;
     productAndBundleEnable.value = false;
     otherServiceEnable.value = false;
 
@@ -71,6 +106,9 @@ class CartDetailsController extends GetxController with CartService{
       midstayEnable.value = false;
       productAndBundleEnable.value = true;
       otherServiceEnable.value = true;
+      lineHireEnable.value = true;
+      bnbServiceEnable.value = true;
+
       airbnbUpdateProcess();
     } else {
       initializeServices();
@@ -80,6 +118,11 @@ class CartDetailsController extends GetxController with CartService{
   void onMidstaySelected(bool isSelected) {
     if (isSelected) {
       bnbServiceEnable.value = false;
+      lineHireEnable.value = true;
+      midstayEnable.value = true;
+      midstayClicked.value = true;
+      productAndBundleEnable.value = true;
+      otherServiceEnable.value = true;
       midStayUpdateProcess();
     } else {
       initializeServices();
@@ -87,17 +130,17 @@ class CartDetailsController extends GetxController with CartService{
   }
 
   void onLineHireSelected(bool isSelected) {
-
     if (isSelected) {
+      lineHireClicked.value = true;
       productAndBundleEnable.value = true;
       otherServiceEnable.value = true;
-      if(midstayEnable.value){
+      if (midstayClicked.value) {
         bnbServiceEnable.value = false;
-        midstayEnable.value = true;
-      }else{
+      } else {
         bnbServiceEnable.value = true;
-        midstayEnable.value = false;
       }
+      debugPrint(">> bnb ${bnbServiceEnable.value}");
+      debugPrint(">> mid stay ${midstayEnable.value}");
       lineUpdateProcess();
     } else {
       initializeServices();
@@ -107,12 +150,13 @@ class CartDetailsController extends GetxController with CartService{
   RxBool submitEnable = false.obs;
   List<ServiceSuccessModel> totalServices = [];
   RxDouble totalPrice = 0.0.obs;
-  int onlyLineSelected = 0; /// if zero then it is only line hire
+  int onlyLineSelected = 0;
+
+  /// if zero then it is only line hire
 
   /// ------------------------------------- >>
   final _isUpdateLoading = false.obs;
   bool get isUpdateLoading => _isUpdateLoading.value;
-
 
   late ServiceSuccessModel _airbnbUpdateModel;
   ServiceSuccessModel get airbnbUpdateModel => _airbnbUpdateModel;
@@ -122,6 +166,8 @@ class CartDetailsController extends GetxController with CartService{
   List airbnbQty = [];
   List airbnbName = [];
 
+  bool selectBnb = false;
+  bool selectLine = false;
   ///* AirbnbUpdate in process
   Future<ServiceSuccessModel> airbnbUpdateProcess() async {
     _isUpdateLoading.value = true;
@@ -129,21 +175,24 @@ class CartDetailsController extends GetxController with CartService{
     Map<String, dynamic> inputBody = {
       "price": airbnbPrice,
       "qty": airbnbQty,
-      "name": airbnbName,
-      "order_id": shoppingCartController.orderId,
-      "date": shoppingCartController.selectedDate,
-      "property_name": shoppingCartController.propertyName
+      "name": airbnbName
     };
-    await airbnbUpdateProcessApi(body: inputBody).then((value) {
+    await airbnbUpdateProcessApi(
+            body: inputBody, orderId: shoppingCartController.orderId.toString())
+        .then((value) {
       _airbnbUpdateModel = value!;
 
-      onlyLineSelected ++;
+      onlyLineSelected++;
       totalServices.add(_airbnbUpdateModel);
-      if(_airbnbUpdateModel.success[2] != null){
+      // debugPrint(">> 1 AirBnb ${lineHireForAirBnb.value}");
+      if (_airbnbUpdateModel.success[2] != null) {
         CustomSnackBar.error(_airbnbUpdateModel.success[2]);
-      }
-      else if(!submitEnable.value){
-        CustomSnackBar.error("Please Select Line Hire.");
+      } else if (!submitEnable.value) {
+        if(lineHireClicked.value){
+          submitEnable.value = true;
+        }else {
+          CustomSnackBar.error("Please Select Line Hire.");
+        }
       }
 
       _isUpdateLoading.value = false;
@@ -155,7 +204,6 @@ class CartDetailsController extends GetxController with CartService{
     update();
     return _airbnbUpdateModel;
   }
-
 
   /// ------------------------------------- >>
   late ServiceSuccessModel _lineUpdateModel;
@@ -173,15 +221,16 @@ class CartDetailsController extends GetxController with CartService{
     Map<String, dynamic> inputBody = {
       "price": lineHirePrice,
       "qty": lineHireQty,
-      "name": lineHireName,
-      "order_id": shoppingCartController.orderId,
-      "date": shoppingCartController.selectedDate,
-      "property_name": shoppingCartController.propertyName
+      "name": lineHireName
     };
-    await lineUpdateProcessApi(body: inputBody).then((value) {
+    await lineUpdateProcessApi(
+            body: inputBody, orderId: shoppingCartController.orderId.toString())
+        .then((value) {
       _lineUpdateModel = value!;
 
-      submitEnable.value = true;
+      if(totalPrice.value.isGreaterThan(39) || onlyLineSelected != 0) { /// checking
+        submitEnable.value = true;
+      }
       totalServices.add(_lineUpdateModel);
 
       _isUpdateLoading.value = false;
@@ -193,7 +242,6 @@ class CartDetailsController extends GetxController with CartService{
     update();
     return _lineUpdateModel;
   }
-
 
   /// ------------------------------------- >>
   late ServiceSuccessModel _midStayUpdateModel;
@@ -211,15 +259,14 @@ class CartDetailsController extends GetxController with CartService{
     Map<String, dynamic> inputBody = {
       "price": midStayPrice,
       "qty": midStayQty,
-      "name": midStayName,
-      "order_id": shoppingCartController.orderId,
-      "date": shoppingCartController.selectedDate,
-      "property_name": shoppingCartController.propertyName
+      "name": midStayName
     };
-    await midStayUpdateProcessApi(body: inputBody).then((value) {
+    await midStayUpdateProcessApi(
+            body: inputBody, orderId: shoppingCartController.orderId.toString())
+        .then((value) {
       _midStayUpdateModel = value!;
 
-      onlyLineSelected ++;
+      onlyLineSelected++;
       submitEnable.value = true;
       totalServices.add(_midStayUpdateModel);
 
@@ -233,10 +280,10 @@ class CartDetailsController extends GetxController with CartService{
     return _midStayUpdateModel;
   }
 
-
   /// ------------------------------------- >>
   late ServiceSuccessModel _productAndBundleUpdateModel;
-  ServiceSuccessModel get productAndBundleUpdateModel => _productAndBundleUpdateModel;
+  ServiceSuccessModel get productAndBundleUpdateModel =>
+      _productAndBundleUpdateModel;
 
   RxBool proAndBundleEnable = false.obs;
   List productAndBundlePrice = [];
@@ -250,15 +297,12 @@ class CartDetailsController extends GetxController with CartService{
     Map<String, dynamic> inputBody = {
       "price": productAndBundlePrice,
       "qty": productAndBundleQty,
-      "name": productAndBundleName,
-      "order_id": shoppingCartController.orderId,
-      "date": shoppingCartController.selectedDate,
-      "property_name": shoppingCartController.propertyName
+      "name": productAndBundleName
     };
-    await productAndBundleUpdateProcessApi(body: inputBody).then((value) {
+    await productAndBundleUpdateProcessApi(body: inputBody, orderId: shoppingCartController.orderId.toString()).then((value) {
       _productAndBundleUpdateModel = value!;
 
-      onlyLineSelected ++;
+      onlyLineSelected++;
       submitEnable.value = true;
       totalServices.add(_productAndBundleUpdateModel);
 
@@ -271,7 +315,6 @@ class CartDetailsController extends GetxController with CartService{
     update();
     return _productAndBundleUpdateModel;
   }
-
 
   /// ------------------------------------- >>
   late ServiceSuccessModel _othersUpdateModel;
@@ -290,14 +333,12 @@ class CartDetailsController extends GetxController with CartService{
       "price": optionalsPrice,
       "qty": optionalsQty,
       "name": optionalsName,
-      "order_id": shoppingCartController.orderId,
-      "date": shoppingCartController.selectedDate,
-      "property_name": shoppingCartController.propertyName
+      // "order_id": shoppingCartController.orderId
     };
-    await othersUpdateProcessApi(body: inputBody).then((value) {
+    await othersUpdateProcessApi(body: inputBody, orderId: shoppingCartController.orderId.toString()).then((value) {
       _othersUpdateModel = value!;
 
-      onlyLineSelected ++;
+      onlyLineSelected++;
       submitEnable.value = true;
       totalServices.add(_othersUpdateModel);
 

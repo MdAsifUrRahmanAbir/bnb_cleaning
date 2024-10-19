@@ -17,10 +17,16 @@ added Cleaning services to the basket already!!!
 
 
 10/06 Due work:
-Payment screen
-Need to download image from dashboard and implement,
-Route to whatsapp  +44 7342 839334,
-Selector top padding issue,
-Help and FAQ screen,
+Payment screen  **
+Need to download image from dashboard and implement, **
+Route to whatsapp  +44 7342 839334,  ** 
+Selector top padding issue,  **
+Help and  ***
+FAQ screen,
 
 Optional extras model add,
+
+
+
+
+As the selected date is Sunday, 20% extra is applied over the payment.

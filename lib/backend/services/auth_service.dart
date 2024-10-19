@@ -40,6 +40,7 @@ mixin AuthService{
       mapResponse = await ApiMethod(isBasic: false).post(
         ApiEndpoint.registerURL,
         body,
+        code: 201
       );
       if (mapResponse != null) {
         RegistrationModel result = RegistrationModel.fromJson(mapResponse);

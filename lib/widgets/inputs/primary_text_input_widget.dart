@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../../utils/basic_widget_imports.dart';
 import '../../utils/strings.dart';
 
@@ -13,6 +15,7 @@ class PrimaryTextInputWidget extends StatelessWidget {
   final Widget? suffixIcon, prefixIcon;
   final VoidCallback? onTap;
   final Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   const PrimaryTextInputWidget({
     super.key,
@@ -29,7 +32,7 @@ class PrimaryTextInputWidget extends StatelessWidget {
     this.optional = "",
     this.hint = "",
     this.prefixIcon,
-    this.onChanged,
+    this.onChanged, this.inputFormatters,
   });
 
   @override
@@ -63,6 +66,7 @@ class PrimaryTextInputWidget extends StatelessWidget {
               .copyWith(color: Theme.of(context).primaryColor),
           readOnly: readOnly!,
           // style: CustomStyle.textStyle,
+          inputFormatters: inputFormatters,
           controller: controller,
           keyboardType: keyboardType,
           validator: (String? value) {

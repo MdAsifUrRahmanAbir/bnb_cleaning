@@ -72,7 +72,7 @@ class _CustomDropDownState<T extends DropdownModel>
                   text: widget.title,
                   fontWeight: FontWeight.w600,
                 ),
-                horizontalSpace(Dimensions.widthSize * 0.5),
+                verticalSpace(Dimensions.marginBetweenInputBox * .5),
                 _dropDown()
               ],
             ))

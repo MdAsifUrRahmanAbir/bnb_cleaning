@@ -1,7 +1,9 @@
 import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 
 import '../../../backend/model/my_property/property_list_model.dart';
+import '../../../backend/static_data.dart';
 import '../../../backend/utils/no_data_widget.dart';
+import '../../../controller/bottom_nav/edit_properties_controller.dart';
 import '../../../controller/bottom_nav/properties_controller.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/basic_screen_imports.dart';
@@ -12,6 +14,8 @@ class PropertiesScreen extends StatelessWidget {
   PropertiesScreen({super.key});
 
   final controller = Get.put(PropertiesController());
+  final updateController = Get.put(UpdatePropertiesController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +71,17 @@ class PropertiesScreen extends StatelessWidget {
                       subTitle: data.propertyType,
                       details: data.description,
                       onTapEdit: () {
+
+                        updateController.propertyId = data.id.toString();
+                        updateController.propertyNameController.text = data.identifier;
+                        updateController.propertyDescriptionController.text = data.description;
+                        updateController.contactNameController.text = data.newContactName;
+                        updateController.contactPhoneController.text = data.newContactNumber;
+                        updateController.addressController.text = data.address;
+                        updateController.postCodeController.text = data.postcode;
+                        // updateController.selectedPropertyType.value.title = data.propertyType;
+                        // updateController.selectedPropertyAccess.value.title = data.access;
+
                         Get.toNamed(Routes.editPropertiesScreen);
                       },
                     );

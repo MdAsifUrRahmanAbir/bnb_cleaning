@@ -5,7 +5,8 @@ class BottomNavItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const BottomNavItem({super.key,
+  const BottomNavItem({
+    super.key,
     required this.icon,
     required this.isSelected,
     required this.onTap,
@@ -13,28 +14,36 @@ class BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: isSelected ? Theme.of(context).primaryColor : Colors.white.withOpacity(.6),
-            ),
-            if (isSelected)
-              Container(
-                margin: const EdgeInsets.only(top: 4.0),
-                width: 6.0,
-                height: 6.0,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  shape: BoxShape.circle,
-                ),
+    return Expanded(
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                icon,
+                color: isSelected
+                    ? Theme.of(context).primaryColor
+                    : Colors.white.withOpacity(.6),
               ),
-          ],
+              if (isSelected)
+                Container(
+                  margin: const EdgeInsets.only(top: 4.0),
+                  width: 6.0,
+                  height: 6.0,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

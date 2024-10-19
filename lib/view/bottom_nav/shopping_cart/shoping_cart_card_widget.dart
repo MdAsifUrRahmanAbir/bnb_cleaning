@@ -1,3 +1,4 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
 import 'package:bnb_clean/utils/basic_screen_imports.dart';
 import 'package:intl/intl.dart';
@@ -14,9 +15,11 @@ class ShoppingCardCardWidget extends StatelessWidget {
       required this.subTitle,
       required this.price,
       required this.date,
+      this.disabledDates,
       this.onEdit,
       this.onDelete,
       this.isExpansion = false,
+      this.isLoading = false,
       this.contactDetails = "",
       required this.name,
       required this.phoneNumber,
@@ -26,8 +29,9 @@ class ShoppingCardCardWidget extends StatelessWidget {
   final String title, subTitle, price, date, contactDetails, name, phoneNumber;
   final VoidCallback? onEdit, onDelete;
   final Function(DateTime date)? onNext;
-  final bool isExpansion;
+  final bool isExpansion, isLoading;
   final DateTime? initialDate;
+  final List<DateTime>? disabledDates;
 
   @override
   Widget build(BuildContext context) {
@@ -113,9 +117,10 @@ class ShoppingCardCardWidget extends StatelessWidget {
                     onNext == null
                         ? TitleAndValueWidget(
                             title: Strings.selectedDate,
-                            value:
-                                DateFormat('yyyy-MM-dd').format(initialDate!))
+                            value: DateFormat('EEEE, d MMMM yyyy')
+                                .format(initialDate!))
                         : PrimaryDateInputWidget(
+                            disabledDates: disabledDates ?? [],
                             initialDate: initialDate,
                             labelText: Strings.selectDate,
                             optional: Strings.selectDateFirst,
@@ -143,7 +148,7 @@ class ShoppingCardCardWidget extends StatelessWidget {
                         title: Strings.phone, value: phoneNumber),
                     onNext == null
                         ? const SizedBox.shrink()
-                        : PrimaryButton(
+                        : isLoading ? const CustomLoadingAPI(): PrimaryButton(
                             title: Strings.next,
                             onPressed: () {
                               if (selectedDate == null) {

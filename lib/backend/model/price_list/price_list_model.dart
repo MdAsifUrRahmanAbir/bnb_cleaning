@@ -4,6 +4,7 @@ class PriceListModel {
   List<AirbnbCleaning> midCleanings;
   List<Bundle> bundles;
   List<Bundle> products;
+  List<Extra> extras;
 
   PriceListModel({
     required this.linenHires,
@@ -11,6 +12,7 @@ class PriceListModel {
     required this.midCleanings,
     required this.bundles,
     required this.products,
+    required this.extras,
   });
 
   factory PriceListModel.fromJson(Map<String, dynamic> json) => PriceListModel(
@@ -19,6 +21,7 @@ class PriceListModel {
     midCleanings: List<AirbnbCleaning>.from(json["mid_cleanings"].map((x) => AirbnbCleaning.fromJson(x))),
     bundles: List<Bundle>.from(json["bundles"].map((x) => Bundle.fromJson(x))),
     products: List<Bundle>.from(json["products"].map((x) => Bundle.fromJson(x))),
+    extras: List<Extra>.from(json["extras"].map((x) => Extra.fromJson(x))),
   );
 }
 
@@ -91,5 +94,20 @@ class Bundle {
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
     isProduct: json["is_product"] ?? "",
+  );
+}
+
+class Extra {
+  final String name;
+  final double price;
+
+  Extra({
+    required this.name,
+    required this.price,
+  });
+
+  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+    name: json["name"],
+    price: json["price"].toDouble(),
   );
 }

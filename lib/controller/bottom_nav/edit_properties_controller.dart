@@ -18,6 +18,8 @@ class UpdatePropertiesController extends GetxController with DashboardService{
   Rx<DropDownUseModel> selectedPropertyType = propertyType.first.obs;
   Rx<DropDownUseModel> selectedPropertyAccess = propertyAccess.first.obs;
 
+  String propertyId = "";
+
   @override
   void dispose() {
     propertyNameController.dispose();
@@ -29,14 +31,14 @@ class UpdatePropertiesController extends GetxController with DashboardService{
     super.dispose();
   }
 
-  @override
-  void onInit() {
-    // TODO: set initial values
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   // TODO: set initial values
+  //   super.onInit();
+  // }
 
   void updateProperty() {
-    myPropertyUpdateProcess(""); // need to pass id
+    myPropertyUpdateProcess(propertyId); // need to pass id
   }
 
 

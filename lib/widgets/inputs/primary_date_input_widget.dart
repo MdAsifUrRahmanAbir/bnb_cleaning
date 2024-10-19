@@ -44,14 +44,14 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   }
 
   String _filterDateOnly(DateTime value) {
-    return DateFormat('dd-MM-yyyy').format(value);
+    return DateFormat('EEEE, d MMMM yyyy').format(value);
   }
 
-  List<DateTime> disabledDates = [
-    DateTime(2024, 10, 8),
-    DateTime(2024, 10, 15),
-    DateTime(2024, 10, 27),
-  ];
+  // List<DateTime> disabledDates = [
+  //   DateTime(2024, 10, 8),
+  //   DateTime(2024, 10, 15),
+  //   DateTime(2024, 10, 27),
+  // ];
 
   DateTime? checkSelectedDate(
       DateTime selectedDate, List<DateTime> disabledDates) {
@@ -68,13 +68,13 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: checkSelectedDate(_selectedDate!, disabledDates),
+      initialDate: checkSelectedDate(_selectedDate!, widget.disabledDates!),
       firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 1),
       // Here you define the predicate to disable specific dates
       selectableDayPredicate: (DateTime date) {
         // Disable the dates in the disabledDates list
-        return !disabledDates
+        return !(widget.disabledDates!)
             .contains(DateTime(date.year, date.month, date.day));
       },
     );
@@ -143,8 +143,8 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
             ),
             filled: true,
             fillColor: widget.color,
-            contentPadding:
-                const EdgeInsets.only(left: 16, right: 10, top: 10, bottom: 10),
+            // contentPadding:
+            //     const EdgeInsets.only(left: 16, right: 10, top: 0, b),
             hintText: "",
             hintStyle: Get.isDarkMode
                 ? CustomStyle.darkHeading3TextStyle.copyWith(

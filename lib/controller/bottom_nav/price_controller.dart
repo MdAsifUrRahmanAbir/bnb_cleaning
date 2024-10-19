@@ -25,6 +25,8 @@ class PriceController extends GetxController with DashboardService{
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
+  List<Bundle> productAndBundle = [];
+
   late PriceListModel _priceListModel;
   PriceListModel get priceListModel => _priceListModel;
 
@@ -34,6 +36,7 @@ class PriceController extends GetxController with DashboardService{
     update();
     await priceListProcessApi().then((value) {
       _priceListModel = value!;
+      productAndBundle = [..._priceListModel.products, ..._priceListModel.bundles];
       _isLoading.value = false;
       update();
     }).catchError((onError) {

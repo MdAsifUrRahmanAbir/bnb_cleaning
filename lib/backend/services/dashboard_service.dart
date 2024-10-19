@@ -59,6 +59,7 @@ mixin DashboardService{
       mapResponse = await ApiMethod(isBasic: false).post(
         ApiEndpoint.myPropertySaveURL,
         body,
+        code: 201
       );
       if (mapResponse != null) {
         MyPropertySaveModel result = MyPropertySaveModel.fromJson(mapResponse);
@@ -104,6 +105,7 @@ mixin DashboardService{
       mapResponse = await ApiMethod(isBasic: false).post(
         "${ApiEndpoint.shoppingCartURL}/$id",
         body,
+        code: 201
       );
       if (mapResponse != null) {
         CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);

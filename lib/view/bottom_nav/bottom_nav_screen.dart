@@ -1,3 +1,4 @@
+import '../../backend/extensions/custom_extensions.dart';
 import '../../controller/bottom_nav/bottom_nav_controller.dart';
 import '../../routes/routes.dart';
 import '../../utils/basic_screen_imports.dart';
@@ -17,23 +18,32 @@ class BottomNavScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: DashboardAppBar(
-          onMenuTap: () {
-            debugPrint("Clicked");
-            _scaffoldKey.currentState!.openDrawer();
-            debugPrint("Clicked");
-          },
-          title: Obx(() => TitleHeading1Widget(
-                text: controller.bodyTitle[controller.selectedIndex.value],
-                color: CustomColor.secondaryLightColor,
-                shadows: [
-                  Shadow(
-                      color: Theme.of(context).primaryColor,
-                      blurRadius: 0,
-                      offset: const Offset(2, 2))
-                ],
-              )..animate()
-              .fadeIn(duration: 900.ms, delay: 300.ms)
-              .move(begin: const Offset(-16, 0), curve: Curves.easeOutQuad))),
+        onMenuTap: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
+        title: Obx(() => TitleHeading1Widget(
+              text: controller.bodyTitle[controller.selectedIndex.value],
+              color: CustomColor.secondaryLightColor,
+              shadows: [
+                Shadow(
+                    color: Theme.of(context).primaryColor,
+                    blurRadius: 0,
+                    offset: const Offset(2, 2))
+              ],
+            )..animate()
+                .fadeIn(duration: 900.ms, delay: 300.ms)
+                .move(begin: const Offset(-16, 0), curve: Curves.easeOutQuad)),
+        actions: [
+          IconButton(
+              onPressed: () {
+                launchWhatsApp(phoneNumber: '447342839334');
+              },
+              icon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset("assets/whatsapp.png"),
+              )),
+        ],
+      ),
       drawer: DrawerWidget(),
       body: _body(context),
       bottomNavigationBar: Obx(() => CustomBottomNavBar(

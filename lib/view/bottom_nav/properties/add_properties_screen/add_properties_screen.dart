@@ -1,11 +1,9 @@
 import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
-
 import '../../../../backend/static_data.dart';
 import '../../../../controller/bottom_nav/add_properties_controller.dart';
 import '../../../../utils/basic_screen_imports.dart';
 import '../../../../utils/strings.dart';
 import '../../../../widgets/custom_dropdown_widget/custom_dropdown_widget.dart';
-import '../../../../widgets/text_labels/title_heading5_widget.dart';
 
 class AddPropertiesScreen extends StatelessWidget {
   AddPropertiesScreen({super.key});

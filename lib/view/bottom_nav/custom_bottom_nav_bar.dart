@@ -41,7 +41,7 @@ class CustomBottomNavBar extends StatelessWidget {
               isSelected: selectedIndex == 1,
               onTap: () => onItemTapped(1),
             ),
-            const SizedBox(width: 60.0), // Space for the floating action button
+            const SizedBox(width: 80.0), // Space for the floating action button
             BottomNavItem(
               icon: Icons.shopping_bag_outlined,
               isSelected: selectedIndex == 2,

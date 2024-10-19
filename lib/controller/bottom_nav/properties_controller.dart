@@ -59,12 +59,7 @@ class PropertiesController extends GetxController with DashboardService {
 
     debugPrint("1");
 
-    Map<String, dynamic> inputBody = {
-      "property_id": id,
-      "name": name,
-      "price": price,
-      "qty": qty
-    };
+    Map<String, dynamic> inputBody = {};
 
     await cartSaveProcessApi(body: inputBody, id: id).then((value) {
       _cartSaveModel = value!;

@@ -52,9 +52,11 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: crossStart,
                             children: [
-                              Image.asset(
-                                'assets/logo/basic_logo.png',
+                              Image.network(
+                                data["image"],
                                 height: 100,
+                                width: 300,
+                                fit: BoxFit.fill,
                               ), // Update with your image path
                               data["title"].isEmpty ? const SizedBox.shrink(): Column(
                                 children: [

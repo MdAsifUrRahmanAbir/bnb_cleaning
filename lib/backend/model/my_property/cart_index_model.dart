@@ -1,61 +1,119 @@
+
 class CartIndexModel {
   final bool success;
   final String message;
-  final List<CartItem> cartItems;
+  final List<Cart> carts;
   final DateData dateData;
 
   CartIndexModel({
     required this.success,
     required this.message,
-    required this.cartItems,
+    required this.carts,
     required this.dateData,
   });
 
   factory CartIndexModel.fromJson(Map<String, dynamic> json) => CartIndexModel(
     success: json["success"],
     message: json["message"],
-    cartItems: List<CartItem>.from(json["cart_items"].map((x) => CartItem.fromJson(x))),
+    carts: List<Cart>.from(json["carts"].map((x) => Cart.fromJson(x))),
     dateData: DateData.fromJson(json["date_data"]),
   );
 }
 
-class CartItem {
+class Cart {
   final int id;
-  final int cartId;
+  final int userId;
+  final String total;
   final int propertyId;
-  final String itemName;
-  final double itemPrice;
-  final int itemQty;
-  final String rowSum;
-  final dynamic quantity;
-  final String attributes;
+  // final DateTime date;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final Property property;
+
+  Cart({
+    required this.id,
+    required this.userId,
+    required this.total,
+    required this.propertyId,
+    // required this.date,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.property,
+  });
+
+  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
+    id: json["id"],
+    userId: json["user_id"],
+    total: json["total"],
+    propertyId: json["property_id"],
+    // date: DateTime.parse(json["date"]),
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    property: Property.fromJson(json["property"]),
+  );
+}
+
+class Property {
+  final int id;
+  final int userId;
+  final String identifier;
+  final String propertyType;
+  final String description;
+  final String newContactName;
+  final String newContactNumber;
+  final dynamic accessInformation;
+  final dynamic addressApartment;
+  final dynamic addressNumber;
+  final dynamic addressStreet;
+  final String address;
+  final String access;
+  final dynamic city;
+  final String postcode;
+  final dynamic country;
+  final int rowStatus;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  CartItem({
+  Property({
     required this.id,
-    required this.cartId,
-    required this.propertyId,
-    required this.itemName,
-    required this.itemPrice,
-    required this.itemQty,
-    required this.rowSum,
-    required this.quantity,
-    required this.attributes,
+    required this.userId,
+    required this.identifier,
+    required this.propertyType,
+    required this.description,
+    required this.newContactName,
+    required this.newContactNumber,
+    required this.accessInformation,
+    required this.addressApartment,
+    required this.addressNumber,
+    required this.addressStreet,
+    required this.address,
+    required this.access,
+    required this.city,
+    required this.postcode,
+    required this.country,
+    required this.rowStatus,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
+  factory Property.fromJson(Map<String, dynamic> json) => Property(
     id: json["id"],
-    cartId: json["cart_id"],
-    propertyId: json["property_id"],
-    itemName: json["item_name"],
-    itemPrice: json["item_price"].toDouble(),
-    itemQty: json["item_qty"],
-    rowSum: json["row_sum"],
-    quantity: json["quantity"],
-    attributes: json["attributes"],
+    userId: json["user_id"],
+    identifier: json["identifier"],
+    propertyType: json["property_type"],
+    description: json["description"],
+    newContactName: json["new_contact_name"],
+    newContactNumber: json["new_contact_number"],
+    accessInformation: json["access_information"],
+    addressApartment: json["address_apartment"],
+    addressNumber: json["address_number"],
+    addressStreet: json["address_street"],
+    address: json["address"],
+    access: json["access"],
+    city: json["city"],
+    postcode: json["postcode"],
+    country: json["country"],
+    rowStatus: json["row_status"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );

@@ -16,6 +16,9 @@ class Strings {
 
   static String login = "Login";
   static String confirm = "Confirm";
+  static String payNow = "Pay Now";
+  static String placeOrder = "Place Order";
+  static String placedOrder = "Placed Order";
   static String confirmPassword = "Confirm Password";
 
   static String forgotPassword = "Forgot Password?";
@@ -130,4 +133,15 @@ class Strings {
 
   static String delete  = "Delete";
   static String areYouSure  = "Are you sure you want to delete it?";
+
+  static String cardNumber  = "Card Number";
+  static String expMonth  = "Exp Month";
+  static String expYear  = "Exp Year";
+  static String cvc  = "CVC/CVV";
+
+  static String past  = "Past";
+  static String today  = "Today";
+  static String tomorrow  = "Tomorrow";
+  static String future  = "Future";
+
 }

@@ -25,16 +25,21 @@ class PricePage extends StatelessWidget {
             children: [
                 _typeWidget<AirbnbCleaning>(context, Strings.linenHires,
                     controller.priceListModel.linenHires, 1),
+                verticalSpace(10),
                 _typeWidget<AirbnbCleaning>(context, Strings.airbnbCleanings,
                     controller.priceListModel.airbnbCleanings, 1),
-                _typeWidget<AirbnbCleaning>(
+              verticalSpace(10),
+              _typeWidget<AirbnbCleaning>(
                     context,
                     Strings.midStayShortLetClean,
                     controller.priceListModel.midCleanings,
                     1),
-                _typeWidget<Bundle>(context, Strings.products,
+              verticalSpace(10),
+              _typeWidget<Bundle>(context, Strings.products,
                     controller.priceListModel.products, 2),
-                _typeWidget<Bundle>(context, Strings.bundles,
+              verticalSpace(10),
+
+              _typeWidget<Bundle>(context, Strings.bundles,
                     controller.priceListModel.bundles, 2),
               ]));
   }
