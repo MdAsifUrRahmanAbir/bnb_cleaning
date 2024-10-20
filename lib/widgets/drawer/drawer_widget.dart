@@ -1,7 +1,6 @@
-
 import 'package:flutter_animate/flutter_animate.dart';
+import '../../backend/services/api_endpoint.dart';
 import '../../controller/bottom_nav/bottom_nav_controller.dart';
-import '../../controller/bottom_nav/order_controller.dart';
 import '../../routes/routes.dart';
 import '../../utils/basic_widget_imports.dart';
 import '../../utils/strings.dart';
@@ -12,12 +11,11 @@ import '../../view/dynamic_webview_screen.dart';
 import '../dialog_helper.dart';
 import 'drawer_tile_widget.dart';
 
-
 class DrawerWidget extends StatelessWidget {
   DrawerWidget({super.key});
 
   final controller = Get.find<BottomNavController>();
-  final orderController = Get.put(OrderController());
+  // final orderController = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,46 +31,51 @@ class DrawerWidget extends StatelessWidget {
   }
 
   _drawerItems(BuildContext context) {
-
     return Column(
       children: AnimateList(children: [
         verticalSpace(Dimensions.marginSizeVertical * 1),
-
         ExpansionTile(
           leading: const Icon(Icons.shopping_cart_outlined),
           title: TitleHeading3Widget(text: Strings.placedOrder),
           children: [
             ListTile(
               dense: true,
-              onTap: (){
-                Get.to(OrderScreen(appTitle: Strings.past));
+              onTap: () {
+                Get.to(OrderScreen(
+                    appTitle: Strings.past,
+                    endPoint: ApiEndpoint.pastOrderURL));
               },
               title: TitleHeading3Widget(text: Strings.past),
             ),
             ListTile(
               dense: true,
-              onTap: (){
-                Get.to(OrderScreen(appTitle: Strings.today));
+              onTap: () {
+                Get.to(OrderScreen(
+                    appTitle: Strings.today,
+                    endPoint: ApiEndpoint.todayOrderURL));
               },
               title: TitleHeading3Widget(text: Strings.today),
             ),
             ListTile(
               dense: true,
-              onTap: (){
-                Get.to(OrderScreen(appTitle: Strings.tomorrow));
+              onTap: () {
+                Get.to(OrderScreen(
+                    appTitle: Strings.tomorrow,
+                    endPoint: ApiEndpoint.tomorrowOrderURL));
               },
               title: TitleHeading3Widget(text: Strings.tomorrow),
             ),
             ListTile(
               dense: true,
-              onTap: (){
-                Get.to(OrderScreen(appTitle: Strings.future));
+              onTap: () {
+                Get.to(OrderScreen(
+                    appTitle: Strings.future,
+                    endPoint: ApiEndpoint.futureOrderURL));
               },
               title: TitleHeading3Widget(text: Strings.future),
             ),
           ],
         ),
-
         DrawerTileButtonWidget(
           onTap: () {
             Get.toNamed(Routes.changePasswordScreen);
@@ -80,17 +83,19 @@ class DrawerWidget extends StatelessWidget {
           text: Strings.changePassword,
           icon: Icons.key,
         ),
-
         Obx(() => DrawerTileButtonWidget(
-          onTap: (){
-            controller.isDark.value = !controller.isDark.value;
-            debugPrint(controller.isDark.value.toString());
-            Themes().switchTheme();
-          },
-          text: controller.isDark.value ? "Switch to Light" : "Switch to Dark",
-          icon: controller.isDark.value ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-        )),
-
+              onTap: () {
+                controller.isDark.value = !controller.isDark.value;
+                debugPrint(controller.isDark.value.toString());
+                Themes().switchTheme();
+              },
+              text: controller.isDark.value
+                  ? "Switch to Light"
+                  : "Switch to Dark",
+              icon: controller.isDark.value
+                  ? Icons.light_mode_outlined
+                  : Icons.dark_mode_outlined,
+            )),
         DrawerTileButtonWidget(
           onTap: () {
             Get.to(const HelpScreen());
@@ -98,7 +103,6 @@ class DrawerWidget extends StatelessWidget {
           text: Strings.helpCenter,
           icon: Icons.help_outline_rounded,
         ),
-
         DrawerTileButtonWidget(
           onTap: () {
             Navigator.push(
@@ -112,20 +116,19 @@ class DrawerWidget extends StatelessWidget {
           text: Strings.faq,
           icon: Icons.info_outline,
         ),
-
         DrawerTileButtonWidget(
-                onTap: () {
-                  DialogHelper.showAlertDialog(context,
-                      title: Strings.logout,
-                      content: Strings.logOutContent, onTap: () async {
-                    Get.close(1);
-                    Get.offAllNamed(Routes.loginScreen);
-                    // await controller.logOutProcess();
-                  });
-                },
-                text: Strings.logout,
-                icon: Icons.power_settings_new_outlined,
-              ),
+          onTap: () {
+            DialogHelper.showAlertDialog(context,
+                title: Strings.logout,
+                content: Strings.logOutContent, onTap: () async {
+              Get.close(1);
+              Get.offAllNamed(Routes.loginScreen);
+              // await controller.logOutProcess();
+            });
+          },
+          text: Strings.logout,
+          icon: Icons.power_settings_new_outlined,
+        ),
         verticalSpace(Dimensions.marginSizeVertical * .2),
       ]),
     );

@@ -18,7 +18,7 @@ class Strings {
   static String confirm = "Confirm";
   static String payNow = "Pay Now";
   static String placeOrder = "Place Order";
-  static String placedOrder = "Placed Order";
+  static String placedOrder = "My Order";
   static String confirmPassword = "Confirm Password";
 
   static String forgotPassword = "Forgot Password?";
@@ -143,5 +143,7 @@ class Strings {
   static String today  = "Today";
   static String tomorrow  = "Tomorrow";
   static String future  = "Future";
+  static String quantity  = "Quantity";
+  static String price  = "Price";
 
 }
