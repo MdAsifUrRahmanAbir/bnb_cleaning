@@ -27,7 +27,10 @@ class ForgotPasswordDialog {
         ),
         actions: <Widget>[
           Obx(() => Get.find<LoginController>().isForgotLoading
-              ? const CustomLoadingAPI()
+              ? SizedBox(
+              height: 100,
+              width: MediaQuery.sizeOf(context).width * .8,
+              child: const CustomLoadingAPI())
               : PrimaryButton(
                   title: Strings.confirm,
                   onPressed: Get.find<LoginController>().forgotPasswordSendLink,

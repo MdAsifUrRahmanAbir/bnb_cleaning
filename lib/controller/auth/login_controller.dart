@@ -95,7 +95,7 @@ class LoginController extends GetxController with AuthService{
     };
     await forgotPasswordProcessApi(body: inputBody).then((value) {
       _forgotPasswordModel = value!;
-      Get.toNamed(Routes.resetPasswordScreen);
+      Get.close(1);
       _isForgotLoading.value = false;
       update();
     }).catchError((onError) {

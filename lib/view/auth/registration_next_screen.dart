@@ -98,18 +98,6 @@ class RegistrationNextScreen extends StatelessWidget {
             hint: Strings.enterAdditionalInformation,
             labelText: Strings.additionalInformation,
           ),
-          verticalSpace(Dimensions.marginBetweenInputBox),
-          PrimaryTextInputWidget(
-            controller: controller.passwordController,
-            hint: Strings.enterPassword,
-            labelText: Strings.password,
-          ),
-          verticalSpace(Dimensions.marginBetweenInputBox),
-          PrimaryTextInputWidget(
-            controller: controller.confirmPasswordController,
-            hint: Strings.enterPassword,
-            labelText: Strings.confirmPassword,
-          ),
           verticalSpace(Dimensions.marginSizeVertical),
           Obx(() => controller.isLoading
               ? const CustomLoadingAPI()

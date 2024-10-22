@@ -3,6 +3,7 @@ import '../../backend/services/dashboard_service.dart';
 import '../../backend/static_data.dart';
 import '../../utils/basic_screen_imports.dart';
 import 'properties_controller.dart';
+import 'shopping_cart_controller.dart';
 
 class UpdatePropertiesController extends GetxController with DashboardService{
 
@@ -68,6 +69,7 @@ class UpdatePropertiesController extends GetxController with DashboardService{
       _myPropertyUpdateModel = value!;
       Get.close(1);
       Get.find<PropertiesController>().myPropertyProcess();
+      Get.find<ShoppingCartController>().cartIndexProcess();
       _isUpdateLoading.value = false;
       update();
     }).catchError((onError) {

@@ -2,17 +2,23 @@ import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../controller/bottom_nav/cart_details_controller.dart';
+import '../../../../controller/bottom_nav/shopping_cart_controller.dart';
 import '../../../../controller/bottom_nav/stripe_payment_controller.dart';
 import '../../../../utils/basic_screen_imports.dart';
 import '../../../../utils/strings.dart';
+import '../../../../widgets/text_labels/title_heading5_widget.dart';
 
 class StripePaymentScreen extends StatelessWidget {
   StripePaymentScreen({super.key});
 
   final controller = Get.put(StripePaymentController());
+  final DateTime selectedDate = Get.find<ShoppingCartController>().selectedDateTime.value;
 
   @override
   Widget build(BuildContext context) {
+    double extra = (checkDate(selectedDate) ? (Get.find<CartDetailsController>().totalPrice.value * 20/100): 0);
+    double price = Get.find<CartDetailsController>().totalPrice.value;
+    double totalPrice = price + extra;
     return Scaffold(
         appBar: const PrimaryAppBar(
           title: "",
@@ -28,6 +34,34 @@ class StripePaymentScreen extends StatelessWidget {
                 right: Dimensions.paddingSizeHorizontal * .5,
               ),
               children: [
+
+                Visibility(
+                    visible: checkDate(selectedDate),
+                    child: Container(
+                      padding: const EdgeInsets.all(18.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(.1),
+                        borderRadius: BorderRadius.circular(Dimensions.radius),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: crossStart,
+                        children: [
+                          TitleHeading4Widget(
+                            text: "As the selected date is ${checkDateDescription(selectedDate)}, 20% extra is applied over the payment.",
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          verticalSpace(5),
+                          TitleHeading5Widget(
+                            text: "£${price.toStringAsFixed(2)} + £${extra.toStringAsFixed(2)} (20%) = £${totalPrice.toStringAsFixed(2)}",
+                            // color: Theme.of(context).primaryColor,
+                          ),
+                        ],
+                      ),
+                    )
+                ),
+
+                verticalSpace(12),
+
                 PrimaryTextInputWidget(
                   controller: controller.cardNumberController,
                   labelText: Strings.cardNumber,
@@ -85,10 +119,43 @@ class StripePaymentScreen extends StatelessWidget {
                 Obx(() => controller.isLoading
                     ? const CustomLoadingAPI()
                     : PrimaryButton(
-                        title: "${Strings.payNow} (£${Get.find<CartDetailsController>().totalPrice.value.toStringAsFixed(2)})", onPressed: controller.confirm))
+                        title: "${Strings.payNow} (£${totalPrice.toStringAsFixed(2)})", onPressed: controller.confirm))
               ]),
         )));
   }
+}
+
+bool checkDate(DateTime selectedDate) {
+  DateTime now = DateTime.now();
+  DateTime today = DateTime(now.year, now.month, now.day);
+  DateTime tomorrow = today.add(const Duration(days: 1));
+
+  // Check if selectedDate is Sunday, today, or tomorrow
+  if (selectedDate.weekday == DateTime.sunday ||
+      selectedDate == today ||
+      selectedDate == tomorrow) {
+    return true;
+  }
+
+  return false;
+}
+
+
+String checkDateDescription(DateTime selectedDate) {
+  DateTime now = DateTime.now();
+  DateTime today = DateTime(now.year, now.month, now.day);
+  DateTime tomorrow = today.add(const Duration(days: 1));
+
+  // Check if selectedDate is Sunday, today, or tomorrow
+  if (selectedDate.weekday == DateTime.sunday) {
+    return "Sunday";
+  } else if (selectedDate == today) {
+    return "Today";
+  } else if (selectedDate == tomorrow) {
+    return "Tomorrow";
+  }
+
+  return "None";
 }
 
 

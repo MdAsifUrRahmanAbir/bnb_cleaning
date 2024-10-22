@@ -9,10 +9,12 @@ class PropertyCard extends StatelessWidget {
       required this.subTitle,
       required this.details,
       required this.onTapCart,
-      required this.onTapEdit});
+      required this.onTapEdit,
+      this.cartAdded = false});
 
   final String title, subTitle, details;
   final VoidCallback onTapCart, onTapEdit;
+  final bool cartAdded;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +33,28 @@ class PropertyCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Container(
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor
-                  )
-                ),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Theme.of(context).primaryColor)),
                 child: GestureDetector(
                   onTap: onTapEdit,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
+                    child: Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ).paddingZero,
               ),
             ),
             const SizedBox(height: 8.0),
-            Icon(Icons.apartment, color:  Theme.of(context).primaryColor, size: 50.0),
+            Icon(Icons.apartment,
+                color: Theme.of(context).primaryColor, size: 50.0),
             const SizedBox(height: 8.0),
             TitleHeading2Widget(
               text: title,
               textAlign: TextAlign.center,
-              color:  Theme.of(context).primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             const SizedBox(height: 4.0),
             TitleHeading4Widget(
@@ -64,18 +67,21 @@ class PropertyCard extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16.0),
-            OutlinedButton(
-              onPressed: onTapCart,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: Theme.of(context).primaryColor.withOpacity(.5),
-                ),
-              ),
-              child: TitleHeading4Widget(
-                text: Strings.addToCart,
-                color:  Theme.of(context).primaryColor,
-              ),
-            ),
+            cartAdded
+                ? Icon(Icons.check_circle,
+                    color: Colors.green, size: Dimensions.iconSizeLarge * 1.6)
+                : OutlinedButton(
+                    onPressed: onTapCart,
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        color: Theme.of(context).primaryColor.withOpacity(.5),
+                      ),
+                    ),
+                    child: TitleHeading4Widget(
+                      text: Strings.addToCart,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
           ],
         ),
       ),

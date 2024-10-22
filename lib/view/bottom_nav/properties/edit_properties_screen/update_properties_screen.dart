@@ -32,7 +32,7 @@ class UpdatePropertiesScreen extends StatelessWidget {
         _addressWidget(),
 
         verticalSpace(Dimensions.marginSizeVertical),
-        PrimaryButton(title: Strings.create, onPressed: controller.updateProperty),
+        PrimaryButton(title: Strings.update, onPressed: controller.updateProperty),
         verticalSpace(Dimensions.marginSizeVertical),
       ],
     ));

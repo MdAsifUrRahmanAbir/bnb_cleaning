@@ -56,8 +56,7 @@ class ShoppingCartPage extends StatelessWidget {
                 controller.orderId = data.id;
                 controller.propertyName = data.property.identifier;
                 controller.selectedDate = DateFormat('yyyy-MM-dd').format(date);
-
-
+                controller.selectedDateTime.value = date;
 
                 cartDetails
                     .cartDateUpdateProcess(data.id, DateFormat('yyyy-MM-dd HH:mm:ss').format(date))
@@ -67,8 +66,7 @@ class ShoppingCartPage extends StatelessWidget {
                     title: data.property.identifier,
                     subTitle: data.property.address,
                     price: '£0',
-                    date:
-                        DateFormat('EEEE, d MMMM yyyy').format(data.createdAt),
+                    date: DateFormat('EEEE, d MMMM yyyy').format(data.createdAt),
                     contactDetails: data.property.description,
                     name: data.property.newContactName,
                     phoneNumber: data.property.newContactNumber,

@@ -15,8 +15,8 @@ class RegistrationController extends GetxController with AuthService {
   final additionalInformationController = TextEditingController();
 
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  // final passwordController = TextEditingController();
+  // final confirmPasswordController = TextEditingController();
 
   /// formKeys
   final formKey = GlobalKey<FormState>();
@@ -38,18 +38,14 @@ class RegistrationController extends GetxController with AuthService {
     phoneNumberController.dispose();
     additionalInformationController.dispose();
     emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    // passwordController.dispose();
+    // confirmPasswordController.dispose();
     super.dispose();
   }
 
   void register() async {
     if (formKey2.currentState!.validate()) {
-      if(passwordController.text == confirmPasswordController.text) {
         await registrationProcess();
-      }else{
-        CustomSnackBar.error("The password confirmation does not match.");
-      }
     }
   }
 
@@ -85,9 +81,9 @@ class RegistrationController extends GetxController with AuthService {
       "property_type": selectedPropertyType.value.title,
       "property_access": selectedPropertyAccess.value.title,
       "bookings": selectBookings.value,
-      "name": "johndoe",
-      "password": passwordController.text,
-      "password_confirmation": confirmPasswordController.text,
+      "name": fullNameController.text,
+      "password": "12345678",
+      "password_confirmation": "12345678",
       "company": companyNameController.text,
       "postal_code": postalCodeController.text,
       "additional_information": additionalInformationController.text

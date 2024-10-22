@@ -15,7 +15,7 @@ class CartIndexModel {
   factory CartIndexModel.fromJson(Map<String, dynamic> json) => CartIndexModel(
     success: json["success"],
     message: json["message"],
-    carts: List<Cart>.from(json["carts"].map((x) => Cart.fromJson(x))),
+    carts: List<Cart>.from((json["carts"] ?? []).map((x) => Cart.fromJson(x))),
     dateData: DateData.fromJson(json["date_data"]),
   );
 }

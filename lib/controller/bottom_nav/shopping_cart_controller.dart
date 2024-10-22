@@ -11,6 +11,7 @@ class ShoppingCartController extends GetxController with CartService{
 
   String propertyName = "";
   String selectedDate = "";
+  Rx<DateTime> selectedDateTime = DateTime.now().obs;
   int orderId = -1;
 
   @override

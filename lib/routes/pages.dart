@@ -4,7 +4,7 @@ import '../binding/splash_binding.dart';
 import '../view/auth/login_screen.dart';
 import '../view/auth/registration_screen.dart';
 import '../view/auth/registration_next_screen.dart';
-import '../view/auth/reset_password_screen.dart';
+// import '../view/auth/reset_password_screen.dart';
 import '../view/befor_auth/splash_screen.dart';
 import '../view/bottom_nav/bottom_nav_screen.dart';
 import '../view/bottom_nav/properties/add_properties_screen/add_properties_screen.dart';
@@ -54,9 +54,9 @@ class Pages{
       name: Routes.changePasswordScreen,
       page: () => ChangePasswordScreen(),
     ),
-    GetPage(
-      name: Routes.resetPasswordScreen,
-      page: () => ResetPasswordScreen(),
-    ),
+    // GetPage(
+    //   name: Routes.resetPasswordScreen,
+    //   page: () => ResetPasswordScreen(),
+    // ),
   ];
 }

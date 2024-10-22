@@ -64,6 +64,7 @@ class PropertiesController extends GetxController with DashboardService {
     await cartSaveProcessApi(body: inputBody, id: id).then((value) {
       _cartSaveModel = value!;
       Get.find<ShoppingCartController>().cartIndexProcess();
+      myPropertyProcess();
       _isCartSaveLoading.value = false;
       update();
     }).catchError((onError) {

@@ -37,7 +37,7 @@ mixin AuthService{
       {required Map<String, dynamic> body}) async {
     Map<String, dynamic>? mapResponse;
     try {
-      mapResponse = await ApiMethod(isBasic: false).post(
+      mapResponse = await ApiMethod(isBasic: true).post(
         ApiEndpoint.registerURL,
         body,
         code: 201
@@ -67,7 +67,7 @@ mixin AuthService{
       );
       if (mapResponse != null) {
         CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
-        // CustomSnackBar.success(result.message.success.first.toString());
+        CustomSnackBar.success(result.message.toString());
         return result;
       }
     } catch (e) {

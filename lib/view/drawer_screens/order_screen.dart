@@ -1,3 +1,4 @@
+import 'package:bnb_clean/backend/utils/no_data_widget.dart';
 import 'package:intl/intl.dart';
 
 import '../../backend/model/order/my_order_model.dart';
@@ -23,17 +24,18 @@ class OrderScreen extends StatelessWidget {
         body: Obx(() => controller.isLoading
             ? const CustomLoadingAPI()
             : SafeArea(
-                child: ListView.separated(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.paddingSizeHorizontal * .5,
-                    vertical: Dimensions.paddingSizeVertical * .3
-                  ),
-                    itemBuilder: (context, index) {
-                      Datum data = controller.myOrderModel.data[index];
-                      return _listTile(context, data, index);
-                    },
-                    separatorBuilder: (context, index) => verticalSpace(7),
-                    itemCount: controller.myOrderModel.data.length))));
+                child: controller.myOrderModel.data.isEmpty
+                    ? const NoDataWidget()
+                    : ListView.separated(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeHorizontal * .5,
+                            vertical: Dimensions.paddingSizeVertical * .3),
+                        itemBuilder: (context, index) {
+                          Datum data = controller.myOrderModel.data[index];
+                          return _listTile(context, data, index);
+                        },
+                        separatorBuilder: (context, index) => verticalSpace(7),
+                        itemCount: controller.myOrderModel.data.length))));
   }
 
   _listTile(BuildContext context, Datum data, int index) {
@@ -44,7 +46,7 @@ class OrderScreen extends StatelessWidget {
       ),
       elevation: 0,
       child: Obx(() => InkWell(
-        borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10),
             onTap: () {
               if (controller.selectedIndex.value != index) {
                 controller.selectedIndex.value = index;
@@ -61,7 +63,7 @@ class OrderScreen extends StatelessWidget {
                     children: [
                       TitleHeading5Widget(
                         text: DateFormat('EEEE, d MMMM yyyy')
-                            .format(data.createdAt),
+                            .format(data.orderDate),
                         textAlign: TextAlign.center,
                       ),
                       TitleHeading3Widget(
