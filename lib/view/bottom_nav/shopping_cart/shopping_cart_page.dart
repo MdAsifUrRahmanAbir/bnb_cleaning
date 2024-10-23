@@ -14,6 +14,7 @@ import 'shoping_cart_card_widget.dart';
 class ShoppingCartPage extends StatelessWidget {
   ShoppingCartPage({super.key});
   final controller = Get.put(ShoppingCartController());
+  final cartDetails = Get.put(CartDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,6 @@ class ShoppingCartPage extends StatelessWidget {
 
           // print(serializedData);
 
-          final cartDetails = Get.put(CartDetailsController());
 
           return Obx(() => ShoppingCardCardWidget(
             isLoading: cartDetails.isDateUpdateLoading,

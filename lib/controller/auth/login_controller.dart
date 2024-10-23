@@ -62,7 +62,7 @@ class LoginController extends GetxController with AuthService{
     await loginProcessApi(body: inputBody).then((value) {
       _loginModel = value!;
 
-      LocalStorage.isLoginSuccess(isLoggedIn: true);
+      LocalStorage.isLoginSuccess(isLoggedIn: rememberMe.value);
       LocalStorage.saveToken(token: _loginModel.token);
       Get.toNamed(Routes.btmScreen);
 

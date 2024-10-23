@@ -1,6 +1,5 @@
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
 import 'package:bnb_clean/utils/basic_screen_imports.dart';
-import 'package:get/get.dart';
 
 import '../../backend/model/cart/service_success_model.dart';
 import '../../backend/model/common/common_success_model.dart';
@@ -95,11 +94,11 @@ class CartDetailsController extends GetxController with CartService {
     }
   }
 
-  @override
-  void onInit() {
-    initializeServices();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   initializeServices();
+  //   super.onInit();
+  // }
 
   void onAirbnbSelected(bool isSelected) {
     if (isSelected) {

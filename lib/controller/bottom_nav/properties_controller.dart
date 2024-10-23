@@ -19,6 +19,7 @@ class PropertiesController extends GetxController with DashboardService {
   }
 
   /// ------------------------------------- >>
+  final isError = true.obs;
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
@@ -32,8 +33,10 @@ class PropertiesController extends GetxController with DashboardService {
     await myPropertyProcessApi().then((value) {
       _myPropertyModel = value!;
       _isLoading.value = false;
+      isError.value = false;
       update();
     }).catchError((onError) {
+      isError.value = true;
       log.e(onError);
     });
     _isLoading.value = false;

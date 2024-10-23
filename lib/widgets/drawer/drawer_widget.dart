@@ -1,3 +1,4 @@
+import 'package:bnb_clean/backend/local_storage/local_storage.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../backend/services/api_endpoint.dart';
 import '../../controller/bottom_nav/bottom_nav_controller.dart';
@@ -122,6 +123,7 @@ class DrawerWidget extends StatelessWidget {
                 title: Strings.logout,
                 content: Strings.logOutContent, onTap: () async {
               Get.close(1);
+              LocalStorage.logout();
               Get.offAllNamed(Routes.loginScreen);
               // await controller.logOutProcess();
             });

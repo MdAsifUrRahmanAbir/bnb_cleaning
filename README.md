@@ -27,10 +27,10 @@ FAQ screen,
 Optional extras model add,
 
 As the selected date is Sunday, 20% extra is applied over the payment.
-
 My Property check that is available in cart index then it will be marked as selected.
 After Update my property call cart index.
-CartDetails controller is not calling in second time
+
+CartDetails controller is not calling in second time. **
 
 https://api.uniobe.com
 admin@example.com
