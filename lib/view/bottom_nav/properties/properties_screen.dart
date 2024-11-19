@@ -10,7 +10,6 @@ import '../../../controller/bottom_nav/properties_controller.dart';
 import '../../../controller/bottom_nav/shopping_cart_controller.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/basic_screen_imports.dart';
-import '../../../utils/strings.dart';
 import 'property_card_widget.dart';
 
 class PropertiesScreen extends StatelessWidget {
@@ -21,29 +20,31 @@ class PropertiesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PrimaryAppBar(
-          title: Strings.properties,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                  style: ButtonStyle(backgroundColor:
-                      WidgetStateProperty.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered)) {
-                      return CustomColor.secondaryLightColor;
-                    }
-                    return Theme.of(context).primaryColor;
-                  })),
-                  onPressed: controller.addPropertiesRoute,
-                  child: TitleHeading4Widget(
-                    text: Strings.addNew,
-                    color: CustomColor.whiteColor,
-                  )),
-            )
-          ],
-        ),
-        body: _bodyWidget());
+    return
+      // Scaffold(
+        // appBar: PrimaryAppBar(
+        //   title: Strings.properties,
+        //   actions: [
+        //     Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: TextButton(
+        //           style: ButtonStyle(backgroundColor:
+        //               WidgetStateProperty.resolveWith((states) {
+        //             if (states.contains(WidgetState.hovered)) {
+        //               return CustomColor.secondaryLightColor;
+        //             }
+        //             return Theme.of(context).primaryColor;
+        //           })),
+        //           onPressed: controller.addPropertiesRoute,
+        //           child: TitleHeading4Widget(
+        //             text: Strings.addNew,
+        //             color: CustomColor.whiteColor,
+        //           )),
+        //     )
+        //   ],
+        // ),
+        // body:
+        _bodyWidget();
   }
 
   _bodyWidget() {

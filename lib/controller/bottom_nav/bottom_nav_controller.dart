@@ -1,13 +1,15 @@
 
 import 'package:get/get.dart';
 
+// import '../../view/bottom_nav/home/home_page.dart';
 import '../../view/bottom_nav/home/home_page.dart';
 import '../../view/bottom_nav/price/price_page.dart';
 import '../../view/bottom_nav/profile/profile_page.dart';
+import '../../view/bottom_nav/properties/properties_screen.dart';
 import '../../view/bottom_nav/shopping_cart/shopping_cart_page.dart';
 
 class BottomNavController extends GetxController{
-  RxInt selectedIndex = 0.obs;
+  RxInt selectedIndex = 4.obs;
   RxBool isDark = false.obs;
 
   void onItemTapped(int index) {
@@ -15,16 +17,18 @@ class BottomNavController extends GetxController{
   }
 
   List body = [
-    HomePage(),
+    PropertiesScreen(),
     PricePage(),
     ShoppingCartPage(),
     ProfilePage(),
+    HomePage(),
   ];
 
   List bodyTitle = [
-    "How To Order",
+    "Properties",
     "Prices",
     "Shopping Cart",
-    "Profile"
+    "Profile",
+    "How To Order",
   ];
 }

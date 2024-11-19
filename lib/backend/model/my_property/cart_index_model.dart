@@ -101,7 +101,7 @@ class Property {
     userId: json["user_id"],
     identifier: json["identifier"],
     propertyType: json["property_type"],
-    description: json["description"],
+    description: json["description"] ?? "",
     newContactName: json["new_contact_name"],
     newContactNumber: json["new_contact_number"],
     accessInformation: json["access_information"],

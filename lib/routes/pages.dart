@@ -7,9 +7,9 @@ import '../view/auth/registration_next_screen.dart';
 // import '../view/auth/reset_password_screen.dart';
 import '../view/befor_auth/splash_screen.dart';
 import '../view/bottom_nav/bottom_nav_screen.dart';
+import '../view/bottom_nav/home/home_page.dart';
 import '../view/bottom_nav/properties/add_properties_screen/add_properties_screen.dart';
 import '../view/bottom_nav/properties/edit_properties_screen/update_properties_screen.dart';
-import '../view/bottom_nav/properties/properties_screen.dart';
 import '../view/drawer_screens/change_password_screen.dart';
 import 'routes.dart';
 
@@ -40,7 +40,7 @@ class Pages{
     ),
     GetPage(
       name: Routes.propertiesScreen,
-      page: () => PropertiesScreen(),
+      page: () => HomePage(),
     ),
     GetPage(
       name: Routes.addPropertiesScreen,

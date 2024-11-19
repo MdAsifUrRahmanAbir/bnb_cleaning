@@ -32,7 +32,7 @@ class CustomBottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             BottomNavItem(
-              icon: Icons.home,
+              icon: Icons.leaderboard_outlined,
               isSelected: selectedIndex == 0,
               onTap: () => onItemTapped(0),
             ),

@@ -25,9 +25,9 @@ class AdditionalInfo {
   });
 
   factory AdditionalInfo.fromJson(Map<String, dynamic> json) => AdditionalInfo(
-    phone: json["phone"],
-    company: json["company"],
-    postalCode: json["postal_code"],
+    phone: json["phone"] ?? "",
+    company: json["company"] ?? "",
+    postalCode: json["postal_code"] ?? "",
   );
 }
 
@@ -43,8 +43,8 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    name: json["name"],
-    email: json["email"],
+    name: json["name"] ?? "",
+    email: json["email"] ?? "",
     profilePhotoPath: json["profile_photo_path"] ?? "",
   );
 }

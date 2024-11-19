@@ -52,13 +52,14 @@ class BottomNavScreen extends StatelessWidget {
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(Routes.propertiesScreen);
+          // Get.toNamed(Routes.propertiesScreen);
+          controller.onItemTapped(4);
         },
         shape: const CircleBorder(),
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(
-          Icons.leaderboard_outlined,
-          color: Colors.black,
+          Icons.home_filled,
+          color: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
