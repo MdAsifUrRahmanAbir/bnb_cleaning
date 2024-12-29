@@ -36,7 +36,8 @@ mixin DashboardService{
     try {
       mapResponse = await ApiMethod(isBasic: false).get(
         ApiEndpoint.myPropertyURL,
-        showResult: true
+        showResult: true,
+        showError: false
       );
       if (mapResponse != null) {
         MyPropertyModel result = MyPropertyModel.fromJson(mapResponse);

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:get/get.dart';
 
 import '../../../routes/routes.dart';
 import '../../backend/local_storage/local_storage.dart';
+import '../../utils/basic_screen_imports.dart';
 
 class SplashController extends GetxController {
   @override
@@ -13,6 +13,7 @@ class SplashController extends GetxController {
   }
 
   _goToScreen() async {
+    debugPrint(LocalStorage.isLoggedIn().toString());
     Timer(const Duration(seconds: 2), () {
       LocalStorage.isLoggedIn()
           ? Get.offAllNamed(Routes.btmScreen)

@@ -1,3 +1,4 @@
+import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 import 'package:bnb_clean/backend/utils/custom_snackbar.dart';
 import '../../../../controller/bottom_nav/cart_details_controller.dart';
 import '../../../../controller/bottom_nav/price_controller.dart';
@@ -154,7 +155,7 @@ class CartDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Visibility(
                 visible: controller.optionalsEnable.value,
-                child: InkWell(
+                child: controller.isUpdateLoading ? const CustomLoadingAPI(): InkWell(
                   onTap: () {
                     for (var i = 0; i < controller.optionalsArray.length; i++) {
                       if (controller.optionalsArray[i] != 0) {
@@ -268,7 +269,7 @@ class CartDetailScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Visibility(
               visible: controller.proAndBundleEnable.value,
-              child: InkWell(
+              child: controller.isUpdateLoading ? const CustomLoadingAPI(): InkWell(
                 onTap: () {
                   for (var i = 0; i < controller.productArray.length; i++) {
                     if (controller.productArray[i] != 0) {
@@ -353,7 +354,7 @@ class CartDetailScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Visibility(
               visible: controller.midStayEnable.value,
-              child: InkWell(
+              child: controller.isUpdateLoading ? const CustomLoadingAPI(): InkWell(
                 onTap: () {
                   for (var i = 0; i < controller.midStayArray.length; i++) {
                     if (controller.midStayArray[i] != 0) {

@@ -118,7 +118,7 @@ class Strings {
   static String contactDetails  = "Contact Details";
   static String addToCart  = "Add to Cart";
 
-  static String linenHires  = "Linen Hires";
+  static String linenHires  = "Linen Hire";
   static String airbnbCleanings  = "Airbnb Cleaning Services";
   static String midStayShortLetClean  = "Mid Stay Short Let Clean";
   static String products  = "Products";

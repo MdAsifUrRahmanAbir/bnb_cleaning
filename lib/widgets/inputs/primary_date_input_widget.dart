@@ -2,6 +2,7 @@ import '../../utils/basic_widget_imports.dart';
 import 'package:intl/intl.dart';
 
 import '../../utils/strings.dart';
+import '../text_labels/title_heading5_widget.dart';
 
 class PrimaryDateInputWidget extends StatefulWidget {
   final String labelText, optional;
@@ -93,20 +94,21 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: crossStart,
           children: [
             TitleHeading4Widget(
               text: widget.labelText,
               fontWeight: FontWeight.w600,
             ),
-            horizontalSpace(Dimensions.widthSize * 0.5),
+            verticalSpace(Dimensions.heightSize * 0.2),
             Visibility(
               visible: widget.optional.isNotEmpty,
-              child: TitleHeading4Widget(
-                text: widget.optional,
+              child: const TitleHeading5Widget(
+                text: "As the selected date is same date or Sunday, 20% extra is applied over the payment.",
                 opacity: .4,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ],

@@ -269,6 +269,9 @@ class CartDetailsController extends GetxController with CartService {
       submitEnable.value = true;
       totalServices.add(_midStayUpdateModel);
 
+      CustomSnackBar.success("Mid Stay added");
+
+
       _isUpdateLoading.value = false;
       update();
     }).catchError((onError) {
@@ -305,6 +308,8 @@ class CartDetailsController extends GetxController with CartService {
       submitEnable.value = true;
       totalServices.add(_productAndBundleUpdateModel);
 
+      CustomSnackBar.success("Products & Bundles added");
+
       _isUpdateLoading.value = false;
       update();
     }).catchError((onError) {
@@ -340,6 +345,8 @@ class CartDetailsController extends GetxController with CartService {
       onlyLineSelected++;
       submitEnable.value = true;
       totalServices.add(_othersUpdateModel);
+
+      CustomSnackBar.success("Optional Extras added");
 
       _isUpdateLoading.value = false;
       update();

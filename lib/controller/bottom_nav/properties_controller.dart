@@ -1,4 +1,5 @@
 import 'package:bnb_clean/backend/model/common/common_success_model.dart';
+import 'package:bnb_clean/controller/bottom_nav/bottom_nav_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -68,6 +69,7 @@ class PropertiesController extends GetxController with DashboardService {
       _cartSaveModel = value!;
       Get.find<ShoppingCartController>().cartIndexProcess();
       myPropertyProcess();
+      Get.find<BottomNavController>().selectedIndex.value = 2;
       _isCartSaveLoading.value = false;
       update();
     }).catchError((onError) {
