@@ -268,9 +268,7 @@ class CartDetailsController extends GetxController with CartService {
       onlyLineSelected++;
       submitEnable.value = true;
       totalServices.add(_midStayUpdateModel);
-
       CustomSnackBar.success("Mid Stay added");
-
 
       _isUpdateLoading.value = false;
       update();

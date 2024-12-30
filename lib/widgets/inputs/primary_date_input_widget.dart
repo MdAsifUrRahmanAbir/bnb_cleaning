@@ -71,7 +71,7 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
       context: context,
       initialDate: checkSelectedDate(_selectedDate!, widget.disabledDates!),
       firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
+      lastDate: DateTime(DateTime.now().year + 2),
       // Here you define the predicate to disable specific dates
       selectableDayPredicate: (DateTime date) {
         // Disable the dates in the disabledDates list

@@ -162,7 +162,7 @@ class CartDetailScreen extends StatelessWidget {
                         controller.optionalsName
                             .add(priceController.priceListModel.bundles[i].name);
                         controller.optionalsPrice
-                            .add(priceController.priceListModel.bundles[i].price);
+                            .add(double.parse(priceController.priceListModel.bundles[i].price.toString()) * double.parse(controller.optionalsArray[i].toString()));
                         controller.optionalsQty.add(controller.optionalsArray[i]);
                       }
                     }
@@ -274,7 +274,7 @@ class CartDetailScreen extends StatelessWidget {
                   for (var i = 0; i < controller.productArray.length; i++) {
                     if (controller.productArray[i] != 0) {
                       controller.productAndBundlePrice
-                          .add(priceController.priceListModel.products[i].price);
+                          .add(double.parse(priceController.priceListModel.products[i].price.toString()) * double.parse(controller.productArray[i].toString()));
                       controller.productAndBundleName
                           .add(priceController.priceListModel.products[i].name);
                       controller.productAndBundleQty
@@ -359,7 +359,7 @@ class CartDetailScreen extends StatelessWidget {
                   for (var i = 0; i < controller.midStayArray.length; i++) {
                     if (controller.midStayArray[i] != 0) {
                       controller.midStayPrice.add(
-                          priceController.priceListModel.midCleanings[i].price);
+                          priceController.priceListModel.midCleanings[i].price * double.parse(controller.midStayArray[i].toString()));
                       controller.midStayName.add(
                           priceController.priceListModel.midCleanings[i].title);
                       controller.midStayQty.add(controller.midStayArray[i]);
@@ -444,7 +444,7 @@ class CartDetailScreen extends StatelessWidget {
                       for (var i = 0; i < controller.lineHireArray.length; i++) {
                         if (controller.lineHireArray[i] != 0) {
                           controller.lineHirePrice.add(
-                              priceController.priceListModel.linenHires[i].price);
+                              priceController.priceListModel.linenHires[i].price * double.parse(controller.lineHireArray[i].toString()));
                           controller.lineHireName.add(
                               priceController.priceListModel.linenHires[i].title);
                           controller.lineHireQty.add(controller.lineHireArray[i]);
@@ -461,7 +461,7 @@ class CartDetailScreen extends StatelessWidget {
                     for (var i = 0; i < controller.lineHireArray.length; i++) {
                       if (controller.lineHireArray[i] != 0) {
                         controller.lineHirePrice.add(
-                            priceController.priceListModel.linenHires[i].price);
+                            priceController.priceListModel.linenHires[i].price * double.parse(controller.lineHireArray[i].toString()));
                         controller.lineHireName.add(
                             priceController.priceListModel.linenHires[i].title);
                         controller.lineHireQty.add(controller.lineHireArray[i]);
@@ -557,7 +557,7 @@ class CartDetailScreen extends StatelessWidget {
                   for (var i = 0; i < controller.airbnbArray.length; i++) {
                     if (controller.airbnbArray[i] != 0) {
                       controller.airbnbPrice.add(priceController
-                          .priceListModel.airbnbCleanings[i].price);
+                          .priceListModel.airbnbCleanings[i].price * double.parse(controller.airbnbArray[i].toString()));
                       controller.airbnbName.add(priceController
                           .priceListModel.airbnbCleanings[i].title);
                       controller.airbnbQty.add(controller.airbnbArray[i]);
