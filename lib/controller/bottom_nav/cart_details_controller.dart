@@ -167,6 +167,9 @@ class CartDetailsController extends GetxController with CartService {
 
   bool selectBnb = false;
   bool selectLine = false;
+
+  RxBool bnbServiceTileEnable = false.obs;
+
   ///* AirbnbUpdate in process
   Future<ServiceSuccessModel> airbnbUpdateProcess() async {
     _isUpdateLoading.value = true;
@@ -187,12 +190,23 @@ class CartDetailsController extends GetxController with CartService {
       if (_airbnbUpdateModel.success[2] != null) {
         CustomSnackBar.error(_airbnbUpdateModel.success[2]);
       } else if (!submitEnable.value) {
-        if(lineHireClicked.value){
+        if (lineHireClicked.value) {
           submitEnable.value = true;
-        }else {
+        } else {
           CustomSnackBar.error("Please Select Line Hire.");
         }
       }
+
+      airbnbPrice.clear();
+      airbnbQty.clear();
+      airbnbName.clear();
+      airbnbArray.clear();
+
+      for (var e in priceController.priceListModel.airbnbCleanings) {
+        airbnbArray.add(0);
+      }
+
+      bnbServiceTileEnable.value = false;
 
       _isUpdateLoading.value = false;
       update();
@@ -212,11 +226,17 @@ class CartDetailsController extends GetxController with CartService {
   List lineHirePrice = [];
   List lineHireQty = [];
   List lineHireName = [];
+  RxBool lineHireTileEnable = false.obs;
 
   ///* LineUpdate in process
   Future<ServiceSuccessModel> lineUpdateProcess() async {
     _isUpdateLoading.value = true;
     update();
+
+    debugPrint(lineHirePrice.length.toString());
+    debugPrint(lineHireQty.length.toString());
+    debugPrint(lineHireName.length.toString());
+
     Map<String, dynamic> inputBody = {
       "price": lineHirePrice,
       "qty": lineHireQty,
@@ -227,10 +247,26 @@ class CartDetailsController extends GetxController with CartService {
         .then((value) {
       _lineUpdateModel = value!;
 
-      if(totalPrice.value.isGreaterThan(39) || onlyLineSelected != 0) { /// checking
+      debugPrint(lineHirePrice.length.toString());
+      debugPrint(lineHireQty.length.toString());
+      debugPrint(lineHireName.length.toString());
+
+      if (totalPrice.value.isGreaterThan(39) || onlyLineSelected != 0) {
+        /// checking
         submitEnable.value = true;
       }
       totalServices.add(_lineUpdateModel);
+
+      lineHirePrice.clear();
+      lineHireQty.clear();
+      lineHireName.clear();
+      lineHireArray.clear();
+
+      for (var e in priceController.priceListModel.linenHires) {
+        lineHireArray.add(0);
+      }
+
+      lineHireTileEnable.value = false;
 
       _isUpdateLoading.value = false;
       update();
@@ -250,6 +286,7 @@ class CartDetailsController extends GetxController with CartService {
   List midStayPrice = [];
   List midStayQty = [];
   List midStayName = [];
+  RxBool midstayTileEnable = false.obs;
 
   ///* MidStayUpdate in process
   Future<ServiceSuccessModel> midStayUpdateProcess() async {
@@ -269,6 +306,17 @@ class CartDetailsController extends GetxController with CartService {
       submitEnable.value = true;
       totalServices.add(_midStayUpdateModel);
       CustomSnackBar.success("Mid Stay added");
+
+      midStayPrice.clear();
+      midStayQty.clear();
+      midStayName.clear();
+      midStayArray.clear();
+
+      for (var e in priceController.priceListModel.midCleanings) {
+        midStayArray.add(0);
+      }
+
+      midstayTileEnable.value = false;
 
       _isUpdateLoading.value = false;
       update();
@@ -290,6 +338,8 @@ class CartDetailsController extends GetxController with CartService {
   List productAndBundleQty = [];
   List productAndBundleName = [];
 
+  RxBool productAndBundleTileEnable = false.obs;
+
   ///* ProductAndBundleUpdate in process
   Future<ServiceSuccessModel> productAndBundleUpdateProcess() async {
     _isUpdateLoading.value = true;
@@ -299,7 +349,9 @@ class CartDetailsController extends GetxController with CartService {
       "qty": productAndBundleQty,
       "name": productAndBundleName
     };
-    await productAndBundleUpdateProcessApi(body: inputBody, orderId: shoppingCartController.orderId.toString()).then((value) {
+    await productAndBundleUpdateProcessApi(
+            body: inputBody, orderId: shoppingCartController.orderId.toString())
+        .then((value) {
       _productAndBundleUpdateModel = value!;
 
       onlyLineSelected++;
@@ -308,6 +360,16 @@ class CartDetailsController extends GetxController with CartService {
 
       CustomSnackBar.success("Products & Bundles added");
 
+      productAndBundlePrice.clear();
+      productAndBundleQty.clear();
+      productAndBundleName.clear();
+      productArray.clear();
+
+      for (var e in priceController.priceListModel.products) {
+        productArray.add(0);
+      }
+
+      productAndBundleTileEnable.value = false;
       _isUpdateLoading.value = false;
       update();
     }).catchError((onError) {
@@ -326,6 +388,7 @@ class CartDetailsController extends GetxController with CartService {
   List optionalsPrice = [];
   List optionalsQty = [];
   List optionalsName = [];
+  RxBool otherServiceTileEnable = false.obs;
 
   ///* OthersUpdate in process
   Future<ServiceSuccessModel> optionalsUpdateProcess() async {
@@ -337,7 +400,9 @@ class CartDetailsController extends GetxController with CartService {
       "name": optionalsName,
       // "order_id": shoppingCartController.orderId
     };
-    await othersUpdateProcessApi(body: inputBody, orderId: shoppingCartController.orderId.toString()).then((value) {
+    await othersUpdateProcessApi(
+            body: inputBody, orderId: shoppingCartController.orderId.toString())
+        .then((value) {
       _othersUpdateModel = value!;
 
       onlyLineSelected++;
@@ -345,6 +410,17 @@ class CartDetailsController extends GetxController with CartService {
       totalServices.add(_othersUpdateModel);
 
       CustomSnackBar.success("Optional Extras added");
+
+      optionalsPrice.clear();
+      optionalsQty.clear();
+      optionalsName.clear();
+      optionalsArray.clear();
+
+      for (var e in priceController.priceListModel.bundles) {
+        optionalsArray.add(0);
+      }
+
+      otherServiceTileEnable.value = false;
 
       _isUpdateLoading.value = false;
       update();
