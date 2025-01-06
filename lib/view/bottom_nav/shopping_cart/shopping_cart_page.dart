@@ -71,6 +71,7 @@ class ShoppingCartPage extends StatelessWidget {
                     name: data.property.newContactName,
                     phoneNumber: data.property.newContactNumber,
                     initialDate: date,
+                    id: data.id.toString(),
                   ));
                 });
                 controller.selectedIndex.value = -1;

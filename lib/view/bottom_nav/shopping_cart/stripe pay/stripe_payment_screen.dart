@@ -1,6 +1,7 @@
 import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../backend/model/my_property/cart_index_model.dart';
 import '../../../../controller/bottom_nav/cart_details_controller.dart';
 import '../../../../controller/bottom_nav/shopping_cart_controller.dart';
 import '../../../../controller/bottom_nav/stripe_payment_controller.dart';
@@ -8,11 +9,25 @@ import '../../../../utils/basic_screen_imports.dart';
 import '../../../../utils/strings.dart';
 import '../../../../widgets/text_labels/title_heading5_widget.dart';
 
-class StripePaymentScreen extends StatelessWidget {
-  StripePaymentScreen({super.key});
+class StripePaymentScreen extends StatefulWidget {
+  const StripePaymentScreen({super.key});
 
+  @override
+  State<StripePaymentScreen> createState() => _StripePaymentScreenState();
+}
+
+class _StripePaymentScreenState extends State<StripePaymentScreen> {
   final controller = Get.put(StripePaymentController());
+
   final DateTime selectedDate = Get.find<ShoppingCartController>().selectedDateTime.value;
+  late final List<Item> items;
+
+  @override
+  void initState() {
+    items = Get.find<ShoppingCartController>().cartIndexModel.carts.firstWhere((cart) => cart.id.toString() == Get.arguments.toString()).items;
+    debugPrint(items.length.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +49,56 @@ class StripePaymentScreen extends StatelessWidget {
                 right: Dimensions.paddingSizeHorizontal * .5,
               ),
               children: [
+
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius),
+                    color: Theme.of(context).primaryColor.withOpacity(.2)
+                  ),
+                  child: Column(children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: TitleHeading3Widget(text: Strings.name)),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: mainSpaceBet,
+                            children: [
+                              TitleHeading3Widget(text: Strings.quantity),
+                              TitleHeading3Widget(text: Strings.price),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    ...List.generate(items.length, (i) {
+                      return Row(
+                        mainAxisAlignment: mainSpaceBet,
+                        children: [
+                          Expanded(
+                              child: TitleHeading4Widget(
+                                  text: items[i].itemName)),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 26, right: 10),
+                              child: Row(
+                                mainAxisAlignment: mainSpaceBet,
+                                children: [
+                                  TitleHeading4Widget(
+                                      text: items[i].itemQty.toString()),
+                                  TitleHeading4Widget(
+                                      text: "€${items[i].itemPrice.toStringAsFixed(2)}"),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                  ]),
+                ),
 
                 Visibility(
                     visible: checkDate(selectedDate),

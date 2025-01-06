@@ -29,6 +29,7 @@ class Cart {
   final DateTime createdAt;
   final DateTime updatedAt;
   final Property property;
+  final List<Item> items;
 
   Cart({
     required this.id,
@@ -39,6 +40,7 @@ class Cart {
     required this.createdAt,
     required this.updatedAt,
     required this.property,
+    required this.items,
   });
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
@@ -50,6 +52,50 @@ class Cart {
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
     property: Property.fromJson(json["property"]),
+    items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+  );
+}
+
+
+class Item {
+  final int id;
+  final int cartId;
+  final dynamic propertyId;
+  final String itemName;
+  final double itemPrice;
+  final int itemQty;
+  final String rowSum;
+  final dynamic quantity;
+  final dynamic attributes;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Item({
+    required this.id,
+    required this.cartId,
+    required this.propertyId,
+    required this.itemName,
+    required this.itemPrice,
+    required this.itemQty,
+    required this.rowSum,
+    required this.quantity,
+    required this.attributes,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
+    id: json["id"],
+    cartId: json["cart_id"],
+    propertyId: json["property_id"],
+    itemName: json["item_name"],
+    itemPrice: json["item_price"].toDouble(),
+    itemQty: json["item_qty"],
+    rowSum: json["row_sum"],
+    quantity: json["quantity"],
+    attributes: json["attributes"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
   );
 }
 
