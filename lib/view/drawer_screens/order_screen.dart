@@ -39,6 +39,14 @@ class OrderScreen extends StatelessWidget {
   }
 
   _listTile(BuildContext context, Datum data, int index) {
+    double total = 0;
+    for (var e in data.details) {
+      debugPrint(e.itemName);
+      debugPrint(e.price);
+      debugPrint(e.qty);
+      debugPrint("--------------");
+      total = total+ double.parse(e.price);
+    }
     return Card(
       color: CustomColor.secondaryLightColor.withOpacity(.05),
       shape: RoundedRectangleBorder(
@@ -67,7 +75,7 @@ class OrderScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       TitleHeading3Widget(
-                        text: "€${data.total.toStringAsFixed(2)}",
+                        text: "€${total.toStringAsFixed(2)}",
                         textAlign: TextAlign.center,
                       ),
                     ],
