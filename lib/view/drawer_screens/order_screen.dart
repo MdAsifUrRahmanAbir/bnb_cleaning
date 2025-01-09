@@ -75,7 +75,7 @@ class OrderScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       TitleHeading3Widget(
-                        text: "€${total.toStringAsFixed(2)}",
+                        text: "£${data.total.toStringAsFixed(2)}",
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -148,7 +148,7 @@ class OrderScreen extends StatelessWidget {
                                       TitleHeading4Widget(
                                           text: data.details[i].qty),
                                       TitleHeading4Widget(
-                                          text: "€${data.details[i].price}"),
+                                          text: "£${data.details[i].price}"),
                                     ],
                                   ),
                                 ),

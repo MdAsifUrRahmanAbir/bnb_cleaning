@@ -16,9 +16,9 @@ class StripePaymentController extends GetxController with CartService {
 
   final formKey = GlobalKey<FormState>();
 
-  void confirm() async {
+  void confirm(String total) async {
     if (formKey.currentState!.validate()) {
-      await orderProcess();
+      await orderProcess(total);
     }
   }
 
@@ -30,7 +30,7 @@ class StripePaymentController extends GetxController with CartService {
   bool get isLoading => _isLoading.value;
 
   ///* OthersUpdate in process
-  Future orderProcess() async {
+  Future orderProcess(String total) async {
     _isLoading.value = true;
     update();
 
@@ -39,7 +39,8 @@ class StripePaymentController extends GetxController with CartService {
       "card_number": cardNumberController.text,
       "exp_month": expMonthController.text,
       "exp_year": expYearController.text,
-      "cvc": cvcController.text
+      "cvc": cvcController.text,
+      "total": total
     };
 
     await orderProcessApi(body: inputBody).then((value) {

@@ -89,7 +89,7 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
                                   TitleHeading4Widget(
                                       text: items[i].itemQty.toString()),
                                   TitleHeading4Widget(
-                                      text: "€${items[i].itemPrice.toStringAsFixed(2)}"),
+                                      text: "£${items[i].itemPrice.toStringAsFixed(2)}"),
                                 ],
                               ),
                             ),
@@ -184,7 +184,9 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
                 Obx(() => controller.isLoading
                     ? const CustomLoadingAPI()
                     : PrimaryButton(
-                        title: "${Strings.payNow} (£${totalPrice.toStringAsFixed(2)})", onPressed: controller.confirm))
+                        title: "${Strings.payNow} (£${totalPrice.toStringAsFixed(2)})", onPressed: (){
+                  controller.confirm(totalPrice.toStringAsFixed(2));
+                }))
               ]),
         )));
   }
