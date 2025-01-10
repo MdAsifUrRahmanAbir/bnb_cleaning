@@ -156,6 +156,8 @@ class OrderScreen extends StatelessWidget {
                             ],
                           );
                         }),
+                        const Divider(),
+                        const TitleHeading4Widget(text: "As the selected date is Today, Tomorrow or Sunday, 20% extra is applied over the payment.", color: Colors.red,)
                       ]),
                     ),
                   )
