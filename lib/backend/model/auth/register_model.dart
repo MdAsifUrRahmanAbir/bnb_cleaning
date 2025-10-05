@@ -82,8 +82,8 @@ class Pivot {
   });
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
-    modelId: json["model_id"],
-    roleId: json["role_id"],
+    modelId: int.parse(json["model_id"].toString()),
+    roleId: int.parse(json["role_id"].toString()),
     modelType: json["model_type"],
   );
 }

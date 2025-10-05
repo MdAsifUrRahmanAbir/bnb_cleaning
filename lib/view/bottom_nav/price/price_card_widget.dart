@@ -44,7 +44,7 @@ class PriceCardWidget extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                       image: DecorationImage(
                         image: NetworkImage(
-                          "${ApiEndpoint.mainDomain}/public/assets/images/$image"
+                          "${ApiEndpoint.mainDomain}/assets/images/$image"
                         ),
                         fit: BoxFit.fill
                       ),

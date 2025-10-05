@@ -6,7 +6,8 @@ class ApiEndpoint {
   // static String stripeSecretKey = "sk_test_51HTXM9LlJ7MCoKyltM3b5gAMjLVuZ77xzuQj6a29yTEGvfgBv92UQH6wYyjDTYPpIAloUN6TRET3c2Tk6MQsciec00HVhkR7wv";
   // static String stripePublishKey = "pk_test_51HTXM9LlJ7MCoKylcyIDBrswA5HHnaZe6MsYi82GIthVYKKK5pIc4ZVT9JOtvgwy5XVcJpdaq7BnYcl1LF9XqcS500kwqFD5tC";
 
-  static String mainDomain = "https://api.uniobe.com";
+  // static String mainDomain = "https://api.uniobe.com";
+  static String mainDomain = "https://mbl-apssszy.bnbcleaning.london";
   static String baseUrl = "$mainDomain/api";
 
   ///-> Auth

@@ -25,7 +25,7 @@ class HelpScreen extends StatelessWidget {
                 "send us an email to contact@bnbcleaning.london"),
             verticalSpace(15),
             Image.network(
-                "${ApiEndpoint.mainDomain}/public/assets/images/help.png")
+                "${ApiEndpoint.mainDomain}/assets/images/help.png")
           ],
         )));
   }
