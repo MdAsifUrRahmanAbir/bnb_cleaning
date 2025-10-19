@@ -52,7 +52,7 @@ class AirbnbCleaning {
     id: json["id"],
     categoryName: json["category_name"] ?? "",
     title: json["title"],
-    price: double.parse(json["price"].toString()).toDouble(),
+    price: double.parse(json["price"].toString()),
     image: json["image"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),

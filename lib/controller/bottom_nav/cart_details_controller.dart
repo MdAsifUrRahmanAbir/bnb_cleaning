@@ -49,6 +49,7 @@ class CartDetailsController extends GetxController with CartService {
 
     await cartDateUpdateProcessApi(id.toString(), body: {"date": date})
         .then((value) {
+          print(value);
       _cartDateUpdateModel = value!;
 
       _isDateUpdateLoading.value = false;

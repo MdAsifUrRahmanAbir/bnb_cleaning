@@ -61,8 +61,10 @@ mixin CartService{
       mapResponse = await ApiMethod(isBasic: false).put(
         "${ApiEndpoint.cartDateUpdateURL}/$id/update-date",
           body,
+        showResult: true,
         code: 200
       );
+      print(mapResponse);
       if (mapResponse != null) {
         CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
         CustomSnackBar.success("Date selected successfully!");

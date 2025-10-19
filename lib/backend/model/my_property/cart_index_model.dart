@@ -45,9 +45,9 @@ class Cart {
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
     id: json["id"],
-    userId: json["user_id"],
+    userId: int.parse(json["user_id"].toString()),
     total: json["total"],
-    propertyId: json["property_id"],
+    propertyId: int.parse(json["property_id"].toString()),
     // date: DateTime.parse(json["date"]),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
@@ -144,7 +144,7 @@ class Property {
 
   factory Property.fromJson(Map<String, dynamic> json) => Property(
     id: json["id"],
-    userId: json["user_id"],
+    userId: int.parse(json["user_id"].toString()),
     identifier: json["identifier"],
     propertyType: json["property_type"],
     description: json["description"] ?? "",
@@ -159,7 +159,7 @@ class Property {
     city: json["city"],
     postcode: json["postcode"],
     country: json["country"],
-    rowStatus: json["row_status"],
+    rowStatus: int.parse(json["row_status"].toString()),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
