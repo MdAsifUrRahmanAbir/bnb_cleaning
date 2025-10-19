@@ -13,6 +13,7 @@ final log = logger(ApiMethod);
 
 Map<String, String> basicHeaderInfo() {
   return {
+    'User-Agent': 'Mozilla/5.0 (Mobile; FlutterApp)',
     HttpHeaders.acceptHeader: "application/json",
     HttpHeaders.contentTypeHeader: "application/json",
   };
@@ -22,6 +23,7 @@ Future<Map<String, String>> bearerHeaderInfo() async {
   String accessToken = LocalStorage.getToken()!;
 
   return {
+    'User-Agent': 'Mozilla/5.0 (Mobile; FlutterApp)',
     HttpHeaders.acceptHeader: "application/json",
     HttpHeaders.contentTypeHeader: "application/json",
     HttpHeaders.authorizationHeader: "Bearer $accessToken",

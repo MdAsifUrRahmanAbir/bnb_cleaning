@@ -179,7 +179,7 @@ class DateData {
   });
 
   factory DateData.fromJson(Map<String, dynamic> json) => DateData(
-    id: json["id"],
+    id: int.parse(json["id"].toString()),
     dateValue: json["date_value"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
