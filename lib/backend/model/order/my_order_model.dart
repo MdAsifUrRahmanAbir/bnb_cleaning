@@ -15,8 +15,8 @@ class MyOrderModel {
 
 class Datum {
   final int id;
-  final int orderNo;
-  final int userId;
+  // final int orderNo;
+  // final int userId;
   final String propertyName;
   final double total;
   final double incTotal;
@@ -28,8 +28,8 @@ class Datum {
 
   Datum({
     required this.id,
-    required this.orderNo,
-    required this.userId,
+    // required this.orderNo,
+    // required this.userId,
     required this.propertyName,
     required this.total,
     required this.incTotal,
@@ -42,10 +42,10 @@ class Datum {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
-    orderNo: json["order_no"],
-    userId: json["user_id"],
+    // orderNo: json["order_no"],
+    // userId: json["user_id"],
     propertyName: json["property_name"],
-    total: json["total"]?.toDouble(),
+    total: double.parse((json["total"].toString())).toDouble(),
     incTotal: (json["inc_total"] ?? 0).toDouble(),
     orderStatus: json["order_status"],
     orderDate: DateTime.parse(json["order_date"]),
@@ -57,7 +57,7 @@ class Datum {
 
 class Detail {
   final int id;
-  final int orderId;
+  // final int orderId;
   final String itemName;
   final String price;
   final String qty;
@@ -66,7 +66,7 @@ class Detail {
 
   Detail({
     required this.id,
-    required this.orderId,
+    // required this.orderId,
     required this.itemName,
     required this.price,
     required this.qty,
@@ -76,7 +76,7 @@ class Detail {
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
     id: json["id"],
-    orderId: json["order_id"],
+    // orderId: json["order_id"],
     itemName: json["item_name"],
     price: json["price"],
     qty: json["qty"],

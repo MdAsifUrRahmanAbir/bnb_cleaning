@@ -22,7 +22,7 @@ class CartIndexModel {
 
 class Cart {
   final int id;
-  final int userId;
+  // final int userId;
   final String total;
   final int propertyId;
   // final DateTime date;
@@ -33,7 +33,7 @@ class Cart {
 
   Cart({
     required this.id,
-    required this.userId,
+    // required this.userId,
     required this.total,
     required this.propertyId,
     // required this.date,
@@ -45,7 +45,7 @@ class Cart {
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
     id: json["id"],
-    userId: int.parse(json["user_id"].toString()),
+    // userId: int.parse(json["user_id"].toString()),
     total: json["total"],
     propertyId: int.parse(json["property_id"].toString()),
     // date: DateTime.parse(json["date"]),
@@ -86,11 +86,11 @@ class Item {
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
     id: json["id"],
-    cartId: json["cart_id"],
+    cartId: int.parse((json["cart_id"].toString())),
     propertyId: json["property_id"],
     itemName: json["item_name"],
-    itemPrice: json["item_price"].toDouble(),
-    itemQty: json["item_qty"],
+    itemPrice: double.parse((json["item_price"].toString())).toDouble(),
+    itemQty: int.parse((json["item_qty"].toString())).toInt(),
     rowSum: json["row_sum"],
     quantity: json["quantity"],
     attributes: json["attributes"],
