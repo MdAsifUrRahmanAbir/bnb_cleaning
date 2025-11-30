@@ -199,8 +199,7 @@ bool checkDate(DateTime selectedDate) {
 
   // Check if selectedDate is Sunday, today, or tomorrow
   if (selectedDate.weekday == DateTime.sunday ||
-      selectedDate == today ||
-      selectedDate == tomorrow) {
+      selectedDate == today ) {
     return true;
   }
 

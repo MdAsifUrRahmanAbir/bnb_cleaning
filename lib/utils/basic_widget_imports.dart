@@ -10,4 +10,3 @@ export 'custom_color.dart';
 export 'custom_style.dart';
 export 'dimensions.dart';
 export 'size.dart';
-export 'package:flutter_screenutil/flutter_screenutil.dart';

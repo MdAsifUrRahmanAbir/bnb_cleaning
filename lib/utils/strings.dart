@@ -18,7 +18,7 @@ class Strings {
   static String confirm = "Confirm";
   static String payNow = "Pay Now";
   static String placeOrder = "Place Order";
-  static String placedOrder = "My Order";
+  static String placedOrders = "My Orders";
   static String confirmPassword = "Confirm Password";
 
   static String forgotPassword = "Forgot Password?";

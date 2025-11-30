@@ -47,6 +47,12 @@ class OrderScreen extends StatelessWidget {
       debugPrint("--------------");
       total = total+ double.parse(e.price);
     }
+
+    double calTotal = 0;
+    for (var e in data.details) {
+      calTotal = calTotal + (double.parse(e.price) * int.parse(e.qty));
+    }
+    print(calTotal);
     return Card(
       color: CustomColor.secondaryLightColor.withOpacity(.05),
       shape: RoundedRectangleBorder(
@@ -156,8 +162,12 @@ class OrderScreen extends StatelessWidget {
                             ],
                           );
                         }),
-                        const Divider(),
-                        const TitleHeading4Widget(text: "As the selected date is Today, Tomorrow or Sunday, 20% extra is applied over the payment.", color: Colors.red,)
+                        if(data.total > calTotal) ...[ const Divider(),
+                        TitleHeading4Widget(
+                            text: "As the selected date is today or Sunday, 20% extra has been applied over the payment.",
+                            color: Colors.red,)
+                      ]
+
                       ]),
                     ),
                   )

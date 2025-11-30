@@ -138,6 +138,7 @@ class ApiMethod {
     int duration = 120,
     bool showResult = true,
     VoidCallback? onTimeOut,
+    VoidCallback? onError,
   }) async {
     try {
       log.i(
@@ -180,7 +181,12 @@ class ApiMethod {
             'unknown error hitted in status code ${jsonDecode(response.body)}');
 
         // ErrorResponse res = ErrorResponse.fromJson(jsonDecode(response.body));
-        CustomSnackBar.error(jsonDecode(response.body).toString());
+        if(onError != null){
+          onError();
+        }else{
+          CustomSnackBar.error(jsonDecode(response.body)["error"].toString());
+        }
+
 
         return null;
       }

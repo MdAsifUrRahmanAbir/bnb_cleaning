@@ -106,7 +106,7 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
             Visibility(
               visible: widget.optional.isNotEmpty,
               child: const TitleHeading5Widget(
-                text: "As the selected date is Today, Tomorrow or Sunday, 20% extra is applied over the payment.",
+                text: "If you select Today or Sunday for appointment, 20% extra will be applied over the payment.",
                 opacity: .4,
                 fontWeight: FontWeight.w300,
               ),

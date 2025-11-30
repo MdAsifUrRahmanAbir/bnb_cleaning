@@ -37,7 +37,7 @@ class DrawerWidget extends StatelessWidget {
         verticalSpace(Dimensions.marginSizeVertical * 1),
         ExpansionTile(
           leading: const Icon(Icons.shopping_cart_outlined),
-          title: TitleHeading3Widget(text: Strings.placedOrder),
+          title: TitleHeading3Widget(text: Strings.placedOrders),
           children: [
             ListTile(
               dense: true,
@@ -99,24 +99,24 @@ class DrawerWidget extends StatelessWidget {
             )),
         DrawerTileButtonWidget(
           onTap: () {
-            Get.to(const HelpScreen());
+            Get.to( HelpScreen());
           },
           text: Strings.helpCenter,
           icon: Icons.help_outline_rounded,
         ),
-        DrawerTileButtonWidget(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WebViewScreen(
-                          appTitle: Strings.faq,
-                          link: "https://app.bnbcleaning.london/user/page/faq",
-                        )));
-          },
-          text: Strings.faq,
-          icon: Icons.info_outline,
-        ),
+        // DrawerTileButtonWidget(
+        //   onTap: () {
+        //     Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => WebViewScreen(
+        //                   appTitle: Strings.faq,
+        //                   link: "https://pro.bnbcleaning.london/user/page/faq",
+        //                 )));
+        //   },
+        //   text: Strings.faq,
+        //   icon: Icons.info_outline,
+        // ),
         DrawerTileButtonWidget(
           onTap: () {
             DialogHelper.showAlertDialog(context,
@@ -155,15 +155,6 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              // Positioned(
-              //   top: 0,
-              //   left: 1,
-              //   right: 1,
-              //   child: AppIconWidget(
-              //     height: MediaQuery.sizeOf(context).height * .06,
-              //     width: MediaQuery.sizeOf(context).width * .4,
-              //   ),
-              // ),
             ],
           ),
         ),

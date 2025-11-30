@@ -48,7 +48,7 @@ class AddSubtractWidgetState extends State<AddSubtractWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade400),
         borderRadius: BorderRadius.circular(8.0),
@@ -63,7 +63,7 @@ class AddSubtractWidgetState extends State<AddSubtractWidget> {
           ),
           // Quantity Display
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Text(
               _quantity.toString(),
               style: const TextStyle(fontSize: 18),

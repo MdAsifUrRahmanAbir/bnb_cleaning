@@ -376,7 +376,7 @@ class CartDetailScreen extends StatelessWidget {
                                         controller.onLineHireSelected(true);
                                         // controller.lineHireForAirBnb.value = true;
                                         CustomSnackBar.error(
-                                            "For Line Hire minimum value is 40 Euro");
+                                            "For Line Hire, minimum order value is 40 Pound.");
                                       }
                                     } else {
                                       for (var i = 0;
@@ -587,7 +587,7 @@ class CartDetailScreen extends StatelessWidget {
                 controller.productAndBundleTileEnable.value =
                     !controller.productAndBundleTileEnable.value;
               },
-              title: TitleHeading3Widget(text: Strings.productsAndBundles),
+              title: TitleHeading3Widget(text: Strings.products),
               trailing: Icon(controller.productAndBundleTileEnable.value
                   ? Icons.arrow_drop_up
                   : Icons.arrow_drop_down),
@@ -730,7 +730,7 @@ class CartDetailScreen extends StatelessWidget {
                 controller.otherServiceTileEnable.value =
                     !controller.otherServiceTileEnable.value;
               },
-              title: TitleHeading3Widget(text: Strings.productsAndBundles),
+              title: TitleHeading3Widget(text: Strings.optionalExtras),
               trailing: Icon(controller.otherServiceTileEnable.value
                   ? Icons.arrow_drop_up
                   : Icons.arrow_drop_down),
@@ -745,7 +745,7 @@ class CartDetailScreen extends StatelessWidget {
                             priceController.priceListModel.extras.length,
                             (index) => Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 4),
+                                      horizontal: 8, vertical: 4),
                                   child: Row(
                                     children: [
                                       Expanded(
@@ -763,6 +763,7 @@ class CartDetailScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      horizontalSpace(5),
                                       AddSubtractWidget(
                                         initialValue: 0,
                                         onChanged: (Map value) {
@@ -1319,7 +1320,7 @@ class CartDetailScreen extends StatelessWidget {
                           controller.onLineHireSelected(true);
                           // controller.lineHireForAirBnb.value = true;
                           CustomSnackBar.error(
-                              "For Line Hire minimum value is 40 Euro");
+                              "For Line Hire, minimum order value is 40 Pound.");
                         }
                       } else {
                         for (var i = 0;

@@ -39,8 +39,8 @@ class PricePage extends StatelessWidget {
                     controller.priceListModel.products, 2),
               verticalSpace(10),
 
-              _typeWidget<Bundle>(context, Strings.bundles,
-                    controller.priceListModel.bundles, 2),
+              // _typeWidget<Bundle>(context, Strings.bundles,
+              //       controller.priceListModel.bundles, 2),
               ]));
   }
 

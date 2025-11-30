@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -27,32 +26,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ScreenUtilInit(
-      designSize: const Size(414, 896),
-      builder: (_, child) => GetMaterialApp(
-        title: Strings.appName,
-        debugShowCheckedModeBanner: false,
-        theme: Themes.light,
-        darkTheme: Themes.dark,
-        themeMode: Themes().theme,
-        initialRoute: Routes.splashScreen,
-        initialBinding: BindingsBuilder(
-              () {
-            /// if need
-          },
-        ),
-        getPages: Pages.list,
-        navigatorKey: Get.key,
-        builder: (context, widget) {
-          ScreenUtil.init(context);
-          return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: widget!,
-              ));
+    return GetMaterialApp(
+      title: Strings.appName,
+      debugShowCheckedModeBanner: false,
+      theme: Themes.light,
+      darkTheme: Themes.dark,
+      themeMode: Themes().theme,
+      initialRoute: Routes.splashScreen,
+      initialBinding: BindingsBuilder(
+            () {
+          /// if need
         },
       ),
+      getPages: Pages.list,
+      navigatorKey: Get.key,
+      builder: (context, widget) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: widget!,
+            ));
+      },
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Dimensions {
   //screen size
@@ -6,36 +5,36 @@ class Dimensions {
   static double tabletScreenWidth = 1100;
 
   // padding and margin
-  static double paddingSizeHorizontal = 24.00.w;
-  static double paddingSizeVertical = 24.00.h;
+  static double paddingSizeHorizontal = 24.00;
+  static double paddingSizeVertical = 24.00;
 
-  static double marginBetweenInputTitleAndBox = 8.h;
-  static double marginBetweenInputBox = 16.h;
-  static double marginSizeHorizontal = 24.00.w;
-  static double marginSizeVertical = 24.00.h;
-  static double marginSizeBetweenColumn = 16.00.w;
+  static double marginBetweenInputTitleAndBox = 8;
+  static double marginBetweenInputBox = 16;
+  static double marginSizeHorizontal = 24.00;
+  static double marginSizeVertical = 24.00;
+  static double marginSizeBetweenColumn = 16.00;
 
   // widget size
-  static double buttonHeight = 56.00.h;
-  static double inputBoxHeight = 56.00.h;
-  static double appBarHeight = 64.4.h;
+  static double buttonHeight = 56.00;
+  static double inputBoxHeight = 56.00;
+  static double appBarHeight = 64.4;
 
-  static double iconSizeSmall = 8.00.h;
-  static double iconSizeDefault = 16.00.h;
-  static double iconSizeLarge = 24.00.h;
+  static double iconSizeSmall = 8.00;
+  static double iconSizeDefault = 16.00;
+  static double iconSizeLarge = 24.00;
 
   // typography size
-  static double headingTextSize1 = 24.00.sp;
-  static double headingTextSize2 = 20.00.sp;
-  static double headingTextSize3 = 16.00.sp;
-  static double headingTextSize4 = 14.00.sp;
-  static double headingTextSize5 = 12.00.sp;
-  static double headingTextSize6 = 10.00.sp;
+  static double headingTextSize1 = 24.00;
+  static double headingTextSize2 = 20.00;
+  static double headingTextSize3 = 16.00;
+  static double headingTextSize4 = 14.00;
+  static double headingTextSize5 = 12.00;
+  static double headingTextSize6 = 10.00;
 
   // radius size
-  static double radius = 10.00.r;
+  static double radius = 10.00;
 
   // default height and width size
-  static double heightSize = 12.00.h;
-  static double widthSize = 10.00.w;
+  static double heightSize = 12.00;
+  static double widthSize = 10.00;
 }

@@ -7,7 +7,8 @@ class ApiEndpoint {
   // static String stripePublishKey = "pk_test_51HTXM9LlJ7MCoKylcyIDBrswA5HHnaZe6MsYi82GIthVYKKK5pIc4ZVT9JOtvgwy5XVcJpdaq7BnYcl1LF9XqcS500kwqFD5tC";
 
   // static String mainDomain = "https://api.uniobe.com";
-  static String mainDomain = "https://mbl-apssszy.bnbcleaning.london";
+  // static String mainDomain = "https://mbl-apssszy.bnbcleaning.london";
+  static String mainDomain = "https://pro.bnbcleaning.london";
   static String baseUrl = "$mainDomain/api";
 
   ///-> Auth

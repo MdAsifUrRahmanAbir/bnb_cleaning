@@ -103,7 +103,7 @@ class Property {
   final int id;
   final int userId;
   final String identifier;
-  final String propertyType;
+  // final String propertyType;
   final String description;
   final String newContactName;
   final String newContactNumber;
@@ -124,7 +124,7 @@ class Property {
     required this.id,
     required this.userId,
     required this.identifier,
-    required this.propertyType,
+    // required this.propertyType,
     required this.description,
     required this.newContactName,
     required this.newContactNumber,
@@ -146,19 +146,19 @@ class Property {
     id: json["id"],
     userId: int.parse(json["user_id"].toString()),
     identifier: json["identifier"],
-    propertyType: json["property_type"],
+    // propertyType: json["property_type"] ?? ,
     description: json["description"] ?? "",
-    newContactName: json["new_contact_name"],
-    newContactNumber: json["new_contact_number"],
+    newContactName: json["new_contact_name"] ?? "",
+    newContactNumber: json["new_contact_number"] ?? "",
     accessInformation: json["access_information"],
     addressApartment: json["address_apartment"],
     addressNumber: json["address_number"],
     addressStreet: json["address_street"],
-    address: json["address"],
-    access: json["access"],
-    city: json["city"],
-    postcode: json["postcode"],
-    country: json["country"],
+    address: json["address"] ?? "",
+    access: json["access"] ?? "",
+    city: json["city"] ?? "",
+    postcode: json["postcode"] ?? "",
+    country: json["country"] ?? "",
     rowStatus: int.parse(json["row_status"].toString()),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
