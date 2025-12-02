@@ -8,9 +8,11 @@ import '../../../backend/utils/no_data_widget.dart';
 import '../../../controller/bottom_nav/edit_properties_controller.dart';
 import '../../../controller/bottom_nav/properties_controller.dart';
 import '../../../controller/bottom_nav/shopping_cart_controller.dart';
+import '../../../controller/profile/profile_controller.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/basic_screen_imports.dart';
 import '../../../utils/strings.dart';
+import '../../../widgets/dialog_helper.dart';
 import 'property_card_widget.dart';
 
 class PropertiesScreen extends StatelessWidget {
@@ -53,7 +55,7 @@ class PropertiesScreen extends StatelessWidget {
         child: Stack(
       children: [
         Obx(() {
-          return controller.isLoading || controller.isCartSaveLoading
+          return controller.isLoading || controller.isCartSaveLoading || controller.isDeleteLoading
               ? const CustomLoadingAPI()
               : controller.isError.value
                   ? const NoDataWidget()
@@ -92,6 +94,25 @@ class PropertiesScreen extends StatelessWidget {
                                         name: data.identifier,
                                         price: '',
                                         qty: '1');
+                                  },
+                              onTapDelete: () {
+                                    print("ID ${data.id}");
+                                    print("User ID ${data.userId}");
+
+                                    print("Profile Email ${Get.find<ProfileController>().profileModel.user.email}");
+                                    print("Profile ID ${Get.find<ProfileController>().profileModel.user.id}");
+
+                                DialogHelper.showAlertDialog(context,
+                                    title: Strings.delete,
+                                    isLoading: controller.isDeleteLoading,
+                                    content: Strings.areYouSure, onTap: () async {
+
+                                  Get.close(1);
+                                      controller.propertyDelete(
+                                          id: data.id.toString());
+                                });
+
+
                                   },
                                   title: data.identifier,
                                   subTitle: data.propertyType,

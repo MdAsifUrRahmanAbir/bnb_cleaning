@@ -32,17 +32,20 @@ class AdditionalInfo {
 }
 
 class User {
+  String id;
   String name;
   String email;
   String profilePhotoPath;
 
   User({
+    required this.id,
     required this.name,
     required this.email,
     required this.profilePhotoPath,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json["id"]?.toString() ?? "",
     name: json["name"] ?? "",
     email: json["email"] ?? "",
     profilePhotoPath: json["profile_photo_path"] ?? "",

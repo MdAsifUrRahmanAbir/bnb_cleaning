@@ -52,6 +52,28 @@ mixin DashboardService{
     return null;
   }
 
+  ///* Get MyProperty api services
+  Future<CommonSuccessModel?> myPropertyDeleteApi({required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        ApiEndpoint.myPropertyDeleteURL,
+        body,
+        showResult: true,
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        CustomSnackBar.success(result.message.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from MyProperty api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
   ///* MyPropertySave api services
   Future<MyPropertySaveModel?> myPropertySaveProcessApi(
       {required Map<String, dynamic> body}) async {

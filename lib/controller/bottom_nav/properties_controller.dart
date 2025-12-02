@@ -79,4 +79,36 @@ class PropertiesController extends GetxController with DashboardService {
     update();
     return _cartSaveModel;
   }
+
+
+  /// ------------------------------------- >>
+  final _isDeleteLoading = false.obs;
+  bool get isDeleteLoading => _isDeleteLoading.value;
+
+  late CommonSuccessModel _propertyDeleteModel;
+  CommonSuccessModel get propertyDeleteModel => _propertyDeleteModel;
+
+  ///* CartSave in process
+  Future<CommonSuccessModel> propertyDelete(
+      {required String id}) async {
+    _isDeleteLoading.value = true;
+    update();
+
+    Map<String, dynamic> inputBody = {
+      'property_id': id,
+    };
+
+    await myPropertyDeleteApi(body: inputBody).then((value) {
+      _propertyDeleteModel = value!;
+      myPropertyProcess();
+
+      _isDeleteLoading.value = false;
+      update();
+    }).catchError((onError) {
+      log.e(onError);
+    });
+    _isDeleteLoading.value = false;
+    update();
+    return _propertyDeleteModel;
+  }
 }

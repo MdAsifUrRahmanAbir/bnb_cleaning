@@ -9,11 +9,12 @@ class PropertyCard extends StatelessWidget {
       required this.subTitle,
       required this.details,
       required this.onTapCart,
+      required this.onTapDelete,
       required this.onTapEdit,
       this.cartAdded = false});
 
   final String title, subTitle, details;
-  final VoidCallback onTapCart, onTapEdit;
+  final VoidCallback onTapCart, onTapEdit, onTapDelete;
   final bool cartAdded;
 
   @override
@@ -31,20 +32,42 @@ class PropertyCard extends StatelessWidget {
           children: <Widget>[
             Align(
               alignment: Alignment.topLeft,
-              child: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Theme.of(context).primaryColor)),
-                child: GestureDetector(
-                  onTap: onTapEdit,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.edit,
-                      color: Theme.of(context).primaryColor,
-                    ),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Theme.of(context).primaryColor)),
+                    child: GestureDetector(
+                      onTap: onTapEdit,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.edit,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ).paddingZero,
                   ),
-                ).paddingZero,
+
+                  horizontalSpace(10),
+
+                  Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.red)),
+                    child: GestureDetector(
+                      onTap: onTapDelete,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ).paddingZero,
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 8.0),
