@@ -36,10 +36,11 @@ class StripePaymentController extends GetxController with CartService {
 
 
     Map<String, String> inputBody = {
-      "card_number": cardNumberController.text,
-      "exp_month": expMonthController.text,
-      "exp_year": expYearController.text,
-      "cvc": cvcController.text,
+      // "card_number": cardNumberController.text,
+      // "exp_month": expMonthController.text,
+      // "exp_year": expYearController.text,
+      // "cvc": cvcController.text,
+      "token": "87896789897979989iou896",
       "total": total
     };
 
