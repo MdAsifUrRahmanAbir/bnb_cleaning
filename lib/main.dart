@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,6 +10,8 @@ import 'utils/strings.dart';
 import 'utils/theme.dart';
 
 void main() async{
+
+
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
@@ -16,6 +19,9 @@ void main() async{
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+
+  Stripe.publishableKey = "pk_test_51MKjbqCzST7grXFxFSBYoBOCTUnF22C4X1SCPWWrNUA2USehkTkimN9aVQoxNjmDwYeDazNodFBovOKTPFQtpzYh00HnHdi6El";
+  await Stripe.instance.applySettings();
 
   runApp(const MyApp());
 }
