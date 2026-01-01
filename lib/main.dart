@@ -20,7 +20,8 @@ void main() async{
     DeviceOrientation.portraitUp,
   ]);
 
-  Stripe.publishableKey = "pk_test_51MKjbqCzST7grXFxFSBYoBOCTUnF22C4X1SCPWWrNUA2USehkTkimN9aVQoxNjmDwYeDazNodFBovOKTPFQtpzYh00HnHdi6El";
+  // Stripe.publishableKey = "pk_test_51MKjbqCzST7grXFxFSBYoBOCTUnF22C4X1SCPWWrNUA2USehkTkimN9aVQoxNjmDwYeDazNodFBovOKTPFQtpzYh00HnHdi6El";
+  Stripe.publishableKey = "pk_test_51HTXM9LlJ7MCoKylcyIDBrswA5HHnaZe6MsYi82GIthVYKKK5pIc4ZVT9JOtvgwy5XVcJpdaq7BnYcl1LF9XqcS500kwqFD5tC";
   await Stripe.instance.applySettings();
 
   runApp(const MyApp());

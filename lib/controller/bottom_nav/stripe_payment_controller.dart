@@ -1,4 +1,5 @@
 import 'package:bnb_clean/backend/model/common/common_success_model.dart';
+import 'package:bnb_clean/controller/profile/profile_controller.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../backend/services/api_endpoint.dart';
@@ -70,6 +71,7 @@ class StripePaymentController extends GetxController with CartService {
       // "exp_year": expYearController.text,
       // "cvc": cvcController.text,
       "fullname": "Md Abir",
+      "user_id": Get.find<ProfileController>().profileModel.user.id,
       "payment_method_id": token,
       "total": total
     };
