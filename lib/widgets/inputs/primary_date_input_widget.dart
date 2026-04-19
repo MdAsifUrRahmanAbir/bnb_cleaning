@@ -106,7 +106,7 @@ class _PrimaryDateInputWidgetState extends State<PrimaryDateInputWidget> {
             Visibility(
               visible: widget.optional.isNotEmpty,
               child: const TitleHeading5Widget(
-                text: "If you select Today or Sunday for appointment, 20% extra will be applied over the payment.",
+                text: "Same day and Sunday appointments will incur a 20% surcharge.",
                 opacity: .4,
                 fontWeight: FontWeight.w300,
               ),

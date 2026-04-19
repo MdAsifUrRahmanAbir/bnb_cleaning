@@ -35,47 +35,54 @@ class DrawerWidget extends StatelessWidget {
     return Column(
       children: AnimateList(children: [
         verticalSpace(Dimensions.marginSizeVertical * 1),
-        ExpansionTile(
-          leading: const Icon(Icons.shopping_cart_outlined),
-          title: TitleHeading3Widget(text: Strings.placedOrders),
-          children: [
-            ListTile(
-              dense: true,
-              onTap: () {
-                Get.to(OrderScreen(
-                    appTitle: Strings.past,
-                    endPoint: ApiEndpoint.pastOrderURL));
-              },
-              title: TitleHeading3Widget(text: Strings.past),
-            ),
-            ListTile(
-              dense: true,
-              onTap: () {
-                Get.to(OrderScreen(
-                    appTitle: Strings.today,
-                    endPoint: ApiEndpoint.todayOrderURL));
-              },
-              title: TitleHeading3Widget(text: Strings.today),
-            ),
-            ListTile(
-              dense: true,
-              onTap: () {
-                Get.to(OrderScreen(
-                    appTitle: Strings.tomorrow,
-                    endPoint: ApiEndpoint.tomorrowOrderURL));
-              },
-              title: TitleHeading3Widget(text: Strings.tomorrow),
-            ),
-            ListTile(
-              dense: true,
-              onTap: () {
-                Get.to(OrderScreen(
-                    appTitle: Strings.future,
-                    endPoint: ApiEndpoint.futureOrderURL));
-              },
-              title: TitleHeading3Widget(text: Strings.future),
-            ),
-          ],
+        // ExpansionTile(
+        //   leading: const Icon(Icons.shopping_cart_outlined),
+        //   title: TitleHeading3Widget(text: Strings.placedOrders),
+        //   children: [
+        //     ListTile(
+        //       dense: true,
+        //       onTap: () {
+        //         Get.to(OrderScreen(
+        //             appTitle: Strings.past,
+        //             endPoint: ApiEndpoint.pastOrderURL));
+        //       },
+        //       title: TitleHeading3Widget(text: Strings.past),
+        //     ),
+        //     ListTile(
+        //       dense: true,
+        //       onTap: () {
+        //         Get.to(OrderScreen(
+        //             appTitle: Strings.today,
+        //             endPoint: ApiEndpoint.todayOrderURL));
+        //       },
+        //       title: TitleHeading3Widget(text: Strings.today),
+        //     ),
+        //     ListTile(
+        //       dense: true,
+        //       onTap: () {
+        //         Get.to(OrderScreen(
+        //             appTitle: Strings.tomorrow,
+        //             endPoint: ApiEndpoint.tomorrowOrderURL));
+        //       },
+        //       title: TitleHeading3Widget(text: Strings.tomorrow),
+        //     ),
+        //     ListTile(
+        //       dense: true,
+        //       onTap: () {
+        //         Get.to(OrderScreen(
+        //             appTitle: Strings.future,
+        //             endPoint: ApiEndpoint.futureOrderURL));
+        //       },
+        //       title: TitleHeading3Widget(text: Strings.future),
+        //     ),
+        //   ],
+        // ),
+        DrawerTileButtonWidget(
+          onTap: () {
+            Get.toNamed(Routes.editPropertiesScreen);
+          },
+          text: Strings.profile,
+          icon: Icons.person,
         ),
         DrawerTileButtonWidget(
           onTap: () {

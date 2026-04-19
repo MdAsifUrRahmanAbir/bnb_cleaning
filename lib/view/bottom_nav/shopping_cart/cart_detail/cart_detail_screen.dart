@@ -767,6 +767,10 @@ class CartDetailScreen extends StatelessWidget {
                                       AddSubtractWidget(
                                         initialValue: 0,
                                         onChanged: (Map value) {
+                                          print(controller.priceController.priceListModel.bundles);
+                                          print(controller.priceController.priceListModel.extras);
+                                          print(controller.optionalsArray);
+                                          print( value["qty"]);
                                           controller.optionalsArray[index] =
                                               value["qty"];
                                           if (value["qty"] > 0) {

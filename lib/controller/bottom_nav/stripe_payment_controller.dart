@@ -1,4 +1,5 @@
 import 'package:bnb_clean/backend/model/common/common_success_model.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../backend/services/api_endpoint.dart';
 import '../../backend/services/cart_service.dart';
@@ -18,8 +19,32 @@ class StripePaymentController extends GetxController with CartService {
 
   void confirm(String total) async {
     if (formKey.currentState!.validate()) {
-      await orderProcess(total);
+      try {
+        // final token = await Stripe.instance.createToken(
+        //   const CreateTokenParams.card(
+        //     params: CardTokenParams(
+        //       name: 'Abir Appdevs',
+        //     ),
+        //   ),
+        // );
+
+        final paymentMethod = await Stripe.instance.createPaymentMethod(
+          params: const PaymentMethodParams.card(
+            paymentMethodData: PaymentMethodData(),
+          ),
+        );
+
+        debugPrint("Stripe Token: ${paymentMethod.id}");
+        await orderProcess(total, paymentMethod.id);
+      } catch (e) {
+        debugPrint("Error: $e");
+      }
+
     }
+  }
+
+  Future<void> createStripeToken() async {
+
   }
 
   /// ------------------------------------- >>
@@ -30,16 +55,18 @@ class StripePaymentController extends GetxController with CartService {
   bool get isLoading => _isLoading.value;
 
   ///* OthersUpdate in process
-  Future orderProcess(String total) async {
+  Future orderProcess(String total, String token) async {
     _isLoading.value = true;
     update();
 
 
     Map<String, String> inputBody = {
-      "card_number": cardNumberController.text,
-      "exp_month": expMonthController.text,
-      "exp_year": expYearController.text,
-      "cvc": cvcController.text,
+      // "card_number": cardNumberController.text,
+      // "exp_month": expMonthController.text,
+      // "exp_year": expYearController.text,
+      // "cvc": cvcController.text,
+      "fullname": "Md Abir",
+      "payment_method_id": token,
       "total": total
     };
 

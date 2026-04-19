@@ -1,5 +1,6 @@
 import 'package:bnb_clean/backend/utils/custom_loading_api.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../../../backend/model/my_property/cart_index_model.dart';
 import '../../../../controller/bottom_nav/cart_details_controller.dart';
@@ -112,7 +113,8 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
                         crossAxisAlignment: crossStart,
                         children: [
                           TitleHeading4Widget(
-                            text: "As the selected date is ${checkDateDescription(selectedDate)}, 20% extra is applied over the payment.",
+                            text: "Same day and Sunday appointments will incur a 20% surcharge.",
+                            // text: "As the selected date is ${checkDateDescription(selectedDate)}, 20% extra is applied over the payment.",
                             color: Theme.of(context).primaryColor,
                           ),
                           verticalSpace(5),
@@ -127,65 +129,21 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
 
                 verticalSpace(12),
 
-                PrimaryTextInputWidget(
-                  controller: controller.cardNumberController,
-                  labelText: Strings.cardNumber,
-                  hint: Strings.cardNumber,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly, // Allow only digits
-                    CardNumberInputFormatter(), // Format the card number with spaces
-                  ],
-                ),
-                verticalSpace(Dimensions.marginBetweenInputBox),
-                Row(
-                  children: [
-                    Expanded(
-                      child: PrimaryTextInputWidget(
-                        controller: controller.expMonthController,
-                        labelText: Strings.expMonth,
-                        hint: Strings.expMonth,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly, // Only allows digits
-                          LengthLimitingTextInputFormatter(2),    // Limit to 2 characters
-                        ],
-                      ),
-                    ),
-                    horizontalSpace(10),
-                    Expanded(
-                      child: PrimaryTextInputWidget(
-                        controller: controller.expYearController,
-                        labelText: Strings.expYear,
-                        hint: Strings.expYear,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly, // Only allows digits
-                          LengthLimitingTextInputFormatter(4),
-                        ],
-                      ),
-                    ),
-                    horizontalSpace(10),
-                    Expanded(
-                      child: PrimaryTextInputWidget(
-                        controller: controller.cvcController,
-                        labelText: Strings.cvc,
-                        hint: Strings.cvc,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly, // Only allows digits
-                          LengthLimitingTextInputFormatter(4),
-                        ],
-                      ),
-                    ),
-                  ],
+                CardField(
+
+                  onCardChanged: (card) {
+                    print("--");
+                    print(card);
+                  },
                 ),
                 verticalSpace(Dimensions.marginBetweenInputBox),
                 Obx(() => controller.isLoading
                     ? const CustomLoadingAPI()
                     : PrimaryButton(
-                        title: "${Strings.payNow} (£${totalPrice.toStringAsFixed(2)})", onPressed: (){
-                  controller.confirm(totalPrice.toStringAsFixed(2));
+                        title: "${Strings.payNow} (£${totalPrice.toStringAsFixed(2)})",
+                    onPressed: (){
+                  controller.confirm(totalPrice.toStringAsFixed(2)
+                  );
                 }))
               ]),
         )));
@@ -248,3 +206,62 @@ class CardNumberInputFormatter extends TextInputFormatter {
     );
   }
 }
+
+
+
+/*
+
+                // PrimaryTextInputWidget(
+                //   controller: controller.cardNumberController,
+                //   labelText: Strings.cardNumber,
+                //   hint: Strings.cardNumber,
+                //   keyboardType: TextInputType.number,
+                //   inputFormatters: [
+                //     FilteringTextInputFormatter.digitsOnly, // Allow only digits
+                //     CardNumberInputFormatter(), // Format the card number with spaces
+                //   ],
+                // ),
+                // verticalSpace(Dimensions.marginBetweenInputBox),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: PrimaryTextInputWidget(
+                //         controller: controller.expMonthController,
+                //         labelText: Strings.expMonth,
+                //         hint: Strings.expMonth,
+                //         keyboardType: TextInputType.number,
+                //         inputFormatters: [
+                //           FilteringTextInputFormatter.digitsOnly, // Only allows digits
+                //           LengthLimitingTextInputFormatter(2),    // Limit to 2 characters
+                //         ],
+                //       ),
+                //     ),
+                //     horizontalSpace(10),
+                //     Expanded(
+                //       child: PrimaryTextInputWidget(
+                //         controller: controller.expYearController,
+                //         labelText: Strings.expYear,
+                //         hint: Strings.expYear,
+                //         keyboardType: TextInputType.number,
+                //         inputFormatters: [
+                //           FilteringTextInputFormatter.digitsOnly, // Only allows digits
+                //           LengthLimitingTextInputFormatter(4),
+                //         ],
+                //       ),
+                //     ),
+                //     horizontalSpace(10),
+                //     Expanded(
+                //       child: PrimaryTextInputWidget(
+                //         controller: controller.cvcController,
+                //         labelText: Strings.cvc,
+                //         hint: Strings.cvc,
+                //         keyboardType: TextInputType.number,
+                //         inputFormatters: [
+                //           FilteringTextInputFormatter.digitsOnly, // Only allows digits
+                //           LengthLimitingTextInputFormatter(4),
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
+ */

@@ -90,7 +90,8 @@ class CartDetailsController extends GetxController with CartService {
     for (var e in priceController.priceListModel.products) {
       productArray.add(0);
     }
-    for (var e in priceController.priceListModel.bundles) {
+
+    for (var e in priceController.priceListModel.extras) {
       optionalsArray.add(0);
     }
   }

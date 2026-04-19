@@ -145,5 +145,7 @@ class Strings {
   static String future  = "Future";
   static String quantity  = "Quantity";
   static String price  = "Price";
+  static String profile  = "Profile";
+  static String updateProfile  = "Update Profile";
 
 }

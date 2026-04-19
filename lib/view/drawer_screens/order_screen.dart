@@ -164,7 +164,7 @@ class OrderScreen extends StatelessWidget {
                         }),
                         if(data.total > calTotal) ...[ const Divider(),
                         TitleHeading4Widget(
-                            text: "As the selected date is today or Sunday, 20% extra has been applied over the payment.",
+                            text: "Same day and Sunday appointments will incur a 20% surcharge.",
                             color: Colors.red,)
                       ]
 
