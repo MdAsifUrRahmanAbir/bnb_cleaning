@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import '../../routes/routes.dart';
+import '../../utils/basic_screen_imports.dart';
 import '../local_storage/local_storage.dart';
 import '../model/common/error_message_model.dart';
 import 'custom_snackbar.dart';
@@ -72,8 +74,9 @@ class ApiMethod {
 
       if (response.statusCode == code) {
         return jsonDecode(response.body);
-      } else if (response.statusCode == 500) {
-        //showExpiredDialog();
+      } else if (response.statusCode == 500 || response.statusCode == 401) {
+        // LocalStorage.logout();
+        // Get.offAllNamed(Routes.loginScreen);
       } else {
         log.e('🐞🐞🐞 Error Alert On Status Code 🐞🐞🐞');
 
