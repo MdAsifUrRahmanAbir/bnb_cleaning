@@ -31,6 +31,6 @@ class BottomNavController extends GetxController{
     "Prices",
     "Shopping Cart",
     "Help Center",
-    "How To Order",
+    "My Orders",
   ];
 }

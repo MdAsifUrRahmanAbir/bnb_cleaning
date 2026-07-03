@@ -42,6 +42,7 @@ class ProfileController extends GetxController with ProfileService {
       companyNameController.text = _profileModel.additionalInfo.company;
       phoneNumberController.text = _profileModel.additionalInfo.phone;
 
+
       _isLoading.value = false;
       update();
     }).catchError((onError) {
@@ -77,6 +78,7 @@ class ProfileController extends GetxController with ProfileService {
       _updateProfileModel = value!;
 
       _isStoreLoading.value = false;
+      profileProcess();
       update();
     }).catchError((onError) {
       log.e(onError);

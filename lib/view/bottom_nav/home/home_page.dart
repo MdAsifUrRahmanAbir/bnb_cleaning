@@ -121,10 +121,10 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        TitleHeading4Widget(
-          text: Strings.placedOrders,
-          fontWeight: FontWeight.w700,
-        ),
+        // TitleHeading4Widget(
+        //   text: Strings.placedOrders,
+        //   fontWeight: FontWeight.w700,
+        // ),
         verticalSpace(Dimensions.paddingSizeVertical * .4),
         GridView.count(
           shrinkWrap: true,
@@ -211,61 +211,44 @@ class _OrderCategoryCardState extends State<_OrderCategoryCard> {
                 blurRadius: 10,
                 offset: const Offset(4, 4),
               ),
-              BoxShadow(
-                color: Colors.white.withOpacity(0.9),
-                blurRadius: 10,
-                offset: const Offset(-4, -4),
-              ),
+              // BoxShadow(
+              //   color: Colors.white.withOpacity(0.9),
+              //   blurRadius: 10,
+              //   offset: const Offset(-4, -4),
+              // ),
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             child: BackdropFilter(
               filter: ui.ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.4),
-                    width: 1.5,
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.white.withOpacity(0.4),
-                      Colors.white.withOpacity(0.1),
-                    ],
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [
-                            CustomColor.primaryLightColor.withOpacity(0.15),
-                            CustomColor.primaryLightColor.withOpacity(0.05),
-                          ],
-                        ),
-                      ),
-                      child: Icon(
-                        widget.icon,
-                        color: CustomColor.primaryLightColor,
-                        size: 26,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          CustomColor.primaryLightColor.withOpacity(0.15),
+                          CustomColor.primaryLightColor.withOpacity(0.05),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    TitleHeading5Widget(
-                      text: widget.title,
-                      fontWeight: FontWeight.w600,
-                      fontSize: Dimensions.headingTextSize5,
+                    child: Icon(
+                      widget.icon,
+                      color: CustomColor.primaryLightColor,
+                      size: 26,
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 8),
+                  TitleHeading5Widget(
+                    text: widget.title,
+                    fontWeight: FontWeight.w600,
+                    fontSize: Dimensions.headingTextSize5,
+                  ),
+                ],
               ),
             ),
           ),

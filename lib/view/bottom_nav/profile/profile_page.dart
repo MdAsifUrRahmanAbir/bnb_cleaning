@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
       appBar: PrimaryAppBar(
         title: Strings.updateProfile,
       ),
-      body: _body(context),
+      body: Obx(() => controller.isLoading ? CustomLoadingAPI(): _body(context)),
     );
   }
 
@@ -73,21 +73,21 @@ class ProfilePage extends StatelessWidget {
   }
 
   _profilePic(BuildContext context) {
+    final hasPhoto = controller.profileModel.user.profilePhotoPath.isNotEmpty;
     return SizedBox(
       child: CircleAvatar(
         radius: Dimensions.radius * 5,
-        child: Container(
-          margin: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: controller.profileModel.user.profilePhotoPath.isEmpty
-                    ? const AssetImage("assets/cartoon.png")
-                    : NetworkImage(
-                        controller.profileModel.user.profilePhotoPath),
-              )),
-        ),
+        backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.15),
+        backgroundImage: hasPhoto
+            ? NetworkImage(controller.profileModel.user.profilePhotoPath)
+            : null,
+        child: hasPhoto
+            ? null
+            : Icon(
+                Icons.person,
+                size: Dimensions.radius * 6,
+                color: Theme.of(context).primaryColor,
+              ),
       ),
     );
   }
