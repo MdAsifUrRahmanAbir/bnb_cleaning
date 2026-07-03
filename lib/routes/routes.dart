@@ -7,6 +7,7 @@ class Routes {
   // static const String resetPasswordScreen = '/ResetPasswordScreen';
 
   static const String btmScreen = '/btmScreen';
+  static const String profilePage = '/profilePage';
   static const String propertiesScreen = '/propertiesScreen';
   static const String addPropertiesScreen = '/addPropertiesScreen';
   static const String editPropertiesScreen = '/editPropertiesScreen';

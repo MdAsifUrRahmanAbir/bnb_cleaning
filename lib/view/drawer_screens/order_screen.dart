@@ -7,6 +7,8 @@ import '../../controller/bottom_nav/order_controller.dart';
 import '../../utils/basic_screen_imports.dart';
 import '../../utils/strings.dart';
 import '../../widgets/text_labels/title_heading5_widget.dart';
+import '../../widgets/inputs/primary_date_input_widget.dart';
+
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({super.key, required this.appTitle, required this.endPoint});
@@ -166,8 +168,14 @@ class OrderScreen extends StatelessWidget {
                         TitleHeading4Widget(
                             text: "Same day and Sunday appointments will incur a 20% surcharge.",
                             color: Colors.red,)
-                      ]
-
+                      ],
+                      verticalSpace(Dimensions.paddingSizeVertical * .4),
+                      PrimaryButton(
+                        title: "Repeat Order",
+                        onPressed: () {
+                          _showRepeatOrderBottomSheet(context, data);
+                        },
+                      ),
                       ]),
                     ),
                   )
@@ -177,4 +185,73 @@ class OrderScreen extends StatelessWidget {
           )),
     );
   }
+
+  _showRepeatOrderBottomSheet(BuildContext context, Datum data) {
+    controller.selectedDate.value = null;
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(Dimensions.paddingSizeHorizontal),
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 5,
+              width: 50,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            verticalSpace(Dimensions.paddingSizeVertical),
+            const TitleHeading2Widget(text: "Repeat Order"),
+            verticalSpace(Dimensions.paddingSizeVertical * 0.5),
+            const TitleHeading4Widget(
+              text: "Select a new date for your order",
+              color: Colors.grey,
+            ),
+            verticalSpace(Dimensions.paddingSizeVertical),
+            PrimaryDateInputWidget(
+              labelText: Strings.selectDate,
+              onChanged: (DateTime date) {
+                debugPrint("✔️ Selected Date for Repeat Order: $date");
+                controller.selectedDate.value = date;
+              },
+              disabledDates: const [],
+            ),
+            verticalSpace(Dimensions.paddingSizeVertical * 1.5),
+            Obx(() => Visibility(
+              visible: controller.selectedDate.value != null,
+              child: PrimaryButton(
+                title: "Continue",
+                onPressed: () {
+                  Get.back();
+                  controller.reorderProcess(
+                    orderId: data.id.toString(),
+                    total: data.total.toString(),
+                  );
+                },
+              ),
+            )),
+            verticalSpace(Dimensions.paddingSizeVertical),
+          ],
+        ),
+      ),
+      isScrollControlled: true,
+    );
+  }
 }
+

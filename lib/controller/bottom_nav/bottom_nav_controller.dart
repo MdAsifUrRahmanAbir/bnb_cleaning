@@ -7,6 +7,7 @@ import '../../view/bottom_nav/price/price_page.dart';
 import '../../view/bottom_nav/profile/profile_page.dart';
 import '../../view/bottom_nav/properties/properties_screen.dart';
 import '../../view/bottom_nav/shopping_cart/shopping_cart_page.dart';
+import '../../view/drawer_screens/help_screen.dart';
 
 class BottomNavController extends GetxController{
   RxInt selectedIndex = 4.obs;
@@ -20,7 +21,8 @@ class BottomNavController extends GetxController{
     PropertiesScreen(),
     PricePage(),
     ShoppingCartPage(),
-    ProfilePage(),
+    // ProfilePage(),
+    HelpScreen(),
     HomePage(),
   ];
 
@@ -28,7 +30,7 @@ class BottomNavController extends GetxController{
     "Properties",
     "Prices",
     "Shopping Cart",
-    "Profile",
+    "Help Center",
     "How To Order",
   ];
 }

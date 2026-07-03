@@ -18,9 +18,7 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PrimaryAppBar(
-          title: Strings.helpCenter,
-        ),
+
         body: SafeArea(
             child: ListView(
           padding: EdgeInsets.symmetric(

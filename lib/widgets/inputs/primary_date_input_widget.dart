@@ -6,7 +6,7 @@ import '../text_labels/title_heading5_widget.dart';
 
 class PrimaryDateInputWidget extends StatefulWidget {
   final String labelText, optional;
-  final bool? readOnly;
+     final bool? readOnly;
   final Function(DateTime) onChanged;
   final DateTime? initialDate;
   final Color color;

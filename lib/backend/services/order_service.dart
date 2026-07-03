@@ -1,4 +1,5 @@
-
+import '../model/common/common_success_model.dart';
+import 'api_endpoint.dart';
 import '../model/order/my_order_model.dart';
 import '../utils/api_method.dart';
 import '../utils/custom_snackbar.dart';
@@ -28,4 +29,24 @@ mixin OrderService{
     return null;
   }
 
+  ///* Repeat order api services
+  Future<CommonSuccessModel?> repeatOrderApi({required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        ApiEndpoint.reorderPlaceURL,
+        body,
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        // CustomSnackBar.success(result.message.toString());
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from Repeat order api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
 }

@@ -11,27 +11,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isLoading
-        ? const CustomLoadingAPI()
-        : ListView(
-            padding: EdgeInsets.only(
-              left: Dimensions.paddingSizeHorizontal,
-              right: Dimensions.paddingSizeHorizontal,
-              bottom: Dimensions.paddingSizeVertical,
-            ),
-            children: [
-              verticalSpace(Dimensions.heightSize),
-              _profilePic(context),
-              verticalSpace(Dimensions.heightSize * .6),
-              TitleHeading4Widget(
-                text: "I am ${controller.fullNameController.text}",
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.center,
-              ),
-              _inputField()
-            ],
-          ));
+    return Scaffold(
+      appBar: PrimaryAppBar(
+        title: Strings.updateProfile,
+      ),
+      body: _body(context),
+    );
   }
 
   _inputField() {
@@ -105,5 +90,29 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _body(BuildContext context) {
+    return Obx(() => controller.isLoading
+        ? const CustomLoadingAPI()
+        : ListView(
+      padding: EdgeInsets.only(
+        left: Dimensions.paddingSizeHorizontal,
+        right: Dimensions.paddingSizeHorizontal,
+        bottom: Dimensions.paddingSizeVertical,
+      ),
+      children: [
+        verticalSpace(Dimensions.heightSize),
+        _profilePic(context),
+        verticalSpace(Dimensions.heightSize * .6),
+        TitleHeading4Widget(
+          text: "I am ${controller.fullNameController.text}",
+          color: Theme.of(context).primaryColor,
+          fontWeight: FontWeight.bold,
+          textAlign: TextAlign.center,
+        ),
+        _inputField()
+      ],
+    ));
   }
 }

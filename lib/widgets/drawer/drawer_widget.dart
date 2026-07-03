@@ -79,7 +79,7 @@ class DrawerWidget extends StatelessWidget {
         // ),
         DrawerTileButtonWidget(
           onTap: () {
-            Get.toNamed(Routes.editPropertiesScreen);
+            Get.toNamed(Routes.profilePage);
           },
           text: Strings.profile,
           icon: Icons.person,

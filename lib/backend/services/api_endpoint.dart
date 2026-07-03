@@ -38,6 +38,7 @@ class ApiEndpoint {
   static String updateOtherServiceURL = '/optional-update'.addBaseURl();
 
   static String orderProcessURL = '/order-process'.addBaseURl();
+  static String reorderPlaceURL = '/reorder-place'.addBaseURl();
 
   ///-> Price-list
   static String priceListURL = '/price-list'.addBaseURl();

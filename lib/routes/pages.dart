@@ -8,6 +8,7 @@ import '../view/auth/registration_next_screen.dart';
 import '../view/befor_auth/splash_screen.dart';
 import '../view/bottom_nav/bottom_nav_screen.dart';
 import '../view/bottom_nav/home/home_page.dart';
+import '../view/bottom_nav/profile/profile_page.dart';
 import '../view/bottom_nav/properties/add_properties_screen/add_properties_screen.dart';
 import '../view/bottom_nav/properties/edit_properties_screen/update_properties_screen.dart';
 import '../view/drawer_screens/change_password_screen.dart';
@@ -37,6 +38,11 @@ class Pages{
       name: Routes.btmScreen,
       page: () => BottomNavScreen(),
       binding: DashboardBinding()
+    ),
+        GetPage(
+      name: Routes.profilePage,
+      page: () => ProfilePage(),
+//       binding: DashboardBinding()
     ),
     GetPage(
       name: Routes.propertiesScreen,

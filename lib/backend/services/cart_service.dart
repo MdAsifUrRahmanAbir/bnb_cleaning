@@ -222,4 +222,34 @@ mixin CartService{
     return null;
   }
 
+
+
+  ///* repeatOrder api services
+  Future<CommonSuccessModel?> repeatOrderApi(
+      {required Map<String, dynamic> body}) async {
+    Map<String, dynamic>? mapResponse;
+    try {
+      mapResponse = await ApiMethod(isBasic: false).post(
+        ApiEndpoint.reorderPlaceURL,
+        body,
+        showResult: true
+      );
+      if (mapResponse != null) {
+        CommonSuccessModel result = CommonSuccessModel.fromJson(mapResponse);
+        if(result.success){
+          CustomSnackBar.success(result.message.toString());
+        }else{
+          CustomSnackBar.error(result.message.toString());
+        }
+
+        return result;
+      }
+    } catch (e) {
+      log.e(':ladybug::ladybug::ladybug: err from OthersUpdate api service ==> $e :ladybug::ladybug::ladybug:');
+      CustomSnackBar.error('Something went Wrong!');
+      return null;
+    }
+    return null;
+  }
+
 }
