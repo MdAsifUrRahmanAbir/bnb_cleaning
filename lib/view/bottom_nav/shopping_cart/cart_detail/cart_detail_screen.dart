@@ -122,15 +122,18 @@ class CartDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.radius)),
         child: Column(
           children: [
-            ListTile(
-              onTap: () {
-                controller.bnbServiceTileEnable.value =
-                    !controller.bnbServiceTileEnable.value;
-              },
-              title: TitleHeading3Widget(text: Strings.airbnbCleanings),
-              trailing: Icon(controller.bnbServiceTileEnable.value
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_drop_down),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  controller.bnbServiceTileEnable.value =
+                      !controller.bnbServiceTileEnable.value;
+                },
+                title: TitleHeading3Widget(text: Strings.airbnbCleanings),
+                trailing: Icon(controller.bnbServiceTileEnable.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down),
+              ),
             ),
             Obx(() => !controller.bnbServiceEnable.value
                 ? const SizedBox.shrink()
@@ -270,15 +273,18 @@ class CartDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.radius)),
         child: Column(
           children: [
-            ListTile(
-              onTap: () {
-                controller.lineHireTileEnable.value =
-                    !controller.lineHireTileEnable.value;
-              },
-              title: TitleHeading3Widget(text: Strings.linenHires),
-              trailing: Icon(controller.lineHireTileEnable.value
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_drop_down),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  controller.lineHireTileEnable.value =
+                      !controller.lineHireTileEnable.value;
+                },
+                title: TitleHeading3Widget(text: Strings.linenHires),
+                trailing: Icon(controller.lineHireTileEnable.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down),
+              ),
             ),
             Obx(() => !controller.lineHireEnable.value
                 ? const SizedBox.shrink()
@@ -443,15 +449,18 @@ class CartDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.radius)),
         child: Column(
           children: [
-            ListTile(
-              onTap: () {
-                controller.midstayTileEnable.value =
-                    !controller.midstayTileEnable.value;
-              },
-              title: TitleHeading3Widget(text: Strings.midStayShortLetClean),
-              trailing: Icon(controller.midstayTileEnable.value
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_drop_down),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  controller.midstayTileEnable.value =
+                      !controller.midstayTileEnable.value;
+                },
+                title: TitleHeading3Widget(text: Strings.midStayShortLetClean),
+                trailing: Icon(controller.midstayTileEnable.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down),
+              ),
             ),
             Obx(() => !controller.midstayEnable.value
                 ? const SizedBox.shrink()
@@ -582,15 +591,18 @@ class CartDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.radius)),
         child: Column(
           children: [
-            ListTile(
-              onTap: () {
-                controller.productAndBundleTileEnable.value =
-                    !controller.productAndBundleTileEnable.value;
-              },
-              title: TitleHeading3Widget(text: Strings.products),
-              trailing: Icon(controller.productAndBundleTileEnable.value
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_drop_down),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  controller.productAndBundleTileEnable.value =
+                      !controller.productAndBundleTileEnable.value;
+                },
+                title: TitleHeading3Widget(text: Strings.products),
+                trailing: Icon(controller.productAndBundleTileEnable.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down),
+              ),
             ),
             Obx(() => !controller.productAndBundleEnable.value
                 ? const SizedBox.shrink()
@@ -725,15 +737,18 @@ class CartDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimensions.radius)),
         child: Column(
           children: [
-            ListTile(
-              onTap: () {
-                controller.otherServiceTileEnable.value =
-                    !controller.otherServiceTileEnable.value;
-              },
-              title: TitleHeading3Widget(text: Strings.optionalExtras),
-              trailing: Icon(controller.otherServiceTileEnable.value
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_drop_down),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  controller.otherServiceTileEnable.value =
+                      !controller.otherServiceTileEnable.value;
+                },
+                title: TitleHeading3Widget(text: Strings.optionalExtras),
+                trailing: Icon(controller.otherServiceTileEnable.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down),
+              ),
             ),
             Obx(() => !controller.otherServiceEnable.value
                 ? const SizedBox.shrink()
