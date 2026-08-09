@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../../backend/model/common/common_success_model.dart';
 import '../../backend/model/order/my_order_model.dart';
 import '../../backend/services/order_service.dart';
-import '../../view/bottom_nav/shopping_cart/stripe pay/stripe_payment_screen.dart';
+import '../../view/bottom_nav/shopping_cart/stripe pay/reorder_stripe_payment_screen.dart';
 import 'cart_details_controller.dart';
 import 'shopping_cart_controller.dart';
 
@@ -68,7 +68,7 @@ class OrderController extends GetxController with OrderService {
         }
 
         // Navigate to payment screen
-        Get.to(() => const StripePaymentScreen(), arguments: orderId);
+        Get.to(() => const ReorderStripePaymentScreen(), arguments: orderId);
       }
       _isLoading.value = false;
       update();

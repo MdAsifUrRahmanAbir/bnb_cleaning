@@ -1,4 +1,4 @@
-package com.example.bnb_clean
+package com.app.bnbclean
 
 //import io.flutter.embedding.android.FlutterActivity
 

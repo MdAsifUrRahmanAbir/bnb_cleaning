@@ -42,6 +42,62 @@ class StripePaymentController extends GetxController with CartService {
 
     }
   }
+
+  void confirmReorder({
+    required String total,
+    required String orderId,
+    required String orderDate,
+  }) async {
+    if (formKey.currentState!.validate()) {
+      try {
+        final paymentMethod = await Stripe.instance.createPaymentMethod(
+          params: const PaymentMethodParams.card(
+            paymentMethodData: PaymentMethodData(),
+          ),
+        );
+
+        debugPrint("Stripe Token (Reorder): ${paymentMethod.id}");
+        await reorderProcess(
+          total: total,
+          token: paymentMethod.id,
+          orderId: orderId,
+          orderDate: orderDate,
+        );
+      } catch (e) {
+        debugPrint("Error: $e");
+      }
+    }
+  }
+
+  Future reorderProcess({
+    required String total,
+    required String token,
+    required String orderId,
+    required String orderDate,
+  }) async {
+    _isLoading.value = true;
+    update();
+
+    Map<String, String> inputBody = {
+      "order_id": orderId,
+      "order_date": orderDate,
+      "fullname": "Md Abir",
+      "payment_method_id": token,
+      "total": total
+    };
+
+    await repeatOrderApi(body: inputBody).then((value) {
+      if (value != null && value.success) {
+        Get.offAllNamed(Routes.btmScreen);
+      }
+      _isLoading.value = false;
+      update();
+    }).catchError((onError) {
+      log.e(onError);
+    });
+    _isLoading.value = false;
+    update();
+  }
   //
   // Future<void> createStripeToken() async {
   //
