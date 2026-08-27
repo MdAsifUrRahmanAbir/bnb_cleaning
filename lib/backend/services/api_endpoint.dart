@@ -47,7 +47,7 @@ class ApiEndpoint {
   static String changePasswordURL = '/change-password'.addBaseURl();
   static String updateProfileURL = '/update-basic-info'.addBaseURl();
   static String profileURL = '/user-info'.addBaseURl();
-
+  static String profileDeleteURL = '/profile/delete-account'.addBaseURl();
 
   ///-> My-Order
   static String todayOrderURL = '/orders/today'.addBaseURl();
